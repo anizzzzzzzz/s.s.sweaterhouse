@@ -1,5 +1,5 @@
 .App {
-  background: url(./images/cloth-clothing.jpg) no-repeat;
-  background-size: cover;
-  height: 100% !important;
+  /*background: url(./images/cloth-clothing.jpg) no-repeat;*/
+  /*background-size: cover;*/
+  height: 100%;
 }

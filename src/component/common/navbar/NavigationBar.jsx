@@ -12,7 +12,7 @@ import {
     NavLink,
     UncontrolledDropdown
 } from 'reactstrap';
-import '../../style/style.css';
+import '../../../style/style.css';
 import PropTypes from 'prop-types';
 
 class NavigationBar extends Component {
@@ -34,9 +34,9 @@ class NavigationBar extends Component {
     render() {
         return (
             <div className="sshouse">
-                <Navbar expand="md">
+                    <Navbar color="dark" dark expand="md" className="fixed-top">
                     <NavbarBrand href="/">S.S. Sweater House</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} style={{color:'red'}} >a</NavbarToggler>
+                    <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mx-auto" navbar>
                             <NavItem className="nav-item-custom nav-text-style">
