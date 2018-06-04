@@ -42,22 +42,46 @@
     color: red;
 }
 
-navbar-toggle {
-    border-color: #2c80e9;
-}
-.navbar-toggle:focus, .navbar-toggle:hover {
-    background-color: #2c80e9;
-}
-
 .sshouse .navbar{
     left: 0;
     top: 0;
     width: 100%;
     z-index: 12;
-    padding-bottom: 15px;
-    background-color: transparent;
     transition: 0.5s;
-    margin-bottom: 10%;
 }
 
 /*======================================================================*/
+
+/*====================================Carousel============================*/
+.carousel-box{
+    position: relative;
+    top:10%;
+}
+
+.carousel-image{
+    width: 100%;
+}
+
+@media (min-height: 600px){
+    .carousel-image{
+        height: 550px;
+    }
+}
+
+@media (min-height: 400px) and (max-width: 599px) {
+    .carousel-image{
+        height: 400px;
+    }
+}
+
+@media (max-height: 399px){
+    .carousel-image{
+        height: 300px;
+    }
+}
+
+/*=============================Categories Card====================*/
+.categoreies-card{
+}
+
+.categories-card-image{}
