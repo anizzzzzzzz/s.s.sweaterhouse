@@ -21,7 +21,8 @@ class NavigationBar extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            height:'0px'
         };
     }
 
@@ -40,10 +41,10 @@ class NavigationBar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mx-auto" navbar>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" className="all-nav-item-style">Home</NavLink>
+                                <NavLink href="#none" >Home</NavLink>
                             </NavItem>
                             <UncontrolledDropdown className="nav-item-custom nav-text-style" nav inNavbar>
-                                <DropdownToggle nav caret className="all-nav-item-style">
+                                <DropdownToggle nav caret >
                                     Products
                                 </DropdownToggle>
                                 <DropdownMenu right>
@@ -69,21 +70,21 @@ class NavigationBar extends Component {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" className="all-nav-item-style">Sale</NavLink>
+                                <NavLink href="#none" >Sale</NavLink>
                             </NavItem>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" className="all-nav-item-style">FAQ</NavLink>
+                                <NavLink href="#none" >FAQ</NavLink>
                             </NavItem>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" className="all-nav-item-style">About us</NavLink>
+                                <NavLink href="#none" >About us</NavLink>
                             </NavItem>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" className="all-nav-item-style">Contact</NavLink>
+                                <NavLink href="#none" >Contact</NavLink>
                             </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <NavItem className="nav-text-style">
-                                <NavLink href="#none" className="all-nav-item-style">Login</NavLink>
+                                <NavLink href="#none" >Login</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

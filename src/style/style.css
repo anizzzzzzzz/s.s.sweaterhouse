@@ -10,6 +10,10 @@
     .nav-text-style{
         font-size: 17px;
     }
+
+    .sshouse nav{
+        height: 70px;
+    }
 }
 
 /*Medium Sized Devices (e.g. Desktops)*/
@@ -22,6 +26,10 @@
 
     .nav-text-style{
         font-size: 16px;
+    }
+
+    .sshouse nav{
+        height: 60px;
     }
 }
 
@@ -36,52 +44,93 @@
     .nav-text-style{
         font-size: 14px;
     }
+
+    .sshouse nav{
+        height: 50px;
+    }
 }
 
-.all-nav-item-style{
-    color: red;
+@media (max-width: 749px) {
+    .nav-item-custom {
+        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+        transition: 0.5s;
+    }
+
+    .nav-text-style{
+        font-size: 14px;
+    }
+
+    .sshouse nav{
+        position:sticky;
+    }
 }
 
-.sshouse .navbar{
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 12;
-    transition: 0.5s;
-}
 
 /*======================================================================*/
 
 /*====================================Carousel============================*/
 .carousel-box{
-    position: relative;
-    top:10%;
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carousel-image{
     width: 100%;
 }
 
-@media (min-height: 600px){
+@media (min-width: 1200px) {
+    .carousel-box {
+        margin-top: 71px;
+    }
+
     .carousel-image{
-        height: 550px;
+        height: 450px;
     }
 }
 
-@media (min-height: 400px) and (max-width: 599px) {
+@media (min-width: 992px) and (max-width: 1199px) {
+    .carousel-box {
+        margin-top: 61px;
+    }
+
     .carousel-image{
-        height: 400px;
+        height: 350px;
     }
 }
 
-@media (max-height: 399px){
+@media (min-width: 750px) and (max-width: 991px) {
+    .carousel-box {
+        margin-top: 51px;
+    }
+
+    .carousel-image{
+        height: 300px;
+    }
+}
+
+@media (max-width: 749px) {
+    .carousel-box {
+        margin-top: 1px;
+    }
+
     .carousel-image{
         height: 300px;
     }
 }
 
 /*=============================Categories Card====================*/
-.categoreies-card{
+.categories-card{
+    margin-top: 30px;
 }
 
-.categories-card-image{}
+.categories-card-image{
+    position:relative;
+    width:100%;
+}
+
+.categories-card  .categories-card-button{
+    position: absolute;
+    left: 50%;
+}

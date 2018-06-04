@@ -1,23 +1,32 @@
 import React, {Component} from 'react';
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Container, Row
-} from 'reactstrap';
+import {Button, Card, CardImg, CardTitle, Col, Container, Row} from 'reactstrap';
 
 class CategoriesCard extends Component {
     render() {
         return (
             <Container className="categories-card">
                 <Row>
-                    <Card>
-                        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                        <CardBody>
+                    <Col sm="6" md="4">
+                        <Card>
+                            <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                            <Button className="categories-card-button">Button</Button>
                             <CardTitle>Sweater</CardTitle>
-                            <CardSubtitle>Card subtitle</CardSubtitle>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                            <Button>Button</Button>
-                        </CardBody>
-                    </Card>
+                        </Card>
+                    </Col>
+                    <Col sm="6" md="4">
+                        <Card>
+                            <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                            <Button className="categories-card-button">Button</Button>
+                            <CardTitle>Sweater</CardTitle>
+                        </Card>
+                    </Col>
+                    <Col sm="6" md="4">
+                        <Card>
+                            <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                            <Button className="categories-card-button">Button</Button>
+                            <CardTitle>Sweater</CardTitle>
+                        </Card>
+                    </Col>
                 </Row>
             </Container>
         )
