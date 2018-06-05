@@ -3,8 +3,8 @@ import {Carousel, CarouselControl, CarouselIndicators, CarouselItem} from "react
 import '../../style/style.css';
 
 class IndexCorausel extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state={
             images:[],
@@ -28,7 +28,14 @@ class IndexCorausel extends Component {
 
     importAll(r) {
         let images = [];
-        r.keys().forEach((item, index) => { images[index] = r(item); });
+        r.keys().forEach((item, index) => {
+            let image={
+                id:index,
+                image:r(item),
+                src:index
+            };
+            images.push(image);
+        });
         return images;
     }
 
@@ -65,14 +72,14 @@ class IndexCorausel extends Component {
 
 
     displayCorauselItem(){
-        return this.state.images.map((image,index)=>{
+        return this.state.images.map((image)=>{
             return (
                 <CarouselItem
                     onExiting={this.onExiting}
                     onExited={this.onExited}
-                    key={index}
+                    key={image.id}
                 >
-                    <img src={image} alt={index} className="carousel-image"/>
+                    <img src={image.image} alt={image.id} className="carousel-image"/>
                 </CarouselItem>
             );
         });

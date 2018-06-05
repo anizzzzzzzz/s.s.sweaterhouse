@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {Button, Card, CardImg, Col, Container, Row} from 'reactstrap';
+import {Button, Card, CardImg, Col, Row} from 'reactstrap';
 import '../../style/style.css';
 
 class CategoriesCard extends Component {
     render() {
         return (
-            <Container className="categories-card">
+            <div className="categories-card">
                 <Row>
                     <Col sm="6" md="4" xs="6" lg="4" className="categories-card-item">
                         <Card>
@@ -44,7 +44,7 @@ class CategoriesCard extends Component {
                         </Card>
                     </Col>
                 </Row>
-            </Container>
+            </div>
         )
     }
 }

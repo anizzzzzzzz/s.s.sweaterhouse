@@ -123,10 +123,13 @@
 /*=============================Categories Card====================*/
 .categories-card{
     margin-top: 5px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .categories-card-item{
-    margin-top: 20px;
+    margin-top: 25px;
     padding:0px;
     -webkit-transition: 0.5s; /* Safari */
     transition: 0.5s;
@@ -175,9 +178,62 @@
 
 /*=============================Featured Products====================*/
 .featured-products{
-    margin-top: 30px;
+    margin-top: 60px;
+    -webkit-transition: 0.5s; /* Safari */
+    transition: 0.5s;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    /*background-color: green;*/
 }
 
 .featured-products h2{
     text-align: center;
 }
+
+.featured-products-slider{
+    margin-top: 40px;
+}
+
+.featured-products .featured-products-card{
+    padding: 0 10px;
+    border:none;
+    border-radius: 0;
+}
+
+.featured-products-card-img{
+    height:400px;
+}
+
+.featured-products-card-img:hover{
+    cursor: grab;
+}
+
+.slick-custom-arrow{
+    background-color:transparent;
+    color: black;
+    font-size: 60px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    position:absolute;
+    top:40%;
+}
+
+.slick-custom-arrow:hover{
+    cursor: pointer;
+}
+
+.slick-custom-prev-arrow{
+    left:-5%;
+}
+
+.slick-custom-next-arrow{
+    right:-5%;
+}
+
+
+
+
+
+
