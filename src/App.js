@@ -3,6 +3,7 @@ import './App.css';
 import IndexCorausel from "./component/home/IndexCarousel";
 import CategoriesCard from "./component/home/CategoriesCard";
 import NavigationBar from "./component/common/navbar/NavigationBar";
+import FeaturedProducts from "./component/home/FeaturedProducts";
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
           <NavigationBar/>
           <IndexCorausel/>
           <CategoriesCard/>
+          <FeaturedProducts/>
      </div>
     );
   }

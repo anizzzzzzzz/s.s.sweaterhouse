@@ -47,7 +47,7 @@ class NavigationBar extends Component {
                                 <DropdownToggle nav caret >
                                     Products
                                 </DropdownToggle>
-                                <DropdownMenu right>
+                                <DropdownMenu right className="dropdown-menu-custom">
                                     <DropdownItem className="nav-text-style">
                                         Handwarmer
                                     </DropdownItem>
