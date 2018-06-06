@@ -5,6 +5,7 @@ import CategoriesCard from "./component/home/CategoriesCard";
 import NavigationBar from "./component/common/navbar/NavigationBar";
 import FeaturedProducts from "./component/home/FeaturedProducts";
 import SubscriptionSection from "./component/home/SubscriptionSection";
+import Footer from "./component/common/footer/Footer";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <CategoriesCard/>
           <FeaturedProducts/>
           <SubscriptionSection/>
+          <Footer/>
      </div>
     );
   }

@@ -1,3 +1,9 @@
+.sweaterhouse-footer{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 /*====================Navigation Bar Styling====================*/
 /*Larger Devices (e.g. wide-screen monitors)*/
 @media (min-width: 1200px) {
@@ -34,7 +40,7 @@
 }
 
 /*Small Devices” (e.g. tablets)*/
-@media (min-width: 750px) and (max-width: 991px) {
+@media (min-width: 769px) and (max-width: 991px) {
     .nav-item-custom {
         padding:0px 10px;
         -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
@@ -50,7 +56,7 @@
     }
 }
 
-@media (max-width: 749px) {
+@media (max-width: 768px) {
     .nav-item-custom {
         -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
         transition: 0.5s;
@@ -237,23 +243,79 @@
 .subscription-section{
     margin-top: 40px;
     background-color: silver;
+    height: auto;
 }
 
-.subscription-section .subscription-sub-section{
+.subscription-section .row{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.subscription-section .subscription-social-link-section{
     padding-top: 30px;
-    height: 100px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-content: center;
+    align-content: center;
+}
+
+@media (min-width: 576px) {
+    .subscription-section .subscription-social-link-section .subscription-social-link-div{
+        margin-left:auto;
+        margin-right: auto;
+        align-content:center;
+
+    }
+}
+
+.subscription-section .subscription-social-link-section .subscription-social-link-div{
+    margin-left:auto;
+    margin-right: auto;
+    align-content:center;
+
+}
+
+.subscription-section .subscription-social-link-section button{
+    background-color: transparent;
+    border: none;
+}
+
+.subscription-section .subscription-social-link-section button:hover{
+    cursor:pointer;
+}
+
+.subscription-section .subscription-subscriber-section{
+    padding-top: 30px;
+}
+
+.subscription-section .subscription-subscriber-section .subscription-form{
     position:relative;
+    right: 0%;
 }
 
-.subscription-section a{
-    margin:10px;
+.subscription-section .subscription-subscriber-section button{
+    margin-left: 20px;
+    background-color: transparent;
+    border: 1px solid white;
 }
 
-.subscription-section a:hover{
-    -webkit-transform: scale(2.05);
-    transform: scale(2.05);
-    position: relative;
-    z-index: 1;
+.subscription-section .subscription-subscriber-section button:hover{
+    cursor:pointer;
+}
+
+.subscription-section .subscription-subscriber-section .subscription-form input[type=email]{
+    width: 100%;
+    border-radius: 25px;
+}
+
+.subscription-section .subscription-subscriber-section .subscription-form button{
+    width:100px;
+    position:relative;
+    margin: 10px auto 20px;
 }
 
 
