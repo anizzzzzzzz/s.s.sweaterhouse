@@ -233,6 +233,31 @@
 }
 
 
+/*=============================Subscription Section====================*/
+.subscription-section{
+    margin-top: 40px;
+    background-color: silver;
+}
+
+.subscription-section .subscription-sub-section{
+    padding-top: 30px;
+    height: 100px;
+    position:relative;
+}
+
+.subscription-section a{
+    margin:10px;
+}
+
+.subscription-section a:hover{
+    -webkit-transform: scale(2.05);
+    transform: scale(2.05);
+    position: relative;
+    z-index: 1;
+}
+
+
+
 
 
 

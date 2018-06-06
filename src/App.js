@@ -4,6 +4,7 @@ import IndexCorausel from "./component/home/IndexCarousel";
 import CategoriesCard from "./component/home/CategoriesCard";
 import NavigationBar from "./component/common/navbar/NavigationBar";
 import FeaturedProducts from "./component/home/FeaturedProducts";
+import SubscriptionSection from "./component/home/SubscriptionSection";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <IndexCorausel/>
           <CategoriesCard/>
           <FeaturedProducts/>
+          <SubscriptionSection/>
      </div>
     );
   }
