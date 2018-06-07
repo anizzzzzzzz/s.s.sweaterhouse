@@ -208,7 +208,7 @@
 }
 
 .featured-products-card-img{
-    height:400px;
+    height:350px;
 }
 
 .featured-products-card-img:hover{
@@ -318,6 +318,35 @@
     margin: 10px auto 20px;
 }
 
+/*=============================Subscription Section====================*/
+.faq-section{
+    width: 95%;
+    margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+    .faq-section {
+        margin-top: 71px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .faq-section {
+        margin-top: 61px;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 991px) {
+    .carousel-box {
+        margin-top: 51px;
+    }
+}
+
+@media (max-width: 749px) {
+    .faq-section {
+        margin-top: 1px;
+    }
+}
 
 
 
