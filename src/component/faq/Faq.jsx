@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
-import {Card, CardBody, Collapse, ListGroup, ListGroupItem} from "reactstrap";
+import {Collapse, ListGroup, ListGroupItem} from "reactstrap";
+
 
 var faq=[
     {
@@ -14,13 +15,13 @@ var faq=[
     {
         "id":2,
         "question":"What's our main product??",
-        "answer":"Our main Product are:-" +
-        "[list]Woolen Sweater[/list]" +
-        "[list]Handwarmers[/list]" +
-        "[list]Shocks[/list]" +
-        "[list]Jackets[/list]" +
-        "[list]Blazzers[/list]" +
-        "[list]Dresses[/list]",
+        "answer":"Our main Product are:-\n" +
+        "- Woolen Sweater\n" +
+        "- Handwarmers\n" +
+        "- Shocks\n" +
+        "- Jackets\n" +
+        "- Blazzers\n" +
+        "- Dresses\n",
         "collapse":false
     },
     {
@@ -46,7 +47,8 @@ class Faq extends Component {
         super(props);
 
         this.state={
-            change:false
+            change:false,
+            minRow:6
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -67,14 +69,10 @@ class Faq extends Component {
     createList(){
         return faq.map((qa)=>{
             return (
-                <div key={qa.id}>
+                <div key={qa.id} className="faq-list-section">
                     <ListGroupItem onClick={(e)=>this.toggle(e,qa)}>{qa.question}</ListGroupItem>
                     <Collapse isOpen={qa.collapse}>
-                        <Card>
-                            <CardBody>
-                                {qa.answer}
-                            </CardBody>
-                        </Card>
+                        <p className="faq-list-item-section">{qa.answer}</p>
                     </Collapse>
                 </div>
             );
@@ -83,12 +81,13 @@ class Faq extends Component {
 
     render() {
         return (
-            <div className="faq-section">
+            <div>
                 <NavigationBar/>
-                <ListGroup>
-                    {this.createList()}
-                </ListGroup>
-
+                <div className="faq-section">
+                    <ListGroup>
+                        {this.createList()}
+                    </ListGroup>
+                </div>
             </div>
         )
     }

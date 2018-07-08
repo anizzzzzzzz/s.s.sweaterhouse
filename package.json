@@ -4,14 +4,14 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "prop-types": "latest",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-icons": "^2.2.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-slick": "^0.23.1",
-    "reactstrap": "^6.1.0",
+    "reactstrap": "^6.2.0",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
