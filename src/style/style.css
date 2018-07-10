@@ -417,6 +417,23 @@
     cursor: pointer;
 }
 
+.products-filter{
+    background-color:yellow;
+    border-radius: 6px;
+    border: 2px solid #d6d9db;
+    box-shadow: none;
+
+}
+
+.products-filter-dropdown-toggle{
+    background-color:red;
+}
+
+.products-filter-dropdown-menu{
+    background-color:aqua;
+    color:black;
+}
+
 @media (min-width: 1200px) {
     .products-section {
         margin-top: 79px;
@@ -489,7 +506,7 @@
         font-size: 16px;
         -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
         transition: 0.5s;
-        background-color:red;
+        background-color:#d6d9db;
     }
 
     .product-index-button{
