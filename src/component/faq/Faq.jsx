@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
-import {Collapse, Input, ListGroup, ListGroupItem} from "reactstrap";
+import {Collapse, ListGroup, ListGroupItem} from "reactstrap";
 
 var faq=[
     {
@@ -15,12 +15,12 @@ var faq=[
         "id":2,
         "question":"What's our main product??",
         "answer":"Our main Product are:-\n" +
-        "Woolen Sweater\n" +
-        "Handwarmers\n" +
-        "Shocks\n" +
-        "Jackets\n" +
-        "Blazzers\n" +
-        "Dresses\n",
+        "- Woolen Sweater\n" +
+        "- Handwarmers\n" +
+        "- Shocks\n" +
+        "- Jackets\n" +
+        "- Blazzers\n" +
+        "- Dresses\n",
         "collapse":false
     },
     {
@@ -45,7 +45,8 @@ class Faq extends Component {
         super(props);
 
         this.state={
-            change:false
+            change:false,
+            minRow:6
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -63,37 +64,13 @@ class Faq extends Component {
         });
     }
 
-    arrangeInList(ans){
-        // console.log(ans);
-        let list=[];
-        let patt = /()(([\w\W\s](?!()))+)(<\/list:newLine>)/g;
-        // var patt = new RegExp('(\<list\:newLine\>)([\\w\\W\\s](?!(\<list\:newLine\>)))+(\<\/list\:newLine\>)','g');
-        // let patt = new RegExp('(\<list\:newLine\>)(([\\w\\W\\s](?!(\<list\:newLine\>)))+)(\<\/list\:newLine\>)','g');
-        let match;
-        while((match=patt.exec(ans))!==null){
-                // console.log(match[2]);
-            list=[...list,match[2]];
-        }
-        // console.log(list);
-    }
-
     createList(){
         return faq.map((qa)=>{
             return (
-                <div key={qa.id} className="faq-list-group">
-                    <ListGroupItem
-                        className="faq-list-group-item"
-                        onClick={(e)=>this.toggle(e,qa)}
-                    >
-                        {qa.question}
-                    </ListGroupItem>
-                    <Collapse isOpen={qa.collapse} className="faq-list-group-collapse">
-
-                        <Input type="textarea" disabled value={qa.answer} style={{overflow:'visible',resize:'vertical'}}/>
-                                {/*<CardText>*/}
-                                    {/*{qa.answer}*/}
-                                {/*</CardText>*/}
-                                {/*{this.arrangeInList(qa.answer)}*/}
+                <div key={qa.id} className="faq-list-section">
+                    <ListGroupItem onClick={(e)=>this.toggle(e,qa)}>{qa.question}</ListGroupItem>
+                    <Collapse isOpen={qa.collapse}>
+                        <p className="faq-list-item-section">{qa.answer}</p>
                     </Collapse>
                 </div>
             );

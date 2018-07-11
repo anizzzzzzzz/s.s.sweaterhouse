@@ -41,7 +41,7 @@ class NavigationBar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mx-auto" navbar>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" >Home</NavLink>
+                                <NavLink href="/" >Home</NavLink>
                             </NavItem>
                             <UncontrolledDropdown className="nav-item-custom nav-text-style" nav inNavbar>
                                 <DropdownToggle nav caret >
@@ -73,7 +73,7 @@ class NavigationBar extends Component {
                                 <NavLink href="#none" >Sale</NavLink>
                             </NavItem>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" >FAQ</NavLink>
+                                <NavLink href="/faq" >FAQ</NavLink>
                             </NavItem>
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="#none" >About us</NavLink>
