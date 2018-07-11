@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
-import {Card, CardBody, Collapse, ListGroup, ListGroupItem} from "reactstrap";
+import {Collapse, Input, ListGroup, ListGroupItem} from "reactstrap";
 
 var faq=[
     {
@@ -14,23 +14,22 @@ var faq=[
     {
         "id":2,
         "question":"What's our main product??",
-        "answer":"Our main Product are:-" +
-        "[list]Woolen Sweater[/list]" +
-        "[list]Handwarmers[/list]" +
-        "[list]Shocks[/list]" +
-        "[list]Jackets[/list]" +
-        "[list]Blazzers[/list]" +
-        "[list]Dresses[/list]",
+        "answer":"Our main Product are:-\n" +
+        "Woolen Sweater\n" +
+        "Handwarmers\n" +
+        "Shocks\n" +
+        "Jackets\n" +
+        "Blazzers\n" +
+        "Dresses\n",
         "collapse":false
     },
     {
         "id":3,
         "question":"Where can I contact to order our product?",
-        "answer":"Factory: Dhungedhara, Raniban, Balaju\n" +
-        "Show Room : Thamel, J.P Road\n" +
-        "Contact No: 01-4880688,01-4880788\n" +
-        "Mobile No: 9841501480\n" +
-        "S.S Sweater House\n",
+        "answer":"Factory: Dhungedhara, Raniban, Balaju \n" +
+        "Show Room : Thamel, J.P Road \n" +
+        "Contact No: 01-4880688,01-4880788 \n"+
+        "Mobile No: 9841501480 \n",
         "collapse":false
     },
     {
@@ -64,17 +63,37 @@ class Faq extends Component {
         });
     }
 
+    arrangeInList(ans){
+        // console.log(ans);
+        let list=[];
+        let patt = /()(([\w\W\s](?!()))+)(<\/list:newLine>)/g;
+        // var patt = new RegExp('(\<list\:newLine\>)([\\w\\W\\s](?!(\<list\:newLine\>)))+(\<\/list\:newLine\>)','g');
+        // let patt = new RegExp('(\<list\:newLine\>)(([\\w\\W\\s](?!(\<list\:newLine\>)))+)(\<\/list\:newLine\>)','g');
+        let match;
+        while((match=patt.exec(ans))!==null){
+                // console.log(match[2]);
+            list=[...list,match[2]];
+        }
+        // console.log(list);
+    }
+
     createList(){
         return faq.map((qa)=>{
             return (
-                <div key={qa.id}>
-                    <ListGroupItem onClick={(e)=>this.toggle(e,qa)}>{qa.question}</ListGroupItem>
-                    <Collapse isOpen={qa.collapse}>
-                        <Card>
-                            <CardBody>
-                                {qa.answer}
-                            </CardBody>
-                        </Card>
+                <div key={qa.id} className="faq-list-group">
+                    <ListGroupItem
+                        className="faq-list-group-item"
+                        onClick={(e)=>this.toggle(e,qa)}
+                    >
+                        {qa.question}
+                    </ListGroupItem>
+                    <Collapse isOpen={qa.collapse} className="faq-list-group-collapse">
+
+                        <Input type="textarea" disabled value={qa.answer} style={{overflow:'visible',resize:'vertical'}}/>
+                                {/*<CardText>*/}
+                                    {/*{qa.answer}*/}
+                                {/*</CardText>*/}
+                                {/*{this.arrangeInList(qa.answer)}*/}
                     </Collapse>
                 </div>
             );
@@ -83,12 +102,13 @@ class Faq extends Component {
 
     render() {
         return (
-            <div className="faq-section">
+            <div>
                 <NavigationBar/>
-                <ListGroup>
-                    {this.createList()}
-                </ListGroup>
-
+                <div className="faq-section">
+                    <ListGroup>
+                        {this.createList()}
+                    </ListGroup>
+                </div>
             </div>
         )
     }

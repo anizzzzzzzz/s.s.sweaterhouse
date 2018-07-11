@@ -12,7 +12,8 @@
     "react-scripts": "1.1.4",
     "react-slick": "^0.23.1",
     "reactstrap": "^6.1.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "autosize": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

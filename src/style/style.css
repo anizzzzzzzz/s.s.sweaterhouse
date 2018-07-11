@@ -321,34 +321,48 @@
 /*=============================Subscription Section====================*/
 .faq-section{
     width: 95%;
-    margin: 0 auto;
+    margin-left:  auto;
+    margin-right: auto;
+    position: relative;
 }
 
 @media (min-width: 1200px) {
     .faq-section {
-        margin-top: 71px;
+        top: 71px;
     }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .faq-section {
-        margin-top: 61px;
+        top: 61px;
     }
 }
 
 @media (min-width: 750px) and (max-width: 991px) {
-    .carousel-box {
-        margin-top: 51px;
+    .faq-section {
+        top: 51px;
     }
 }
 
 @media (max-width: 749px) {
     .faq-section {
-        margin-top: 1px;
+        top: 1px;
     }
 }
 
+.faq-section .faq-list-group{
+    margin:10px 0 ;
+    background-color: silver;
+}
 
+.faq-list-group-collapse{
+    resize:vertical;
+}
+
+.faq-section .faq-list-group-card{
+    width: 95%;
+    margin: 5px auto;
+}
 
 
 
