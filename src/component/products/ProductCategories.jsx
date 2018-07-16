@@ -7,15 +7,19 @@ class ProductCategories extends Component {
             <Nav vertical className="products-categories">
                 <NavItem>
                     <NavLink href="#" className="products-categories-list">Handwarmer</NavLink>
+                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
                 <NavItem>
                     <NavLink href="#" className="products-categories-list">Jacket</NavLink>
+                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
                 <NavItem>
                     <NavLink href="#" className="products-categories-list">Shock</NavLink>
+                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
                 <NavItem>
                     <NavLink href="#" className="products-categories-list">Sweater</NavLink>
+                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
                 <NavItem>
                     <NavLink href="#" className="products-categories-list">Trouser</NavLink>

@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap";
+import * as FontAwesome from 'react-icons/lib/fa'
 
 class ProductFilter extends Component {
     constructor(props){
         super(props);
 
-        this.toggle=this.toggle.bind(this);
         this.state={
-            dropDownOpen:false,
+            showMenu:false,
             filterName:""
         };
+
+        this.showMenu=this.showMenu.bind(this);
+        this.closeMenu=this.closeMenu.bind(this);
 
         this.filterItem=[
             {
@@ -40,9 +42,25 @@ class ProductFilter extends Component {
         ]
     }
 
-    toggle(){
+    componentWillMount(){
         this.setState({
-            dropDownOpen:!this.state.dropDownOpen
+            filterName:this.filterItem[0].key
+        })
+    }
+
+    showMenu(e){
+        e.preventDefault();
+        this.setState({
+                showMenu:true
+        },
+        () => {
+            document.addEventListener('click', this.closeMenu);
+        });
+    }
+
+    closeMenu() {
+        this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
         });
     }
 
@@ -55,22 +73,45 @@ class ProductFilter extends Component {
 
     render() {
         return (
-            <UncontrolledDropdown
-                className="products-filter"
-                isOpen={this.state.dropDownOpen}
-                toggle={this.toggle}
-            >
-                <DropdownToggle className="products-filter-dropdown-toggle" caret>
+            <div className="products-filter">
+                <button
+                    type="button"
+                    className="product-index-button"
+                    onClick={this.showMenu}
+                >
                     Sort By : {this.state.filterName}
-                </DropdownToggle>
-                <DropdownMenu className="products-filter-dropdown-menu" right>
-                    {
-                        this.filterItem.map((filter)=>
-                            <DropdownItem key={filter.id} onClick={(e)=>this.handleClick(e,filter.key)}>{filter.key}</DropdownItem>
+                    <FontAwesome.FaCaretDown/>
+                </button>
+                {
+                    this.state.showMenu?
+                        (
+                            <div className="products-filter-dropdown-menu">
+                                {
+                                    this.filterItem.map(filter=>
+                                            <div>
+                                                <a
+                                                    key={filter.id}
+                                                    tabIndex={filter.id}
+                                                    className="products-filter-dropdown-item"
+                                                    onClick={(e)=>this.handleClick(e,filter.key)}
+                                                >
+                                                    {filter.key}
+                                                </a>
+                                                {
+                                                    (filter.id<this.filterItem.length)?
+                                                    (<hr style={{margin:'1px 0'}}/>):
+                                                    (null)
+                                                }
+                                            </div>
+                                    )
+                                }
+                            </div>
+                        ):
+                        (
+                            null
                         )
-                    }
-                </DropdownMenu>
-            </UncontrolledDropdown  >
+                }
+            </div>
         )
     }
 }

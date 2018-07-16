@@ -27,12 +27,14 @@ class ProductIndex extends Component {
             <div>
                 <NavigationBar/>
                 <div className="products-section">
-                     <button type="button" className="product-index-button"  onClick={this.toggle}>
-                         {!this.state.collapse?
-                             (<span><FontAwesome.FaPlus/> Show Categories</span>):
-                             (<span><FontAwesome.FaMinus/> Hide Categories</span>)}
-                     </button>
-                    <ProductFilter/>
+                     <div className="products-section-buttons">
+                         <button type="button" className="product-index-button"  onClick={this.toggle}>
+                             {!this.state.collapse?
+                                 (<span><FontAwesome.FaPlus/> Show Categories</span>):
+                                 (<span><FontAwesome.FaMinus/> Hide Categories</span>)}
+                         </button>
+                         <ProductFilter/>
+                     </div>
 
                     <div className="products-section-div">
                         <Collapse isOpen={this.state.collapse}>
