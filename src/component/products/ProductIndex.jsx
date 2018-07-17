@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
 import './style/ProductIndex.css';
-import {Collapse} from "reactstrap";
 import ProductCategories from "./ProductCategories";
 import ProductMain from "./ProductMain";
 import * as FontAwesome from 'react-icons/lib/fa'

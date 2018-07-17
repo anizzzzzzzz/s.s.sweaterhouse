@@ -15,21 +15,7 @@
     z-index: -1;
 }
 
-@media (min-width: 750px) and (max-width: 991px) {
-    .products-main-with-filter{
-        width: 100%;
-        left: 0;
-    }
-}
-
-@media (max-width: 749px) and (min-width: 420px) {
-    .products-main-with-filter{
-        width: 100%;
-        left: 0;
-    }
-}
-
-@media (max-width: 419px) {
+@media (max-width: 991px) {
     .products-main-with-filter{
         width: 100%;
         left: 0;

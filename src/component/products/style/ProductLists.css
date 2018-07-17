@@ -1,9 +1,13 @@
 .product-lists{
     position: absolute;
-    margin-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
 .products-lists-row{
+
 }
 
 .product-lists-col{
@@ -14,12 +18,16 @@
 .product-lists-card{
     float:left;
     width: 250px;
-    margin: 10px;
+    margin-top: 10px;
 }
 
 .product-item-image{
     height: 300px;
     padding: 5px;
+}
+
+.product-item-text{
+    text-align: center;
 }
 
 .product-lists-card-with-filter-shown{

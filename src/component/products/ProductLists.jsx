@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle, Col, Row} from "reactstrap";
+import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/ProductLists.css';
 
 class ProductLists extends Component {
@@ -36,15 +36,13 @@ class ProductLists extends Component {
     createImagesList(){
         return this.state.images.map((image)=>{
             return (
-                <Card key={image.id} className="product-lists-card">
-                    <CardImg className="product-item-image" top src={image.image} alt="Card image cap"/>
-                    <CardText>Sweater</CardText>
-                    <CardBody>
-                        <CardTitle>Sweater</CardTitle>
-                        <CardSubtitle>Card subtitle</CardSubtitle>
-                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                    </CardBody>
-                </Card>
+                <Col sm="6" md="6" xs="10" lg="4" className="product-lists-col" key={image.id}>
+                    <Card className="product-lists-card">
+                        <CardImg className="product-item-image" top src={image.image} alt="Card image cap"/>
+                        <CardTitle className="product-item-text">Sweater</CardTitle>
+                        <CardText className="product-item-text">Sweater</CardText>
+                    </Card>
+                </Col>
             )
         });
     }
@@ -53,9 +51,7 @@ class ProductLists extends Component {
         return (
             <div className="product-lists">
                 <Row className="products-lists-row">
-                    <Col className="product-lists-col">
-                        {this.createImagesList()}
-                    </Col>
+                    {this.createImagesList()}
                 </Row>
             </div>
         );
