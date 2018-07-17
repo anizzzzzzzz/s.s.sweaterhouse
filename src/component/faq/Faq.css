@@ -1,0 +1,42 @@
+.faq-section{
+    width: 95%;
+    margin-left:  auto;
+    margin-right: auto;
+    position: relative;
+}
+
+@media (min-width: 1200px) {
+    .faq-section {
+        top: 71px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .faq-section {
+        top: 61px;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 991px) {
+    .faq-section {
+        margin-top: 51px;
+    }
+}
+
+@media (max-width: 749px) {
+    .faq-section {
+        top: 1px;
+    }
+}
+
+.faq-list-section{
+    margin-top: 5px;
+}
+
+.faq-list-item-section{
+    margin:4px 8px 8px;
+    padding:9px;
+    box-sizing : border-box;
+    white-space: pre-wrap;
+    border:1px solid #d6d9db;
+}

@@ -12,7 +12,7 @@ import {
     NavLink,
     UncontrolledDropdown
 } from 'reactstrap';
-import '../../../style/style.css';
+import './NavigationBar.css';
 import PropTypes from 'prop-types';
 
 class NavigationBar extends Component {

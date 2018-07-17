@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
-import '../../style/style.css';
+import './style/ProductIndex.css';
 import {Collapse} from "reactstrap";
 import ProductCategories from "./ProductCategories";
-import ProductionMain from "./ProductionMain";
+import ProductMain from "./ProductMain";
 import * as FontAwesome from 'react-icons/lib/fa'
 import ProductFilter from "./ProductFilter";
 
@@ -41,7 +41,7 @@ class ProductIndex extends Component {
                             <ProductCategories isOpen={this.state.collapse}/>
                         </Collapse>
 
-                        <ProductionMain isOpen={this.state.collapse}/>
+                        <ProductMain isOpen={this.state.collapse}/>
                     </div>
                 </div>
             </div>

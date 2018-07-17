@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../style/style.css';
+import './style/FeaturedProducts.css';
 import {Card, CardImg} from "reactstrap";
 import Slider from "react-slick";
 import LeftNavButton from "./customized-slick-button/LeftNavButton";

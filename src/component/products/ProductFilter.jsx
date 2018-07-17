@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import * as FontAwesome from 'react-icons/lib/fa'
+import * as FontAwesome from 'react-icons/lib/fa';
+import './style/ProductFilter.css';
 
 class ProductFilter extends Component {
     constructor(props){

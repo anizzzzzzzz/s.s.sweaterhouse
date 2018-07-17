@@ -1,0 +1,50 @@
+.carousel-box{
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-image{
+    width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .carousel-box {
+        margin-top: 71px;
+    }
+
+    .carousel-image{
+        height: 450px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .carousel-box {
+        margin-top: 61px;
+    }
+
+    .carousel-image{
+        height: 350px;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 991px) {
+    .carousel-box {
+        margin-top: 51px;
+    }
+
+    .carousel-image{
+        height: 300px;
+    }
+}
+
+@media (max-width: 749px) {
+    .carousel-box {
+        margin-top: 1px;
+    }
+
+    .carousel-image{
+        height: 300px;
+    }
+}

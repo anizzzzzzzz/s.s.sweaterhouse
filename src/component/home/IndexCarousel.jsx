@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Carousel, CarouselControl, CarouselIndicators, CarouselItem} from "reactstrap";
-import '../../style/style.css';
+import './style/IndexCarousel.css';
 
 class IndexCorausel extends Component {
     constructor(props){

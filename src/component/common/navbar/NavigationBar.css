@@ -1,0 +1,65 @@
+/*Larger Devices (e.g. wide-screen monitors)*/
+@media (min-width: 1200px) {
+    .nav-item-custom {
+        padding:0 35px;
+        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+        transition: 0.5s;
+    }
+
+    .nav-text-style{
+        font-size: 17px;
+    }
+
+    .sshouse nav{
+        height: 70px;
+    }
+}
+
+/*Medium Sized Devices (e.g. Desktops)*/
+@media (min-width: 992px) and (max-width: 1199px) {
+    .nav-item-custom {
+        padding:0 20px;
+        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+        transition: 0.5s;
+    }
+
+    .nav-text-style{
+        font-size: 16px;
+    }
+
+    .sshouse nav{
+        height: 60px;
+    }
+}
+
+/*Small Devices” (e.g. tablets)*/
+@media (min-width: 769px) and (max-width: 991px) {
+    .nav-item-custom {
+        padding:0px 10px;
+        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+        transition: 0.5s;
+    }
+
+    .nav-text-style{
+        font-size: 14px;
+    }
+
+    .sshouse nav{
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-item-custom {
+        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+        transition: 0.5s;
+    }
+
+    .nav-text-style{
+        font-size: 14px;
+    }
+
+    .sshouse nav{
+        position:sticky;
+    }
+}

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Nav, NavItem, NavLink} from "reactstrap";
+import './style/ProductCategories.css';
 
 class ProductCategories extends Component {
     render() {

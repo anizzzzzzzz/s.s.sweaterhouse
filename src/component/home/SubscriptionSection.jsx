@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as FontAwesome from 'react-icons/lib/fa'
 import {Button, Col, Form, FormGroup, Input, Row} from "reactstrap";
-
+import './style/SubscriptionSection.css';
 
 class SubscriptionSection extends Component {
     render() {
