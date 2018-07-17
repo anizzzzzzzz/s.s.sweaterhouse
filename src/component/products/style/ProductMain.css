@@ -1,14 +1,12 @@
 .products-main{
-    height: 500px;
     width: 100%;
-    border:1px solid black;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
+    position: relative;
+    z-index: -1;
 }
 
 .products-main-with-filter{
-    border:1px solid black;
-    height:500px;
     width: 85%;
     position: relative;
     left: 15%;
@@ -21,7 +19,6 @@
     .products-main-with-filter{
         width: 100%;
         left: 0;
-        z-index: -1;
     }
 }
 
@@ -29,7 +26,6 @@
     .products-main-with-filter{
         width: 100%;
         left: 0;
-        z-index: -1;
     }
 }
 
@@ -37,6 +33,5 @@
     .products-main-with-filter{
         width: 100%;
         left: 0;
-        z-index: -1;
     }
 }

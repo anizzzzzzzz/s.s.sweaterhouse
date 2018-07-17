@@ -19,10 +19,9 @@
         margin-top: -8px;
         width:180px ;
         font-size: 15px;
-        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
-        transition: 0.5s;
         background-color:#d6d9db;
         text-align: center;
+        z-index: 100;
     }
 
     .products-categories-list-hr-line{
@@ -36,10 +35,9 @@
         margin-top: -8px;
         width:180px ;
         font-size: 15px;
-        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
-        transition: 0.5s;
         background-color:#d6d9db;
         text-align: center;
+        z-index: 100;
     }
 
     .products-categories-list-hr-line{
@@ -53,9 +51,8 @@
         margin-top: -8px;
         width:145px ;
         font-size: 15px;
-        -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
-        transition: 0.5s;
         background-color:#d6d9db;
+        z-index: 100;
     }
 
     .products-categories-list{

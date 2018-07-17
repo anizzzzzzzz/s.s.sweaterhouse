@@ -37,9 +37,9 @@ class ProductIndex extends Component {
                      </div>
 
                     <div className="products-section-div">
-                        <Collapse isOpen={this.state.collapse}>
+                        <div className={this.state.collapse===true?"products-section-div-collapse-true":"products-section-div-collapse-false"}>
                             <ProductCategories isOpen={this.state.collapse}/>
-                        </Collapse>
+                        </div>
 
                         <ProductMain isOpen={this.state.collapse}/>
                     </div>

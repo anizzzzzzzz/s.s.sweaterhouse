@@ -1,9 +1,9 @@
 .products-filter{
-    float:right
+    float:right;
 }
 
 .products-filter-dropdown-menu{
-    z-index: 1;
+    position:relative;
     background-color:#d6d9db;
     margin-top: 9px;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */

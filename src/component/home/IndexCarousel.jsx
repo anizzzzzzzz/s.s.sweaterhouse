@@ -18,7 +18,7 @@ class IndexCorausel extends Component {
         this.goToIndex = this.goToIndex.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const images = this.importAll(require.context('../../images/carousel', false, /\.(png|jpe?g|svg)$/));
         console.log("images",images);
         this.setState({

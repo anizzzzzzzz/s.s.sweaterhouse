@@ -14,7 +14,7 @@ class FeaturedProducts extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const images = this.importAll(require.context('../../images/carousel', false, /\.(png|jpe?g|svg)$/));
         this.setState({
             images:images
@@ -45,7 +45,7 @@ class FeaturedProducts extends Component {
     }
 
     render() {
-        var settings = {
+        let settings = {
             arrows:true,
             autoplay:true,
             prevArrow:<LeftNavButton/>,

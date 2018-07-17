@@ -29,6 +29,14 @@
     z-index: -1;
 }
 
+.products-section-div-collapse-true{
+    display: inline;
+}
+
+.products-section-div-collapse-false{
+    display: none;
+}
+
 @media (min-width: 1200px) {
     .products-section {
         margin-top: 79px;
