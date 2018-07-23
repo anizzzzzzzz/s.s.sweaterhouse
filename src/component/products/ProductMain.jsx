@@ -6,7 +6,7 @@ class ProductMain extends Component {
     render() {
         return (
             <div className={this.props.isOpen?"products-main-with-filter":"products-main"}>
-                <ProductLists/>
+                <ProductLists isOpen={this.props.isOpen}/>
             </div>
         )
     }

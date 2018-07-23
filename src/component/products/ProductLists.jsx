@@ -37,8 +37,8 @@ class ProductLists extends Component {
         return this.state.images.map((image)=>{
             return (
                 <Col sm="6" md="6" xs="10" lg="4" className="product-lists-col" key={image.id}>
-                    <Card className="product-lists-card">
-                        <CardImg className="product-item-image" top src={image.image} alt="Card image cap"/>
+                    <Card className={this.props.isOpen?"product-lists-card-with-filter":"product-lists-card"}>
+                        <CardImg className={this.props.isOpen?"product-item-image-with-filter":"product-item-image"} top src={image.image} alt="Card image cap"/>
                         <CardTitle className="product-item-text">Sweater</CardTitle>
                         <CardText className="product-item-text">Sweater</CardText>
                     </Card>
@@ -49,8 +49,8 @@ class ProductLists extends Component {
 
     render() {
         return (
-            <div className="product-lists">
-                <Row className="products-lists-row">
+            <div className={this.props.isOpen?"product-lists-with-filter":"product-lists"}>
+                <Row className={this.props.isOpen?"products-list-row-with-filter":"products-lists-row"}>
                     {this.createImagesList()}
                 </Row>
             </div>
