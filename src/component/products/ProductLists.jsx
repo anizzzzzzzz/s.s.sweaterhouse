@@ -49,8 +49,9 @@ class ProductLists extends Component {
 
     render() {
         return (
-            <div className={this.props.isOpen?"product-lists-with-filter":"product-lists"}>
-                <Row className={this.props.isOpen?"products-list-row-with-filter":"products-lists-row"}>
+            <div className="product-lists">
+                {/*<Row className={this.props.isOpen?"products-list-row-with-filter":"products-lists-row"}>*/}
+                <Row className="products-lists-row">
                     {this.createImagesList()}
                 </Row>
             </div>

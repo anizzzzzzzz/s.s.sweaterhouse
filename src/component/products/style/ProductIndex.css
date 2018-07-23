@@ -49,13 +49,13 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 999px) {
+@media (min-width: 769px) and (max-width: 999px) {
     .products-section {
         margin-top: 59px;
     }
 }
 
-@media (max-width: 767px) and (min-width: 420px) {
+@media (max-width: 768px) and (min-width: 420px) {
     .products-section {
         margin-top: 9px;
     }

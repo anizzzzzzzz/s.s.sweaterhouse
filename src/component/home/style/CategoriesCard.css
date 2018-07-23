@@ -10,6 +10,8 @@
     padding:0;
     -webkit-transition: 0.5s; /* Safari */
     transition: 0.5s;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .categories-card-item:hover{
