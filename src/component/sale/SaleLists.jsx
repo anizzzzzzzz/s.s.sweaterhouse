@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
-import './style/ProductLists.css';
+import './style/SaleLists.css';
 
-class ProductLists extends Component {
+class SaleLists extends Component {
     constructor(){
         super();
 
@@ -37,11 +37,11 @@ class ProductLists extends Component {
     createImagesList(){
         return this.state.images.map((image)=>{
             return (
-                <Col sm="6" md="6" xs="12" lg="4" className="product-lists-col" key={image.id}>
-                    <Card className={this.props.isOpen?"product-lists-card-with-filter":"product-lists-card"}>
-                        <CardImg className={this.props.isOpen?"product-item-image-with-filter":"product-item-image"} top src={image.image} alt="Card image cap"/>
-                        <CardTitle className="product-item-text">Sweater</CardTitle>
-                        <CardText className="product-item-text">Sweater</CardText>
+                <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={image.id}>
+                    <Card className={this.props.isOpen?"sales-lists-card-with-filter":"sales-lists-card"}>
+                        <CardImg className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"} top src={image.image} alt="Card image cap"/>
+                        <CardTitle className="sales-item-text">Sweater</CardTitle>
+                        <CardText className="sales-item-text">Sweater</CardText>
                     </Card>
                 </Col>
             )
@@ -50,9 +50,9 @@ class ProductLists extends Component {
 
     render() {
         return (
-            <div className="product-lists">
-                {/*<Row className={this.props.isOpen?"products-lists-row-with-filter":"products-lists-row"}>*/}
-                <Row className="products-lists-row">
+            <div className="sales-lists">
+                {/*<Row className={this.props.isOpen?"saless-lists-row-with-filter":"saless-lists-row"}>*/}
+                <Row className="sales-lists-row">
                     {this.createImagesList()}
                 </Row>
             </div>
@@ -60,4 +60,4 @@ class ProductLists extends Component {
     }
 }
 
-export default ProductLists;
+export default SaleLists;

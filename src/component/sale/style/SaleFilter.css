@@ -1,8 +1,8 @@
-.products-filter{
+.sales-filter{
     float:right;
 }
 
-.products-filter-dropdown-menu{
+.sales-filter-dropdown-menu{
     position:absolute;
     background-color:#fcfdff;
     margin-top: 9px;
@@ -12,38 +12,38 @@
     z-index: 1;
 }
 
-.products-filter-dropdown-item{
+.sales-filter-dropdown-item{
     text-align: center;
     padding: 8px;
     display: block;
     color:black;
 }
 
-.products-filter-dropdown-item:hover{
+.sales-filter-dropdown-item:hover{
     cursor: pointer;
     text-decoration: none;
 }
 
-.products-filter-dropdown-item:not([href]):not([tabindex]):hover {
+.sales-filter-dropdown-item:not([href]):not([tabindex]):hover {
     color:#0056c4;
 }
 
 @media (min-width: 750px) and (max-width: 991px) {
-    .products-filter-dropdown-menu{
+    .sales-filter-dropdown-menu{
         font-size: 15px;
         position: absolute;
     }
 }
 
 @media (max-width: 749px) and (min-width: 420px) {
-    .products-filter-dropdown-menu{
+    .sales-filter-dropdown-menu{
         font-size: 15px;
         position: absolute;
     }
 }
 
 @media (max-width: 419px) {
-    .products-filter-dropdown-menu{
+    .sales-filter-dropdown-menu{
         font-size: 13px;
         position: absolute;
         width: 140px;

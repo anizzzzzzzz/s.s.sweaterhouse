@@ -1,4 +1,4 @@
-.products-categories{
+.sales-categories{
     float:left;
     width: 14%;
     background-color: transparent;
@@ -7,16 +7,16 @@
     position: absolute;
 }
 
-.products-categories-list{
+.sales-categories-list{
     color:black;
 }
 
-.products-categories-list-hr-line{
+.sales-categories-list-hr-line{
     display: none;
 }
 
 @media (min-width: 750px) and (max-width: 991px) {
-    .products-categories{
+    .sales-categories{
         margin-top: -8px;
         width:180px ;
         font-size: 15px;
@@ -25,14 +25,14 @@
         z-index: 1;
     }
 
-    .products-categories-list-hr-line{
+    .sales-categories-list-hr-line{
         display: block;
         margin: 1px 0;
     }
 }
 
 @media (max-width: 749px) and (min-width: 420px) {
-    .products-categories{
+    .sales-categories{
         margin-top: -8px;
         width:180px ;
         font-size: 15px;
@@ -41,14 +41,14 @@
         z-index: 1;
     }
 
-    .products-categories-list-hr-line{
+    .sales-categories-list-hr-line{
         display: block;
         margin: 1px 0;
     }
 }
 
 @media (max-width: 419px) {
-    .products-categories{
+    .sales-categories{
         margin-top: -8px;
         width:145px ;
         font-size: 15px;
@@ -56,12 +56,12 @@
         z-index: 1;
     }
 
-    .products-categories-list{
+    .sales-categories-list{
         font-size: 13px;
         text-align: center;
     }
 
-    .products-categories-list-hr-line{
+    .sales-categories-list-hr-line{
         display: block;
         margin: 1px 0;
     }

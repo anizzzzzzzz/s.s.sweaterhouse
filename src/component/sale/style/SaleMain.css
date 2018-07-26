@@ -1,0 +1,22 @@
+.sales-main{
+    width: 100%;
+    -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: 0.5s;
+    position: relative;
+}
+
+.sales-main-with-filter{
+    width: 85%;
+    position: relative;
+    left: 15%;
+    -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: 0.5s;
+
+}
+
+@media (max-width: 991px) {
+    .sales-main-with-filter{
+        width: 100%;
+        left: 0;
+    }
+}
