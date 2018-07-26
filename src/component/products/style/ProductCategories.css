@@ -4,6 +4,7 @@
     background-color: transparent;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
+    position: absolute;
 }
 
 .products-categories-list{
@@ -21,7 +22,7 @@
         font-size: 15px;
         background-color:#d6d9db;
         text-align: center;
-        z-index: 100;
+        z-index: 1;
     }
 
     .products-categories-list-hr-line{
@@ -37,7 +38,7 @@
         font-size: 15px;
         background-color:#d6d9db;
         text-align: center;
-        z-index: 100;
+        z-index: 1;
     }
 
     .products-categories-list-hr-line{
@@ -52,7 +53,7 @@
         width:145px ;
         font-size: 15px;
         background-color:#d6d9db;
-        z-index: 100;
+        z-index: 1;
     }
 
     .products-categories-list{

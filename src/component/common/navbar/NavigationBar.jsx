@@ -48,29 +48,29 @@ class NavigationBar extends Component {
                                     Products
                                 </DropdownToggle>
                                 <DropdownMenu right className="dropdown-menu-custom">
-                                    <DropdownItem className="nav-text-style">
+                                    <DropdownItem className="nav-text-style" href="/products?item=handwarmer">
                                         Handwarmer
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style">
+                                    <DropdownItem className="nav-text-style" href="/products?item=jacket">
                                         Jacket
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style">
+                                    <DropdownItem className="nav-text-style" href="/products?item=shock">
                                         Shock
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style">
+                                    <DropdownItem className="nav-text-style" href="/products?item=sweater">
                                         Sweater
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style">
+                                    <DropdownItem className="nav-text-style" href="/products?item=trouser">
                                         Trouser
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <NavItem className="nav-item-custom nav-text-style">
-                                <NavLink href="#none" >Sale</NavLink>
+                                <NavLink href="/sale" >Sale</NavLink>
                             </NavItem>
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="/faq" >FAQ</NavLink>

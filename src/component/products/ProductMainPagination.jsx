@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import './style/ProductMainPagination.css';
 
 
 class ProductMainPagination extends Component {

@@ -3,7 +3,6 @@
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
     position: relative;
-    z-index: -1;
 }
 
 .products-main-with-filter{
@@ -12,7 +11,7 @@
     left: 15%;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
-    z-index: -1;
+
 }
 
 @media (max-width: 991px) {

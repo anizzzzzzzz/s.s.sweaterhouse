@@ -10,37 +10,37 @@ class CategoriesCard extends Component {
                     <Col sm="6" md="6" xs="10" lg="4" className="categories-card-item">
                         <Card>
                             <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <Button className="categories-card-button">Handwarmer</Button>
+                            <Button className="categories-card-button" href="/products?item=handwarmer">Handwarmer</Button>
                         </Card>
                     </Col>
                     <Col sm="6" md="6" xs="10" lg="4" className="categories-card-item">
                         <Card>
                             <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <Button className="categories-card-button">Jacket</Button>
+                            <Button className="categories-card-button" href="/products?item=jacket">Jacket</Button>
                         </Card>
                     </Col>
                     <Col sm="6" md="6" xs="10" lg="4" className="categories-card-item">
                         <Card>
                             <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <Button className="categories-card-button">Shock</Button>
+                            <Button className="categories-card-button" href="/products?item=shock">Shock</Button>
                         </Card>
                     </Col>
                     <Col sm="6" md="6" xs="10" lg="4" className="categories-card-item">
                         <Card>
                             <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <Button className="categories-card-button">Sweater</Button>
+                            <Button className="categories-card-button" href="/products?item=sweater">Sweater</Button>
                         </Card>
                     </Col>
                     <Col sm="6" md="6" xs="10" lg="4" className="categories-card-item">
                         <Card>
                             <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <Button className="categories-card-button">Trouser</Button>
+                            <Button className="categories-card-button" href="/products?item=trouser">Trouser</Button>
                         </Card>
                     </Col>
                     <Col sm="6" md="6" xs="10" lg="4" className="categories-card-item">
                         <Card>
                             <CardImg className="categories-card-image" top src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-                            <Button className="categories-card-button">Others</Button>
+                            <Button className="categories-card-button" href="/products?item=other">Others</Button>
                         </Card>
                     </Col>
                 </Row>

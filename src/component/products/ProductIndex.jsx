@@ -5,6 +5,7 @@ import ProductCategories from "./ProductCategories";
 import ProductMain from "./ProductMain";
 import * as FontAwesome from 'react-icons/lib/fa'
 import ProductFilter from "./ProductFilter";
+import Footer from "../common/footer/Footer";
 
 class ProductIndex extends Component {
     constructor(props){
@@ -43,6 +44,7 @@ class ProductIndex extends Component {
                         <ProductMain isOpen={this.state.collapse}/>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

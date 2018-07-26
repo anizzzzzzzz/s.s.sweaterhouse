@@ -1,5 +1,5 @@
 .product-lists{
-    position: absolute;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
@@ -11,7 +11,6 @@
 }
 
 .product-lists-col{
-    position: absolute;
     margin: 0 auto !important;
 }
 
@@ -31,10 +30,12 @@
 
 .product-item-image{
     padding: 5px;
+    max-height: 87%;
 }
 
 .product-item-image-with-filter{
-    padding:5px
+    padding:5px;
+    max-height: 87%;
 }
 
 .product-item-text{

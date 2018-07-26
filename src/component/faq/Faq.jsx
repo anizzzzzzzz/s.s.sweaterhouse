@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
 import {Collapse, ListGroup, ListGroupItem} from "reactstrap";
 import './Faq.css';
+import Footer from "../common/footer/Footer";
 
 var faq=[
     {

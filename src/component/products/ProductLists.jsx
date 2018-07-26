@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/ProductLists.css';
+import ProductMainPagination from "./ProductMainPagination";
 
 class ProductLists extends Component {
     constructor(){
         super();
 
         this.state={
-            images:[]
+            images:[],
+            height:0
         };
 
         this.createImagesList=this.createImagesList.bind(this);
@@ -36,7 +38,7 @@ class ProductLists extends Component {
     createImagesList(){
         return this.state.images.map((image)=>{
             return (
-                <Col sm="6" md="6" xs="10" lg="4" className="product-lists-col" key={image.id}>
+                <Col sm="6" md="6" xs="12" lg="4" className="product-lists-col" key={image.id}>
                     <Card className={this.props.isOpen?"product-lists-card-with-filter":"product-lists-card"}>
                         <CardImg className={this.props.isOpen?"product-item-image-with-filter":"product-item-image"} top src={image.image} alt="Card image cap"/>
                         <CardTitle className="product-item-text">Sweater</CardTitle>
@@ -50,7 +52,7 @@ class ProductLists extends Component {
     render() {
         return (
             <div className="product-lists">
-                {/*<Row className={this.props.isOpen?"products-list-row-with-filter":"products-lists-row"}>*/}
+                {/*<Row className={this.props.isOpen?"products-lists-row-with-filter":"products-lists-row"}>*/}
                 <Row className="products-lists-row">
                     {this.createImagesList()}
                 </Row>

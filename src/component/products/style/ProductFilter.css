@@ -3,11 +3,13 @@
 }
 
 .products-filter-dropdown-menu{
-    position:relative;
+    position:absolute;
     background-color:#d6d9db;
     margin-top: 9px;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
+    width: 180px;
+    z-index: 1;
 }
 
 .products-filter-dropdown-item{
@@ -29,17 +31,21 @@
 @media (min-width: 750px) and (max-width: 991px) {
     .products-filter-dropdown-menu{
         font-size: 15px;
+        position: absolute;
     }
 }
 
 @media (max-width: 749px) and (min-width: 420px) {
     .products-filter-dropdown-menu{
         font-size: 15px;
+        position: absolute;
     }
 }
 
 @media (max-width: 419px) {
     .products-filter-dropdown-menu{
         font-size: 13px;
+        position: absolute;
+        width: 140px;
     }
 }
