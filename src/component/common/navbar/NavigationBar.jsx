@@ -84,7 +84,7 @@ class NavigationBar extends Component {
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <NavItem className="nav-text-style">
-                                <NavLink href="#none" >Login</NavLink>
+                                <NavLink href="/login" >Login</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
