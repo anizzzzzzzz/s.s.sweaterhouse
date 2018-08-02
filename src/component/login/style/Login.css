@@ -1,5 +1,40 @@
-.login-form{
-    width: 80%;
+.login{
+    width: 50%;
     margin-right: auto;
     margin-left: auto;
+    padding:20px;
+    border: 1px solid #cacdd1;
+}
+
+.login-header-text p:first-child{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.login-header-text p:nth-child(2) {
+    text-align: center;
+    color: #cacdd1;
+}
+
+.login-google-btn{
+    width: 49%;
+    background-color: #D84B37 !important;
+    margin-right: 2%;
+}
+
+.login-facebook-btn{
+    width: 49%;
+    background-color: #3B5998 !important;
+}
+
+.login-social-icon{
+    padding-right: 2%;
+}
+
+.login-form-button{
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
