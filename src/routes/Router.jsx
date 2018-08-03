@@ -5,6 +5,7 @@ import Faq from "../component/faq/Faq";
 import ProductIndex from "../component/products/ProductIndex";
 import SaleIndex from "../component/sale/SaleIndex";
 import Login from "../component/login/Login";
+import Register from "../component/register/Register";
 
 class Router extends Component {
     render() {
@@ -16,6 +17,7 @@ class Router extends Component {
                     <Route path="/faq" component={Faq}/>
                     <Route path="/sale" component={SaleIndex}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/register" component={Register}/>
                 </Switch>
             </BrowserRouter>
         )

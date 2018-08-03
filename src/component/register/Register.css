@@ -1,0 +1,45 @@
+.register{
+    width: 70%;
+    border: 1px solid #cacdd1;
+    margin-right: auto;
+    margin-left: auto;
+    padding:20px;
+    position: relative;
+}
+
+.register button{
+    width: 15%;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.register button:hover{
+    background-color: #2d6a9f;
+}
+
+@media (min-width: 1200px) {
+    .register {
+        top: 80px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .register{
+        width: 60%;
+        top: 70px;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 991px) {
+    .register{
+        width: 65%;
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 749px) {
+    .register{
+        width: 75%;
+        top: 10px;
+    }
+}
