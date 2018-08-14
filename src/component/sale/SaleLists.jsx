@@ -40,8 +40,14 @@ class SaleLists extends Component {
                 <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={image.id}>
                     <Card className={this.props.isOpen?"sales-lists-card-with-filter":"sales-lists-card"}>
                         <CardImg className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"} top src={image.image} alt="Card image cap"/>
-                        <CardTitle className="sales-item-text">Sweater</CardTitle>
-                        <CardText className="sales-item-text">Sweater</CardText>
+                        <CardTitle className="sales-item-title">Product Code:123</CardTitle>
+                        <CardText className="sales-item-text">
+                            Type: Sweater
+                            <br/>
+                            Price : 9000
+                            <br/>
+                            Size : XL,L
+                        </CardText>
                     </Card>
                 </Col>
             )

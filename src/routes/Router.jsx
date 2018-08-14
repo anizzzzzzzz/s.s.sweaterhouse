@@ -6,6 +6,7 @@ import ProductIndex from "../component/products/ProductIndex";
 import SaleIndex from "../component/sale/SaleIndex";
 import Login from "../component/login/Login";
 import Register from "../component/register/Register";
+import AddProduct from "../component/admin/addProduct/AddProduct";
 
 class Router extends Component {
     render() {
@@ -18,6 +19,7 @@ class Router extends Component {
                     <Route path="/sale" component={SaleIndex}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/register" component={Register}/>
+                    <Route path="/add-product" component={AddProduct}/>
                 </Switch>
             </BrowserRouter>
         )

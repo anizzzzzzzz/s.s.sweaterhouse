@@ -7,6 +7,10 @@
     position: relative;
 }
 
+.register label{
+    font-weight: bold;
+}
+
 .register button{
     width: 15%;
     background-color: #337ab7;
@@ -15,6 +19,10 @@
 
 .register button:hover{
     background-color: #2d6a9f;
+}
+
+.register-error{
+    color: red;
 }
 
 @media (min-width: 1200px) {
