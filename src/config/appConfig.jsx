@@ -1,13 +1,13 @@
 const DEV = 'DEV';
 const PROD= 'PROD';
 
-let mode = DEV;
+let mode = 'DEV';
 let ROOT_API;
 
-if(mode === 'DEV'){
+if(mode === DEV){
     ROOT_API='http://localhost:8080';
 }
-else if(mode === 'PROD'){
+else if(mode === PROD){
     ROOT_API='http://localhost:8080';
 }
 

@@ -6,30 +6,30 @@ import ProductMain from "./ProductMain";
 import * as FontAwesome from 'react-icons/lib/fa'
 import ProductFilter from "./ProductFilter";
 import Footer from "../common/footer/Footer";
+import {connect} from "react-redux";
+import {isProductCollapseOpen} from "../../action/CollapseAction";
+import {bindActionCreators} from "redux";
 
 class ProductIndex extends Component {
     constructor(props){
         super(props);
 
-        this.state={
-            collapse:true
-        };
-
         this.toggle=this.toggle.bind(this);
     }
 
     toggle() {
-        this.setState({ collapse: !this.state.collapse });
+        this.props.isProductCollapseOpen(!this.props.isProdCategoriesCollapseOpen);
     }
 
     render() {
+        console.log(this.props.isProdCategoriesCollapseOpen);
         return (
             <div>
                 <NavigationBar/>
                 <div className="products-section">
                      <div className="products-section-buttons">
                          <button type="button" className="product-index-button"  onClick={this.toggle}>
-                             {!this.state.collapse?
+                             {!this.props.isProdCategoriesCollapseOpen?
                                  (<span><FontAwesome.FaPlus/> Show Categories</span>):
                                  (<span><FontAwesome.FaMinus/> Hide Categories</span>)}
                          </button>
@@ -37,11 +37,11 @@ class ProductIndex extends Component {
                      </div>
 
                     <div className="products-section-div">
-                        <div className={this.state.collapse===true?"products-section-div-collapse-true":"products-section-div-collapse-false"}>
-                            <ProductCategories isOpen={this.state.collapse}/>
+                        <div className={this.props.isProdCategoriesCollapseOpen===true?"products-section-div-collapse-true":"products-section-div-collapse-false"}>
+                            <ProductCategories isOpen={this.props.isProdCategoriesCollapseOpen}/>
                         </div>
 
-                        <ProductMain isOpen={this.state.collapse}/>
+                        <ProductMain isOpen={this.props.isProdCategoriesCollapseOpen}/>
                     </div>
                 </div>
                 <Footer/>
@@ -50,4 +50,16 @@ class ProductIndex extends Component {
     }
 }
 
-export default ProductIndex;
+const mapStateToProps = (state)=>{
+    return{
+        isProdCategoriesCollapseOpen:state.isProdCategoriesCollapseOpen
+    }
+};
+
+const mapDispatchToAction = dispatch=>{
+    return bindActionCreators({
+        isProductCollapseOpen:isProductCollapseOpen
+    },dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToAction)(ProductIndex);

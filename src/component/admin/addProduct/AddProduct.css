@@ -17,6 +17,10 @@
     box-shadow: none;
 }
 
+.add-product-type-input{
+    width: 300px;
+}
+
 .add-product-size-checkbox{
     display: flex;
     flex-direction: row;
@@ -29,4 +33,24 @@
 
 .add-product-price-input{
     width: 300px;
+}
+
+.add-product-sale-radio{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.add-product-sale-radio div{
+    margin-right: 4%;
+}
+
+@media (max-width: 488px) {
+    .add-product-type-input{
+        width: 98%;
+    }
+
+    .add-product-price-input{
+        width: 98%;
+    }
 }

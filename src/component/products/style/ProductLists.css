@@ -50,6 +50,12 @@
     margin-bottom: 15px;
 }
 
+.product-no-product-text{
+    text-align: center;
+    color: red;
+    margin: 90px auto;
+}
+
 @media (min-width: 1200px) {
     .product-lists-card{
         height: 510px;
@@ -190,22 +196,22 @@
     }
 }
 
-@media (min-width: 576px) and (max-width: 604px) {
+@media (max-width: 604px) {
     .product-lists-card{
-        height: 350px;
+        height: 400px;
         width: 85%;
     }
 
     .product-lists-card-with-filter{
-        height: 350px;
+        height: 400px;
         width: 85%;
     }
 
     .product-item-image{
-        height: 240px;
+        height: 300px;
     }
 
     .product-item-image-with-filter{
-        height: 240px;
+        height: 300px;
     }
 }

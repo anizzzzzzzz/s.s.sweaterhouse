@@ -14,6 +14,9 @@ import {
 } from 'reactstrap';
 import './NavigationBar.css';
 import PropTypes from 'prop-types';
+import {bindActionCreators} from "redux";
+import {selectProductType} from "../../../action/ImageAction";
+import {connect} from "react-redux";
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -32,6 +35,12 @@ class NavigationBar extends Component {
         });
     }
 
+    handleClick(e){
+        e.preventDefault();
+        this.props.selectProductType(e.target.name);
+        window.location='/products?item='+e.target.name;
+    }
+
     render() {
         return (
             <div className="sshouse">
@@ -48,23 +57,43 @@ class NavigationBar extends Component {
                                     Products
                                 </DropdownToggle>
                                 <DropdownMenu right className="dropdown-menu-custom">
-                                    <DropdownItem className="nav-text-style" href="/products?item=handwarmer">
+                                    <DropdownItem className="nav-text-style"
+                                                  href="/products?item=handwarmer"
+                                                  name="handwarmer"
+                                                  onClick={(e)=>{return this.handleClick(e)}}
+                                    >
                                         Handwarmer
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style" href="/products?item=jacket">
+                                    <DropdownItem className="nav-text-style"
+                                                  href="/products?item=jacket"
+                                                  name="jacket"
+                                                  onClick={(e)=>{return this.handleClick(e)}}
+                                    >
                                         Jacket
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style" href="/products?item=shock">
+                                    <DropdownItem className="nav-text-style"
+                                                  href="/products?item=shock"
+                                                  name="shock"
+                                                  onClick={(e)=>{return this.handleClick(e)}}
+                                    >
                                         Shock
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style" href="/products?item=sweater">
+                                    <DropdownItem className="nav-text-style"
+                                                  href="/products?item=sweater"
+                                                  name="sweater"
+                                                  onClick={(e)=>{return this.handleClick(e)}}
+                                    >
                                         Sweater
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style" href="/products?item=trouser">
+                                    <DropdownItem className="nav-text-style"
+                                                  href="/products?item=trouser"
+                                                  name="trouser"
+                                                  onClick={(e)=>{return this.handleClick(e)}}
+                                    >
                                         Trouser
                                     </DropdownItem>
                                 </DropdownMenu>
@@ -105,4 +134,10 @@ Nav.propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-export default NavigationBar;
+const mapDispatchToProps = (dispatch)=>{
+  return bindActionCreators({
+      selectProductType:selectProductType
+  },dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(NavigationBar);

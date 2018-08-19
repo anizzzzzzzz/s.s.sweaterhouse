@@ -190,22 +190,22 @@
     }
 }
 
-@media (min-width: 576px) and (max-width: 604px) {
+@media (max-width: 604px) {
     .sales-lists-card{
-        height: 350px;
+        height: 400px;
         width: 85%;
     }
 
     .sales-lists-card-with-filter{
-        height: 350px;
+        height: 400px;
         width: 85%;
     }
 
     .sales-item-image{
-        height: 240px;
+        height: 300px;
     }
 
     .sales-item-image-with-filter{
-        height: 240px;
+        height: 300px;
     }
 }
