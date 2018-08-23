@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 import {bindActionCreators} from "redux";
 import {selectProductType} from "../../../action/ImageAction";
 import {connect} from "react-redux";
+import {trackingPagination} from "../../../action/PaginationAction";
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -38,6 +39,7 @@ class NavigationBar extends Component {
     handleClick(e){
         e.preventDefault();
         this.props.selectProductType(e.target.name);
+        this.props.trackingPagination(0);
         window.location='/products?item='+e.target.name;
     }
 
@@ -136,7 +138,8 @@ Nav.propTypes = {
 
 const mapDispatchToProps = (dispatch)=>{
   return bindActionCreators({
-      selectProductType:selectProductType
+      selectProductType:selectProductType,
+      trackingPagination:trackingPagination
   },dispatch);
 };
 

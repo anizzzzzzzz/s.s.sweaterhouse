@@ -6,11 +6,11 @@ export function showImages() {
     });
 }
 
-export function findAllByType(type){
+export function findAllByType(type, pageNo, size){
     let data=new FormData();
     data.append("type",type);
-    data.append("size","5");
-    data.append("page","0");
+    data.append("size",size.toString());
+    data.append("page",pageNo.toString());
 
     return fetch(API_ROOT+"/find-all-by-type",{
         method:'POST',

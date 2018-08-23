@@ -14,6 +14,10 @@ class ProductIndex extends Component {
     constructor(props){
         super(props);
 
+        this.state={
+            change:false
+        };
+
         this.toggle=this.toggle.bind(this);
     }
 
@@ -51,7 +55,7 @@ class ProductIndex extends Component {
 
 const mapStateToProps = (state)=>{
     return{
-        isProdCategoriesCollapseOpen:state.isProdCategoriesCollapseOpen
+        isProdCategoriesCollapseOpen:state.isProdCategoriesCollapseOpen,
     }
 };
 

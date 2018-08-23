@@ -25,15 +25,15 @@ class ProductLists extends Component {
             loading:false,
             totalPages:0,
             totalElements:0,
-            currentPage:0
+            currentPage:0,
+            isFirst:false,
+            isLast:false,
+            change:false
         };
     }
 
-    componentWillMount() {
-        this.setState({
-            loading:true
-        });
-        findAllByType(this.props.selectProdType)
+    findAllByType(){
+        findAllByType(this.props.selectProdType, this.props.trackingPagination,5)
             .then(response=>{
                 if(response.status === 200){
                     return response.json();
@@ -48,7 +48,9 @@ class ProductLists extends Component {
                     loading:false,
                     totalPages:result.totalPages,
                     totalElements:result.totalElements,
-                    currentPage:result.number
+                    currentPage:result.number,
+                    isFirst:result.first,
+                    isLast:result.last
                 });
             })
             .catch((ex)=>{
@@ -60,6 +62,14 @@ class ProductLists extends Component {
                     );
                 }
             })
+    }
+
+    componentWillMount() {
+        this.setState({
+            loading:true
+        });
+
+        this.findAllByType();
     }
 
     createImagesList(){
@@ -94,6 +104,12 @@ class ProductLists extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(this.props.trackingPagination !== nextProps.trackingPagination){
+            window.location='/products?item='+this.props.selectProdType;
+        }
+    }
+
     render() {
         return (
             <div>
@@ -114,7 +130,8 @@ class ProductLists extends Component {
                     <ProductMainPagination totalPages={this.state.totalPages}
                                            totalElements={this.state.totalElements}
                                            currentPage={this.state.currentPage}
-
+                                           isFirst={this.state.isFirst}
+                                           isLast={this.state.isLast}
                     />:
                     null
                 }
@@ -126,7 +143,8 @@ class ProductLists extends Component {
 
 const mapStateToProps = (state)=>{
   return{
-      selectProdType: state.selectProdType
+      selectProdType: state.selectProdType,
+      trackingPagination: state.trackingPagination
   }
 };
 
@@ -137,4 +155,3 @@ const mapDispatchToAction = (dispatch)=>{
 };
 
 export default connect(mapStateToProps, mapDispatchToAction)(ProductLists);
-// export default ProductLists;

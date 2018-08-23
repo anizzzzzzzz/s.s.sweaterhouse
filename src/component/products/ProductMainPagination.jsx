@@ -1,72 +1,76 @@
 import React, {Component} from 'react';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import {Pagination, PaginationItem, PaginationLink} from 'reactstrap';
 import './style/ProductMainPagination.css';
+import bindActionCreators from "redux/src/bindActionCreators";
+import {trackingPagination} from "../../action/PaginationAction";
+import {connect} from "react-redux";
 
 
 class ProductMainPagination extends Component {
-    constructor(props){
-        super(props);
+    handleClick(event,i){
+        event.preventDefault();
+        this.props.trackingPagination(i);
+    }
 
-        console.log(this.props);
+    handleNext(event,i){
+        event.preventDefault();
+        if((i+1)<this.props.totalPages){
+            this.props.trackingPagination(i+1);
+        }
+    }
+
+    handlePrevious(event,i){
+        event.preventDefault();
+        if((i-1)>=0){
+            this.props.trackingPagination(i-1);
+        }
     }
 
     createPagination(){
-
-        for(let i=0; i<=this.props.totalPages; i++){
-             (
-                <PaginationItem>
-                    <PaginationLink href="#">
-                        {i+1}
-                    </PaginationLink>
-                </PaginationItem>
-            )
+        let page=[];
+        for(let i=0; i<this.props.totalPages; i++){
+            if(i === this.props.currentPage){
+                page.push(
+                    <PaginationItem key={i} onClick={(e)=>this.handleClick(e,i)} active>
+                        <PaginationLink>
+                            {i+1}
+                        </PaginationLink>
+                    </PaginationItem>
+                );
+            }
+            else {
+                page.push(
+                    <PaginationItem key={i} onClick={(e) => this.handleClick(e, i)}>
+                        <PaginationLink>
+                            {i + 1}
+                        </PaginationLink>
+                    </PaginationItem>
+                );
+            }
         }
+
+        return page.map((pa)=>pa);
     }
-    /*render() {
-        return (
-                <Pagination className="products-main-pagination" aria-label="Page navigation example">
-                    <PaginationItem disabled>
-                        <PaginationLink previous href="#" />
-                    </PaginationItem>
-                    <PaginationItem active>
-                        <PaginationLink href="#">
-                            1
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            2
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            3
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            4
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            5
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink next href="#" />
-                    </PaginationItem>
-                </Pagination>
-        )
-    }*/
 
     render() {
         return (
-            <Pagination className="products-main-pagination" aria-label="Page navigation example">
+            <Pagination className="products-main-pagination">
+                <PaginationItem disabled={this.props.isFirst} onClick={(e)=>this.handlePrevious(e,this.props.currentPage)}>
+                    <PaginationLink previous />
+                </PaginationItem>
                 {this.createPagination()}
+                <PaginationItem disabled={this.props.isLast} onClick={(e)=>this.handleNext(e,this.props.currentPage)}>
+                    <PaginationLink next disabled={this.props.isLast}/>
+                </PaginationItem>
             </Pagination>
         )
     }
 }
 
-export default ProductMainPagination;
+const mapDispatchToAction=(dispatch)=>{
+    return bindActionCreators({
+        trackingPagination:trackingPagination
+    },dispatch)
+};
+
+export default connect(null,mapDispatchToAction)(ProductMainPagination);
