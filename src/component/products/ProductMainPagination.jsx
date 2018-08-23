@@ -4,7 +4,25 @@ import './style/ProductMainPagination.css';
 
 
 class ProductMainPagination extends Component {
-    render() {
+    constructor(props){
+        super(props);
+
+        console.log(this.props);
+    }
+
+    createPagination(){
+
+        for(let i=0; i<=this.props.totalPages; i++){
+             (
+                <PaginationItem>
+                    <PaginationLink href="#">
+                        {i+1}
+                    </PaginationLink>
+                </PaginationItem>
+            )
+        }
+    }
+    /*render() {
         return (
                 <Pagination className="products-main-pagination" aria-label="Page navigation example">
                     <PaginationItem disabled>
@@ -39,6 +57,14 @@ class ProductMainPagination extends Component {
                         <PaginationLink next href="#" />
                     </PaginationItem>
                 </Pagination>
+        )
+    }*/
+
+    render() {
+        return (
+            <Pagination className="products-main-pagination" aria-label="Page navigation example">
+                {this.createPagination()}
+            </Pagination>
         )
     }
 }

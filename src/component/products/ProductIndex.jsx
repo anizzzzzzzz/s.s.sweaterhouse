@@ -22,7 +22,6 @@ class ProductIndex extends Component {
     }
 
     render() {
-        console.log(this.props.isProdCategoriesCollapseOpen);
         return (
             <div>
                 <NavigationBar/>

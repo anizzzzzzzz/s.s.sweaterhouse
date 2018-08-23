@@ -88,17 +88,17 @@ class IndexCorausel extends Component {
     render() {
         const {activeIndex} = this.state;
         return (
-                <Carousel
-                    activeIndex={activeIndex}
-                    next={this.next}
-                    previous={this.previous}
-                    className="carousel-box"
-                >
-                    <CarouselIndicators items={this.state.images} activeIndex={activeIndex} onClickHandler={this.goToIndex}/>
-                    {this.displayCorauselItem()}
-                    <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                    <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-                </Carousel>
+            <Carousel
+                activeIndex={activeIndex}
+                next={this.next}
+                previous={this.previous}
+                className="carousel-box"
+            >
+                <CarouselIndicators items={this.state.images} activeIndex={activeIndex} onClickHandler={this.goToIndex}/>
+                {this.displayCorauselItem()}
+                <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+                <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+            </Carousel>
         )
     }
 }

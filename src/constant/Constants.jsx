@@ -1,0 +1,1 @@
+export const FIND_ALL_BY_TYPE="/find-all-by-type/";

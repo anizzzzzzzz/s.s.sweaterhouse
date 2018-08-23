@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/ProductLists.css';
-import {showImagesByType} from "../../api/ImageApi";
+import {findAllByType} from "../../api/ImageApi";
 import {ProductNullException} from "../../exception/Exceptions";
 import {connect} from "react-redux";
 import {BounceLoader} from "react-spinners";
 import {css} from 'react-emotion';
+import bindActionCreators from "redux/src/bindActionCreators";
+import {storeRestUrl} from "../../action/RestUrlAction";
+import ProductMainPagination from "./ProductMainPagination";
 
 const override = css`
     display: block;
@@ -18,9 +21,11 @@ class ProductLists extends Component {
         super(props);
 
         this.state={
-            images:[],
-            height:0,
-            loading:false
+            products:[],
+            loading:false,
+            totalPages:0,
+            totalElements:0,
+            currentPage:0
         };
     }
 
@@ -28,7 +33,7 @@ class ProductLists extends Component {
         this.setState({
             loading:true
         });
-        showImagesByType(this.props.selectProdType)
+        findAllByType(this.props.selectProdType)
             .then(response=>{
                 if(response.status === 200){
                     return response.json();
@@ -39,9 +44,12 @@ class ProductLists extends Component {
             })
             .then(result=>{
                 this.setState({
-                    images:result.content,
-                    loading:false
-                })
+                    products:result.content,
+                    loading:false,
+                    totalPages:result.totalPages,
+                    totalElements:result.totalElements,
+                    currentPage:result.number
+                });
             })
             .catch((ex)=>{
                 if(ex instanceof ProductNullException){
@@ -55,8 +63,8 @@ class ProductLists extends Component {
     }
 
     createImagesList(){
-        if(this.state.images.length > 0) {
-            return this.state.images.map((image) => {
+        if(this.state.products.length > 0) {
+            return this.state.products.map((image) => {
                 let src = 'data:' + image.imageType + ';base64,' + image.image;
                 return (
                     <Col sm="6" md="6" xs="12" lg="4" className="product-lists-col" key={image.productCode}>
@@ -102,6 +110,14 @@ class ProductLists extends Component {
                     color={'#01A390'}
                     loading={this.state.loading}
                 />
+                {(!this.state.loading && this.state.totalElements !== 0 && this.state.totalPages > 1)?
+                    <ProductMainPagination totalPages={this.state.totalPages}
+                                           totalElements={this.state.totalElements}
+                                           currentPage={this.state.currentPage}
+
+                    />:
+                    null
+                }
             </div>
 
         );
@@ -114,5 +130,11 @@ const mapStateToProps = (state)=>{
   }
 };
 
-export default connect(mapStateToProps)(ProductLists);
+const mapDispatchToAction = (dispatch)=>{
+    return bindActionCreators({
+        storeRestUrl:storeRestUrl
+    },dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToAction)(ProductLists);
 // export default ProductLists;
