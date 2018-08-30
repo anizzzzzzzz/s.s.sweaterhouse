@@ -1,3 +1,7 @@
+.dropdown-custom{
+    cursor: pointer;
+}
+
 /*Larger Devices (e.g. wide-screen monitors)*/
 @media (min-width: 1200px) {
     .nav-item-custom {

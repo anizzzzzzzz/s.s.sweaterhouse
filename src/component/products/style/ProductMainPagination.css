@@ -1,9 +1,0 @@
-.products-main-pagination{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.page-link{
-    background-color: black;
-}
