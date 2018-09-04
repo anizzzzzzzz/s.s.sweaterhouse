@@ -8,7 +8,7 @@ if(mode === DEV){
     ROOT_API='http://localhost:8080';
 }
 else if(mode === PROD){
-    ROOT_API='http://localhost:8080';
+    ROOT_API='http://192.168.1.103:8080';
 }
 
 export default ROOT_API;

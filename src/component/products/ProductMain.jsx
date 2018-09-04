@@ -46,7 +46,7 @@ class ProductMain extends Component {
     }
 
     findAllByType(){
-        findAllByType(this.props.item, this.props.page-1,2)
+        findAllByType(this.props.item, this.props.page-1,18)
             .then(response=>{
                 if(response.status === 200){
                     return response.json();
@@ -77,16 +77,26 @@ class ProductMain extends Component {
             })
     }
 
+    handleClick(e,productCode){
+        e.preventDefault();
+        window.location = "/view?code="+productCode;
+    }
+
     createImagesList(){
         if(this.state.products.length > 0) {
             return this.state.products.map((image) => {
                 let src = 'data:' + image.imageType + ';base64,' + image.image;
                 return (
-                    <Col sm="6" md="6" xs="12" lg="4" className="product-lists-col" key={image.productCode}>
+                    <Col sm="6" md="6" xs="12" lg="4"
+                         className="product-lists-col"
+                         key={image.productCode}
+                    >
                         <Card className={this.props.isOpen ? "product-lists-card-with-filter" : "product-lists-card"}>
                             <CardImg
                                 className={this.props.isOpen ? "product-item-image-with-filter" : "product-item-image"}
-                                top src={src} alt="Card image cap"/>
+                                top src={src} alt="Card image cap"
+                                onClick={(e)=>this.handleClick(e,image.productCode)}
+                            />
                             <CardTitle className="product-item-text">Product Code: {image.productCode}</CardTitle>
                             <CardText className="product-item-text">
                                 Product Type: {image.type}
