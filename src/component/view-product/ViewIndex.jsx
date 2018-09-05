@@ -5,6 +5,7 @@ import {ProductNullException} from "../../exception/Exceptions";
 import ReactImageMagnify from "react-image-magnify";
 import NavigationBar from "../common/navbar/NavigationBar";
 import {Col, Row} from "reactstrap";
+import ViewLightBox from "./ViewLightBox";
 
 class ViewIndex extends Component {
     constructor(props){
@@ -19,8 +20,11 @@ class ViewIndex extends Component {
             productCode:queryParams.code,
             size:[],
             type:'',
-            selectedImage:{}
+            selectedImage:{},
+            openLightbox:false
         };
+
+        this.closeImageLightbox = this.closeImageLightbox.bind(this);
     }
 
     componentWillMount(){
@@ -51,6 +55,19 @@ class ViewIndex extends Component {
             })
     }
 
+    openImageLightbox(e){
+        e.preventDefault();
+        this.setState({
+           openLightbox:true
+        });
+    }
+
+    closeImageLightbox(){
+        this.setState({
+            openLightbox:false
+        });
+    }
+
     selectedImageSection(){
         let image=this.state.selectedImage;
         let src = 'data:' + image.type + ';base64,' + image.image;
@@ -61,29 +78,30 @@ class ViewIndex extends Component {
                       {this.imageListSection()}
                   </Col>
                   <Col sm="12" md="10" lg="10" xs="12" className="view-product-image-col">
-                      <ReactImageMagnify className="view-product-image-root"
-                                         imageClassName="view-product-image-small"
-                                         enlargedImageClassName="view-product-image-container"
-                                         enlargedImageContainerClassName="view-product-image-large"
-                                         {...{
-                                             smallImage: {
-                                                 alt: image.name+"."+image.extension,
-                                                 isFluidWidth: true,
-                                                 src: src,
-                                             },
-                                             largeImage: {
-                                                 alt: image.name+"."+image.extension,
-                                                 src: src,
-                                                 width: 1200,
-                                                 height: 1800,
-                                             },
-                                             shouldUsePositiveSpaceLens: true,
-                                             enlargedImageContainerDimensions: {
-                                                 width: '100%',
-                                                 height: '100%'
-                                             },
-                                         }}
-                      />
+                      <div className="view-product-image-col-div" onClick={e=>this.openImageLightbox(e)}>
+                          <ReactImageMagnify imageClassName="view-product-image-small"
+                                             enlargedImageClassName="view-product-image-container"
+                                             enlargedImageContainerClassName="view-product-image-large"
+                                             {...{
+                                                 smallImage: {
+                                                     alt: image.name+"."+image.extension,
+                                                     isFluidWidth: true,
+                                                     src: src,
+                                                 },
+                                                 largeImage: {
+                                                     alt: image.name+"."+image.extension,
+                                                     src: src,
+                                                     width: 1200,
+                                                     height: 1900,
+                                                 },
+                                                 shouldUsePositiveSpaceLens: true,
+                                                 enlargedImageContainerDimensions: {
+                                                     width: '100%',
+                                                     height: '100%'
+                                                 },
+                                             }}
+                          />
+                      </div>
                   </Col>
               </Row>
 
@@ -131,7 +149,7 @@ class ViewIndex extends Component {
     productInfo(){
         return (
             <Col sm="5" md="5" xs="12" lg="5" className="view-product-info">
-                <div>
+                <div className="view-product-details">
                     <p><b>Black Woolen Jacket</b></p>
                     <p>Product : {this.state.productCode}</p>
                     <p>Size Available : {this.sizeLists()}</p>
@@ -149,6 +167,15 @@ class ViewIndex extends Component {
                         {this.selectedImageSection()}
                         {this.productInfo()}
                     </Row>
+                    {this.state.openLightbox?
+                        (
+                            <ViewLightBox
+                                openLightbox={this.state.openLightbox}
+                                images={this.state.images}
+                                currentImage={this.state.selectedImage}
+                                closeLighbox={this.closeImageLightbox}
+                            />
+                        ):null}
                 </div>
             </div>
         )
