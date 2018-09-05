@@ -2,20 +2,26 @@ import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
 import './style/ProductIndex.css';
 import ProductCategories from "./ProductCategories";
-import ProductMain from "./ProductMain";
 import * as FontAwesome from 'react-icons/lib/fa'
 import ProductFilter from "./ProductFilter";
 import Footer from "../common/footer/Footer";
 import {connect} from "react-redux";
 import {isProductCollapseOpen} from "../../action/CollapseAction";
 import {bindActionCreators} from "redux";
+import ProductMain from "./ProductMain";
+
 
 class ProductIndex extends Component {
     constructor(props){
         super(props);
 
+        const parseQueryString = require('query-string');
+        let queryParams = parseQueryString.parse(this.props.location.search);
+
         this.state={
-            change:false
+            change:false,
+            item:queryParams.item,
+            page:parseInt(queryParams.page,10)
         };
 
         this.toggle=this.toggle.bind(this);
@@ -44,7 +50,7 @@ class ProductIndex extends Component {
                             <ProductCategories isOpen={this.props.isProdCategoriesCollapseOpen}/>
                         </div>
 
-                        <ProductMain isOpen={this.props.isProdCategoriesCollapseOpen}/>
+                        <ProductMain isOpen={this.props.isProdCategoriesCollapseOpen} item={this.state.item} page={this.state.page}/>
                     </div>
                 </div>
                 <Footer/>

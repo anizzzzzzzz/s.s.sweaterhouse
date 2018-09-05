@@ -17,3 +17,12 @@ export function findAllByType(type, pageNo, size){
         body:data
     });
 }
+
+export function findOneByProductCode(productCode){
+    let data=new FormData();
+    data.append("productCode",productCode);
+    return fetch(API_ROOT+"/find-one",{
+        method:'POST',
+        body:data
+    });
+}

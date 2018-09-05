@@ -14,10 +14,6 @@ import {
 } from 'reactstrap';
 import './NavigationBar.css';
 import PropTypes from 'prop-types';
-import {bindActionCreators} from "redux";
-import {selectProductType} from "../../../action/ImageAction";
-import {connect} from "react-redux";
-import {trackingPagination} from "../../../action/PaginationAction";
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -26,7 +22,6 @@ class NavigationBar extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            height:'0px'
         };
     }
 
@@ -34,13 +29,6 @@ class NavigationBar extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         });
-    }
-
-    handleClick(e){
-        e.preventDefault();
-        this.props.selectProductType(e.target.name);
-        this.props.trackingPagination(0);
-        window.location='/products?item='+e.target.name;
     }
 
     render() {
@@ -59,42 +47,37 @@ class NavigationBar extends Component {
                                     Products
                                 </DropdownToggle>
                                 <DropdownMenu right className="dropdown-menu-custom">
-                                    <DropdownItem className="nav-text-style"
-                                                  href="/products?item=handwarmer"
+                                    <DropdownItem className="nav-text-style dropdown-custom"
+                                                  href="/products?item=handwarmer&page=1"
                                                   name="handwarmer"
-                                                  onClick={(e)=>{return this.handleClick(e)}}
                                     >
                                         Handwarmer
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style"
-                                                  href="/products?item=jacket"
+                                    <DropdownItem className="nav-text-style dropdown-custom"
+                                                  href="/products?item=jacket&page=1"
                                                   name="jacket"
-                                                  onClick={(e)=>{return this.handleClick(e)}}
                                     >
                                         Jacket
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style"
-                                                  href="/products?item=shock"
+                                    <DropdownItem className="nav-text-style dropdown-custom"
+                                                  href="/products?item=shock&page=1"
                                                   name="shock"
-                                                  onClick={(e)=>{return this.handleClick(e)}}
                                     >
                                         Shock
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style"
-                                                  href="/products?item=sweater"
+                                    <DropdownItem className="nav-text-style dropdown-custom"
+                                                  href="/products?item=sweater&page=1"
                                                   name="sweater"
-                                                  onClick={(e)=>{return this.handleClick(e)}}
                                     >
                                         Sweater
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem className="nav-text-style"
-                                                  href="/products?item=trouser"
+                                    <DropdownItem className="nav-text-style dropdown-custom"
+                                                  href="/products?item=trouser&page=1"
                                                   name="trouser"
-                                                  onClick={(e)=>{return this.handleClick(e)}}
                                     >
                                         Trouser
                                     </DropdownItem>
@@ -136,11 +119,4 @@ Nav.propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-const mapDispatchToProps = (dispatch)=>{
-  return bindActionCreators({
-      selectProductType:selectProductType,
-      trackingPagination:trackingPagination
-  },dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(NavigationBar);
+export default NavigationBar;

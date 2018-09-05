@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Pagination, PaginationItem, PaginationLink} from 'reactstrap';
-import './style/ProductMainPagination.css';
+import './style/ProductPagination.css';
 import bindActionCreators from "redux/src/bindActionCreators";
 import {trackingPagination} from "../../action/PaginationAction";
 import {connect} from "react-redux";
@@ -28,6 +28,7 @@ class ProductMainPagination extends Component {
 
     createPagination(){
         let page=[];
+
         for(let i=0; i<this.props.totalPages; i++){
             if(i === this.props.currentPage){
                 page.push(

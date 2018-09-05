@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import './AddProduct.css';
+import './style/AddProduct.css';
 import {Button, Col, Form, FormGroup, FormText, Input, InputGroup, InputGroupAddon, Label} from "reactstrap";
 import ShowSelectedImages from "./ShowSelectedImages";
+import {uploadProduct} from "../../../api/UploadApi";
+import {ProductUploadFailure} from "../../../exception/Exceptions";
 
 const productType=[
     {
@@ -58,8 +60,11 @@ class AddProduct extends Component {
             type:'',
             size:[],
             price:'',
-            sale:''
-        }
+            sale:'',
+            selectedImage:''
+        };
+
+        this.handleSelectForHighlight=this.handleSelectForHighlight.bind(this);
     }
 
     createListForType(){
@@ -103,19 +108,53 @@ class AddProduct extends Component {
                 images
             });
         }
+        console.log(images.length);
+    }
+
+    handleSelectForHighlight(name){
+        this.setState({
+            selectedImage:name
+        });
     }
 
     handleSubmit(e){
         e.preventDefault();
+        let state=this.state;
 
-        console.log(this.state);
+        uploadProduct(state.images, state.type, state.size, state.price, state.sale, state.selectedImage)
+            .then(response=>{
+                console.log("Response",response);
+                if(response.status ===200){
+                    return response.json();
+                }
+                else{
+                    throw new ProductUploadFailure();
+                }
+            })
+            .then(result=>{
+                console.log("Result",result);
+                return (
+                    <div style={{minHeight:'100%'}}>
+                        <p style={{color:'red'}}>{result.message}</p>
+                    </div>
+                );
+            })
+            .catch((ex)=>{
+                if(ex instanceof ProductUploadFailure){
+                    return (
+                        <div style={{minHeight:'100%'}}>
+                            <p style={{color:'red'}}>Error Occured while uploading.</p>
+                        </div>
+                    );
+                }
+            })
     }
 
     render() {
         return (
             <div>
                 <div className="add-product">
-                    <Form>
+                    <Form encType="multipart/form-data">
                         <FormGroup row>
                             <Label for="images" sm={2}>Images</Label>
                             <Col sm={10}>
@@ -128,7 +167,11 @@ class AddProduct extends Component {
                                 <FormText color="muted">
                                     You can only upload image with jpeg/png extension.
                                 </FormText>
-                                {this.state.images.length > 0?<ShowSelectedImages images={this.state.images}/>:null}
+                                {this.state.images.length > 0?
+                                    <ShowSelectedImages images={this.state.images}
+                                                        handleSelectImage={this.handleSelectForHighlight}
+                                                        selectedImage={this.state.selectedImage}/>:
+                                    null}
                             </Col>
                         </FormGroup>
                         <FormGroup row>
