@@ -34,6 +34,7 @@ class ViewIndex extends Component {
                 }
             })
             .then(result=>{
+                console.log("sd",result);
                 this.setState({
                     images : result.productResponse.images,
                     type : result.productResponse.type,
@@ -54,16 +55,16 @@ class ViewIndex extends Component {
         let image=this.state.selectedImage;
         let src = 'data:' + image.type + ';base64,' + image.image;
         return (
-          <Col sm="6" md="6" xs="12" lg="6" className="view-product-image">
+          <Col sm="7" md="7" xs="12" lg="7" className="view-product-image">
               <Row>
-                  <Col sm="2" md="2" lg="2">
+                  <Col sm="12" md="2" lg="2" xs="12" className="view-product-image-lists-col">
                       {this.imageListSection()}
                   </Col>
-                  <Col sm="10" md="10" lg="10">
+                  <Col sm="12" md="10" lg="10" xs="12" className="view-product-image-col">
                       <ReactImageMagnify className="view-product-image-root"
                                          imageClassName="view-product-image-small"
-                                         enlargedImageClassName="view-product-image-large"
-                                         enlargedImageContainerClassName="view-product-image-container"
+                                         enlargedImageClassName="view-product-image-container"
+                                         enlargedImageContainerClassName="view-product-image-large"
                                          {...{
                                              smallImage: {
                                                  alt: image.name+"."+image.extension,
@@ -71,9 +72,10 @@ class ViewIndex extends Component {
                                                  src: src,
                                              },
                                              largeImage: {
+                                                 alt: image.name+"."+image.extension,
                                                  src: src,
-                                                 width: 1000,
-                                                 height: 1000
+                                                 width: 1200,
+                                                 height: 1800,
                                              },
                                              shouldUsePositiveSpaceLens: true,
                                              enlargedImageContainerDimensions: {
@@ -99,7 +101,7 @@ class ViewIndex extends Component {
                         .map(img=>{
                             let src = 'data:' + img.type + ';base64,' + img.image;
                             return (
-                                <div className="view-product-img-lists" key={img.name}>
+                                <div className="view-product-img-lists" key={img.name} onClick={(e)=>{this.handleImageSelect(e,img)}}>
                                     <img src={src} alt={img.name+"."+img.extension}/>
                                 </div>
                             )
@@ -109,10 +111,31 @@ class ViewIndex extends Component {
         )
     }
 
+    handleImageSelect(e,selectedImage){
+        e.preventDefault();
+        this.setState({selectedImage});
+    }
+
+    sizeLists(){
+        let size=this.state.size;
+        if(size.length >0){
+            return size.map((s)=>{
+                return (s.id === size[size.length-1].id)?(<b key={s.id}>{s.size}</b>):(<b key={s.id}>{s.size+", "}</b>)
+            })
+        }
+        else{
+            return null;
+        }
+    }
+
     productInfo(){
         return (
-            <Col sm="6" md="6" xs="12" lg="6" className="view-product-info">
-                Product : {this.state.productCode}
+            <Col sm="5" md="5" xs="12" lg="5" className="view-product-info">
+                <div>
+                    <p><b>Black Woolen Jacket</b></p>
+                    <p>Product : {this.state.productCode}</p>
+                    <p>Size Available : {this.sizeLists()}</p>
+                </div>
             </Col>
         );
     }

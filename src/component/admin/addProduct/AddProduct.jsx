@@ -61,7 +61,9 @@ class AddProduct extends Component {
             size:[],
             price:'',
             sale:'',
-            selectedImage:''
+            selectedImage:'',
+            error:false,
+            successs:false
         };
 
         this.handleSelectForHighlight=this.handleSelectForHighlight.bind(this);
@@ -133,19 +135,23 @@ class AddProduct extends Component {
             })
             .then(result=>{
                 console.log("Result",result);
-                return (
-                    <div style={{minHeight:'100%'}}>
-                        <p style={{color:'red'}}>{result.message}</p>
-                    </div>
-                );
+                this.setState({
+                    images:[],
+                    type:'',
+                    size:[],
+                    price:'',
+                    sale:'',
+                    selectedImage:'',
+                    error:false,
+                    success:true
+                });
             })
             .catch((ex)=>{
                 if(ex instanceof ProductUploadFailure){
-                    return (
-                        <div style={{minHeight:'100%'}}>
-                            <p style={{color:'red'}}>Error Occured while uploading.</p>
-                        </div>
-                    );
+                    this.setState({
+                        success:false,
+                        error:true
+                    });
                 }
             })
     }
@@ -154,6 +160,22 @@ class AddProduct extends Component {
         return (
             <div>
                 <div className="add-product">
+                    {
+                        this.state.success === true ?
+                        (
+                            <div style={{minHeight:'100%',textAlign:'center'}}>
+                                <p style={{color:'green'}}>Saved product successfully.</p>
+                            </div>
+                        ):null
+                    }
+                    {
+                        this.state.error === true ?
+                            (
+                                <div style={{minHeight:'100%',textAlign:'center'}}>
+                                    <p style={{color:'red'}}>Error while saving product.</p>
+                                </div>
+                            ):null
+                    }
                     <Form encType="multipart/form-data">
                         <FormGroup row>
                             <Label for="images" sm={2}>Images</Label>
