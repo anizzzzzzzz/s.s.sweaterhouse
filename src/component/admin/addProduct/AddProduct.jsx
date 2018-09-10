@@ -57,6 +57,7 @@ class AddProduct extends Component {
 
         this.state={
             images:[],
+            name:'',
             type:'',
             size:[],
             price:'',
@@ -123,7 +124,7 @@ class AddProduct extends Component {
         e.preventDefault();
         let state=this.state;
 
-        uploadProduct(state.images, state.type, state.size, state.price, state.sale, state.selectedImage)
+        uploadProduct(state.images, state.name, state.type, state.size, state.price, state.sale, state.selectedImage)
             .then(response=>{
                 console.log("Response",response);
                 if(response.status ===200){
@@ -177,6 +178,16 @@ class AddProduct extends Component {
                             ):null
                     }
                     <Form encType="multipart/form-data">
+                        <FormGroup row>
+                            <Label for="name" sm={2}>Name</Label>
+                            <Col sm={10}>
+                                <Input type="text"
+                                       name="name"
+                                       placeholder="Enter name"
+                                       onChange={this.handleChange.bind(this)}
+                                />
+                            </Col>
+                        </FormGroup>
                         <FormGroup row>
                             <Label for="images" sm={2}>Images</Label>
                             <Col sm={10}>

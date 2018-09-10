@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/ProductMain.css';
-import {findAllByType} from "../../api/ImageApi";
+import {findAllByType} from "../../api/ProductApi";
 import {ProductNullException} from "../../exception/Exceptions";
 import {BounceLoader} from "react-spinners";
 import {css} from 'react-emotion';
@@ -94,8 +94,10 @@ class ProductMain extends Component {
                                     top src={src} alt="Card image cap"
                                 />
                             </Link>
-                            <CardTitle className="product-item-text">Product Code: {image.productCode}</CardTitle>
+                            <CardTitle className="product-item-text">{image.name}</CardTitle>
                             <CardText className="product-item-text">
+                                Product Code: {image.productCode}
+                                <br/>
                                 Product Type: {image.type}
                                 <br/>
                                 Price: {image.price}

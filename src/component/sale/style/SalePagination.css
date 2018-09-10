@@ -1,0 +1,30 @@
+.sales-main-pagination{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.sales-main-pagination button{
+    height: 50px !important;
+    margin: 0 3px !important;
+    font-size: 25px !important;
+    border-radius: 5px !important;
+    border: 1px solid #ddd !important;
+}
+
+.sales-main-pagination button div span{
+    font-size: 16px !important;
+}
+
+.sales-main-pagination button:active{
+    background-color: #007bff !important;
+}
+
+.sales-page-link{
+    background-color: black;
+}
+
+button div span{
+
+}

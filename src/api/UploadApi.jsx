@@ -1,12 +1,13 @@
 import API_ROOT from '../config/appConfig';
 
 
-export function uploadProduct(images,type,size,price,sale,selectedImage) {
+export function uploadProduct(images,name,type,size,price,sale,selectedImage) {
     console.log(selectedImage);
     let data=new FormData();
     for(let i=0; i<images.length; i++) {
         data.append("images", images[i]);
     }
+    data.append("name",name);
     data.append("type",type);
     data.append("price",price);
     data.append("sale",sale);

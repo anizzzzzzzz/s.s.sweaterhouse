@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import './style/ViewIndex.css';
-import {findOneByProductCode} from "../../api/ImageApi";
+import {findOneByProductCode} from "../../api/ProductApi";
 import {ProductNullException} from "../../exception/Exceptions";
 import ReactImageMagnify from "react-image-magnify";
 import NavigationBar from "../common/navbar/NavigationBar";
 import {Col, Row} from "reactstrap";
 import ViewLightBox from "./ViewLightBox";
+import Footer from "../common/footer/Footer";
 
 class ViewIndex extends Component {
     constructor(props){
@@ -177,6 +178,7 @@ class ViewIndex extends Component {
                             />
                         ):null}
                 </div>
+                <Footer/>
             </div>
         )
     }

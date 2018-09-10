@@ -13,8 +13,8 @@ class ProductCategories extends Component {
                     >
                         Handwarmer
                     </NavLink>
-                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
+                <hr className="products-categories-list-hr-line"/>
                 <NavItem>
                     <NavLink href="/products?item=jacket&page=1"
                              className="products-categories-list"
@@ -22,8 +22,8 @@ class ProductCategories extends Component {
                     >
                         Jacket
                     </NavLink>
-                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
+                <hr className="products-categories-list-hr-line"/>
                 <NavItem>
                     <NavLink href="/products?item=shock&page=1"
                              className="products-categories-list"
@@ -31,8 +31,8 @@ class ProductCategories extends Component {
                     >
                         Shock
                     </NavLink>
-                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
+                <hr className="products-categories-list-hr-line"/>
                 <NavItem>
                     <NavLink  href="/products?item=sweater&page=1"
                              className="products-categories-list"
@@ -40,8 +40,8 @@ class ProductCategories extends Component {
                     >
                         Sweater
                     </NavLink>
-                    <hr className="products-categories-list-hr-line"/>
                 </NavItem>
+                <hr className="products-categories-list-hr-line"/>
                 <NavItem>
                     <NavLink href="/products?item=trouser&page=1"
                              className="products-categories-list"

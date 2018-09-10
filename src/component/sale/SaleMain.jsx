@@ -1,16 +1,163 @@
 import React, {Component} from 'react';
+import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/SaleMain.css';
-import SaleLists from "./SaleLists";
-import SaleMainPagination from "./SaleMainPagination";
+import {findAllSales} from "../../api/SalesApi";
+import {ProductNullException} from "../../exception/Exceptions";
+import {Link} from "react-router-dom";
+import {BounceLoader} from "react-spinners";
+import {css} from "react-emotion";
+import SalePagination from "./SalePagination";
+
+const override = css`
+    display: block;
+    margin: 90px auto;
+    border-color: red;
+`;
 
 class SaleMain extends Component {
+    constructor(props){
+        super(props);
+
+        this.state={
+            products:[],
+            loading:false,
+            totalPages:0,
+            totalElements:0,
+            currentPage:0,
+            isFirst:false,
+            isLast:false,
+            change:false,
+            page:this.props.page,
+            error:false
+        };
+
+        this.handlePagination=this.handlePagination.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({
+            loading:true
+        });
+
+        this.findAllSales();
+    }
+
+    componentDidUpdate(nextProps,nextState){
+        if(this.state.page !== nextState.page){
+            window.location='/sale?page='+(this.state.page);
+        }
+    }
+
+    findAllSales(){
+        findAllSales(this.state.page-1,2)
+            .then(response=>{
+                if(response.status === 200){
+                    return response.json();
+                }
+                else{
+                    throw new ProductNullException();
+                }
+            })
+            .then(result=>{
+                console.log(result);
+                this.setState({
+                    products:result.content,
+                    loading:false,
+                    totalPages:result.totalPages,
+                    totalElements:result.totalElements,
+                    currentPage:result.number,
+                    isFirst:result.first,
+                    isLast:result.last
+                })
+            })
+            .catch((e)=>{
+                if(e instanceof ProductNullException){
+                    this.setState({
+                        error:true
+                    });
+                }
+            })
+    }
+
+    createImagesList(){
+        if(this.state.products.length > 0) {
+            return this.state.products.map((image)=>{
+                let src = 'data:' + image.imageType + ';base64,' + image.image;
+                return (
+                    <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={image.productCode}>
+                        <Card className={this.props.isOpen?"sales-lists-card-with-filter":"sales-lists-card"}>
+                            <Link to={"/view?code="+image.productCode}>
+                                <CardImg
+                                    className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"}
+                                    top src={src} alt="prod"
+                                />
+                            </Link>
+                            <CardTitle className="sales-item-title">{image.name}</CardTitle>
+                            <CardText className="sales-item-title">
+                                Product Code: {image.productCode}
+                                <br/>
+                                Product Type: {image.type}
+                                <br/>
+                                Price: {image.price}
+                            </CardText>
+                        </Card>
+                    </Col>
+                )
+            });
+        }
+        else{
+            if (this.state.loading === false) {
+                return (
+                    <div className="sales-no-product-text">
+                        <p>No products Found.</p>
+                    </div>
+                );
+            }
+        }
+    }
+
+    handlePagination(number){
+        this.setState({
+            page:number
+        });
+    }
+
     render() {
         return (
             <div className={this.props.isOpen?"sales-main-with-filter":"sales-main"}>
-                <SaleLists isOpen={this.props.isOpen}/>
-                <SaleMainPagination/>
+                <div className="sales-lists">
+                    {
+                        this.state.error === true ?
+                            (
+                                <div style={{minHeight:'100%',textAlign:'center'}}>
+                                    <p style={{color:'red'}}>No products are listed for sale.</p>
+                                </div>
+                            ):null
+                    }
+                    {/*<Row className={this.props.isOpen?"saless-lists-row-with-filter":"saless-lists-row"}>*/}
+                    <Row className="sales-lists-row">
+                        {this.createImagesList()}
+                    </Row>
+                </div>
+                <BounceLoader
+                    className={override}
+                    sizeUnit={"px"}
+                    size={100}
+                    color={'#01A390'}
+                    loading={this.state.loading}
+                />
+                {(!this.state.loading && this.state.totalElements !== 0 && this.state.totalPages > 1)?
+                    <SalePagination totalPages={this.state.totalPages}
+                                       currentPage={this.state.currentPage}
+                                       isFirst={this.state.isFirst}
+                                       isLast={this.state.isLast}
+                                       handlePagination={this.handlePagination}
+                                       page={this.state.page}
+                    />:
+                    null
+                }
             </div>
-        )
+        );
     }
 }
 
