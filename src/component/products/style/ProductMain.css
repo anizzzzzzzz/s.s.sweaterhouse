@@ -30,6 +30,7 @@
     margin-right: auto;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
+    min-height: 67vh;
 }
 
 .products-lists-row{
@@ -50,11 +51,21 @@
 .product-lists-card{
     float:left;
     margin: 10px 23px 35px;
+    position: relative;
 }
 
 .product-lists-card-with-filter{
     float:left;
     margin: 10px 23px 35px;
+    position: relative;
+}
+
+.sale-icon-on-product-top{
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 65px;
+    width: 65px;
 }
 
 .product-item-image{

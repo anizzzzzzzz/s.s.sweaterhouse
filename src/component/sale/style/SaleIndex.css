@@ -5,6 +5,7 @@
     font-size: 15px;
     -webkit-transition: 0.5s; /* For Safari 3.1 to 6.0 */
     transition: 0.5s;
+    min-height: 84vh;
 }
 
 .sales-section-buttons{

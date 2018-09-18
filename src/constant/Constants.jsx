@@ -1,1 +1,7 @@
-export const FIND_ALL_BY_TYPE="/find-all-by-type/";
+export const FIND_ALL_PRODUCTS = "FIND_ALL_PRODUCTS";
+
+export const FIND_ALL_PRODUCTS_BY_TYPE = "FIND_ALL_PRODUCTS_BY_TYPE";
+
+export const FIND_ALL_SALES = "FIND_ALL_SALES";
+
+export const FIND_ALL_BY_SALES_AND_TYPE = "FIND_ALL_BY_SALES_AND_TYPE";

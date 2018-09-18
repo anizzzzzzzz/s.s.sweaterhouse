@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/SaleMain.css';
-import {findAllSales} from "../../api/SalesApi";
+import {findAllBySalesAndType, findAllSales} from "../../api/SalesApi";
 import {ProductNullException} from "../../exception/Exceptions";
 import {Link} from "react-router-dom";
 import {BounceLoader} from "react-spinners";
 import {css} from "react-emotion";
 import SalePagination from "./SalePagination";
+import {FIND_ALL_BY_SALES_AND_TYPE, FIND_ALL_SALES} from "../../constant/Constants";
 
 const override = css`
     display: block;
@@ -28,10 +29,19 @@ class SaleMain extends Component {
             isLast:false,
             change:false,
             page:this.props.page,
-            error:false
+            error:false,
+            selectedMethod : this.selectMethod(this.props.item),
+            message:''
         };
 
         this.handlePagination=this.handlePagination.bind(this);
+    }
+
+    selectMethod(item){
+        if(item!==undefined )
+            return FIND_ALL_BY_SALES_AND_TYPE;
+        else
+            return FIND_ALL_SALES;
     }
 
     componentWillMount() {
@@ -44,22 +54,40 @@ class SaleMain extends Component {
 
     componentDidUpdate(nextProps,nextState){
         if(this.state.page !== nextState.page){
-            window.location='/sale?page='+(this.state.page);
+            if(this.props.item!==undefined)
+                window.location='/sale?item='+this.props.item+'&page='+(this.state.page);
+            else
+                window.location='/sale?page='+(this.state.page);
         }
     }
 
     findAllSales(){
-        findAllSales(this.state.page-1,2)
-            .then(response=>{
-                if(response.status === 200){
-                    return response.json();
-                }
-                else{
-                    throw new ProductNullException();
-                }
-            })
+        let select = null;
+        const size = 18;
+        switch (this.state.selectedMethod){
+            case FIND_ALL_BY_SALES_AND_TYPE:
+                select = findAllBySalesAndType(this.props.item,this.state.page-1,size);
+                break;
+            case FIND_ALL_SALES:
+                select = findAllSales(this.state.page-1,size);
+                break;
+            default:
+                this.setState({
+                   error:true,
+                   message:'Error while requesting product. Please recheck your request'
+                });
+        }
+
+        select.then(response=>{
+            if(response.status === 200){
+                return response.json();
+            }
+            else{
+                throw new ProductNullException();
+            }
+        })
             .then(result=>{
-                console.log(result);
+                const page = (this.state.page > result.totalPages)?result.totalPages:this.state.page;
                 this.setState({
                     products:result.content,
                     loading:false,
@@ -67,16 +95,18 @@ class SaleMain extends Component {
                     totalElements:result.totalElements,
                     currentPage:result.number,
                     isFirst:result.first,
-                    isLast:result.last
-                })
+                    isLast:result.last,
+                    page: (result.totalElements > 0)? page : page+1
+                });
             })
             .catch((e)=>{
                 if(e instanceof ProductNullException){
                     this.setState({
-                        error:true
+                        error:true,
+                        message:'No products are listed for sale.'
                     });
                 }
-            })
+            });
     }
 
     createImagesList(){
@@ -130,7 +160,7 @@ class SaleMain extends Component {
                         this.state.error === true ?
                             (
                                 <div style={{minHeight:'100%',textAlign:'center'}}>
-                                    <p style={{color:'red'}}>No products are listed for sale.</p>
+                                    <p style={{color:'red'}}>{this.state.message}</p>
                                 </div>
                             ):null
                     }

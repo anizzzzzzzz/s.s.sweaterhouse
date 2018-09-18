@@ -1,17 +1,5 @@
 import React, {Component} from 'react';
-import {
-    Collapse,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Nav,
-    Navbar,
-    NavbarBrand,
-    NavbarToggler,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown
-} from 'reactstrap';
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
 import './NavigationBar.css';
 import PropTypes from 'prop-types';
 
@@ -42,7 +30,10 @@ class NavigationBar extends Component {
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="/" >Home</NavLink>
                             </NavItem>
-                            <UncontrolledDropdown className="nav-item-custom nav-text-style" nav inNavbar>
+                            <NavItem className="nav-item-custom nav-text-style">
+                                <NavLink href="/products" >Products</NavLink>
+                            </NavItem>
+                            {/*<UncontrolledDropdown className="nav-item-custom nav-text-style" nav inNavbar>
                                 <DropdownToggle nav caret >
                                     Products
                                 </DropdownToggle>
@@ -82,7 +73,7 @@ class NavigationBar extends Component {
                                         Trouser
                                     </DropdownItem>
                                 </DropdownMenu>
-                            </UncontrolledDropdown>
+                            </UncontrolledDropdown>*/}
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="/sale" >Sale</NavLink>
                             </NavItem>

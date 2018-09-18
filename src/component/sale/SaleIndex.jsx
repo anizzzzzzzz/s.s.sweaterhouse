@@ -6,6 +6,9 @@ import * as FontAwesome from 'react-icons/lib/fa'
 import SaleFilter from "./SaleFilter";
 import Footer from "../common/footer/Footer";
 import SaleMain from "./SaleMain";
+import {bindActionCreators} from "redux";
+import {isSaleCollapseOpen} from "../../action/CollapseAction";
+import {connect} from "react-redux";
 
 class SaleIndex extends Component {
     constructor(props){
@@ -15,7 +18,7 @@ class SaleIndex extends Component {
         let queryParams = parseQueryString.parse(this.props.location.search);
 
         this.state={
-            collapse:false,
+            item:queryParams.item,
             page:('page' in queryParams)?parseInt(queryParams.page,10):1,
         };
 
@@ -23,7 +26,7 @@ class SaleIndex extends Component {
     }
 
     toggle() {
-        this.setState({ collapse: !this.state.collapse });
+        this.props.isSaleCollapseOpen(!this.props.isSaleCategoriesCollapseOpen);
     }
 
     render() {
@@ -41,11 +44,13 @@ class SaleIndex extends Component {
                      </div>
 
                     <div className="sales-section-div">
-                        <div className={this.state.collapse===true?"sales-section-div-collapse-true":"sales-section-div-collapse-false"}>
-                            <SaleCategories isOpen={this.state.collapse}/>
+                        <div className={this.props.isSaleCategoriesCollapseOpen===true?"sales-section-div-collapse-true":"sales-section-div-collapse-false"}>
+                            <SaleCategories isOpen={this.props.isSaleCategoriesCollapseOpen}/>
                         </div>
 
-                        <SaleMain isOpen={this.state.collapse} page={this.state.page}/>
+                        <SaleMain isOpen={this.props.isSaleCategoriesCollapseOpen}
+                                  item={this.state.item}
+                                  page={this.state.page}/>
                     </div>
                 </div>
                 <Footer/>
@@ -54,4 +59,16 @@ class SaleIndex extends Component {
     }
 }
 
-export default SaleIndex;
+const mapStateToProps = (state)=>{
+    return {
+        isSaleCategoriesCollapseOpen:state.isSaleCategoriesCollapseOpen
+    }
+};
+
+const mapDispatchToAction = dispatch=>{
+    return bindActionCreators({
+        isSaleCollapseOpen:isSaleCollapseOpen
+    }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToAction)(SaleIndex);

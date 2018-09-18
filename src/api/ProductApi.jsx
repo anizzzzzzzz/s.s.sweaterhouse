@@ -1,12 +1,12 @@
 import API_ROOT from '../config/appConfig';
 
-export function showImages() {
-    return fetch(API_ROOT+"/find-all",{
+export function findAllProducts(pageNo, size) {
+    return fetch(API_ROOT+"/find-all?page="+pageNo.toString()+"&size="+size.toString(),{
        method:'GET'
     });
 }
 
-export function findAllByType(type, pageNo, size){
+export function findAllProductsByType(type, pageNo, size){
     let data=new FormData();
     data.append("type",type);
     data.append("size",size.toString());

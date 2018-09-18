@@ -5,3 +5,9 @@ export function findAllSales(pageNo, size) {
         method:'GET'
     });
 }
+
+export function findAllBySalesAndType(type,pageNo, size) {
+    return fetch(API_ROOT+"/find-all-sales-and-type?page="+pageNo.toString()+"&size="+size.toString()+"&type="+type.toString(),{
+        method:'GET'
+    });
+}

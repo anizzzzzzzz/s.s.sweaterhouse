@@ -19,7 +19,7 @@ class SaleCategories extends Component {
                 </NavItem>
                 <hr className="sales-categories-list-hr-line"/>
                 <NavItem>
-                    <NavLink href="/sale?item=sweate&page=1" className="sales-categories-list">Sweater</NavLink>
+                    <NavLink href="/sale?item=sweater&page=1" className="sales-categories-list">Sweater</NavLink>
                 </NavItem>
                 <hr className="sales-categories-list-hr-line"/>
                 <NavItem>

@@ -21,7 +21,7 @@ class ProductIndex extends Component {
         this.state={
             change:false,
             item:queryParams.item,
-            page:parseInt(queryParams.page,10)
+            page:('page' in queryParams)?parseInt(queryParams.page,10):1,
         };
 
         this.toggle=this.toggle.bind(this);
@@ -50,7 +50,9 @@ class ProductIndex extends Component {
                             <ProductCategories isOpen={this.props.isProdCategoriesCollapseOpen}/>
                         </div>
 
-                        <ProductMain isOpen={this.props.isProdCategoriesCollapseOpen} item={this.state.item} page={this.state.page}/>
+                        <ProductMain isOpen={this.props.isProdCategoriesCollapseOpen}
+                                     item={this.state.item}
+                                     page={this.state.page}/>
                     </div>
                 </div>
                 <Footer/>

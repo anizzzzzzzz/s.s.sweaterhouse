@@ -1,10 +1,14 @@
-.add-product{
+.add-product-parent-div{
+    min-height: 85vh;
     width: 70%;
+    margin: auto;
+}
+
+.add-product{
     border: 1px solid #cacdd1;
-    margin-right: auto;
-    margin-left: auto;
+    margin: auto;
     padding:20px;
-    position: relative;
+    /*min-height: 84vh;*/
 }
 
 .add-product-file-upload{
@@ -45,6 +49,10 @@
     margin-right: 4%;
 }
 
+input[type=radio],input[type=checkbox], label:hover{
+    cursor: pointer;
+}
+
 @media (max-width: 488px) {
     .add-product-type-input{
         width: 98%;
@@ -52,5 +60,29 @@
 
     .add-product-price-input{
         width: 98%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .add-product-parent-div {
+        margin-top: 75px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .add-product-parent-div {
+        margin-top: 65px;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 991px) {
+    .add-product-parent-div {
+        margin-top: 55px;
+    }
+}
+
+@media (max-width: 749px) {
+    .add-product-parent-div {
+        margin-top: 3px;
     }
 }
