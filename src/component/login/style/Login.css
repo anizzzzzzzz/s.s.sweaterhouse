@@ -104,6 +104,10 @@
     width: 100%;
 }
 
+.login-error{
+    color: red;
+}
+
 @media (min-width: 1200px) {
     .login {
         top: 80px;

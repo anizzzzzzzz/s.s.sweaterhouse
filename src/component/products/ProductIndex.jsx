@@ -34,7 +34,7 @@ class ProductIndex extends Component {
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar props={this.props}/>
                 <div className="products-section">
                      <div className="products-section-buttons">
                          <button type="button" className="product-index-button"  onClick={this.toggle}>

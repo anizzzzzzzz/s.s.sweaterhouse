@@ -4,7 +4,7 @@ import {Collapse, ListGroup, ListGroupItem} from "reactstrap";
 import './Faq.css';
 import Footer from "../common/footer/Footer";
 
-var faq=[
+const faq=[
     {
         "id":1,
         "question":"About S.S. Sweater House",
@@ -82,7 +82,7 @@ class Faq extends Component {
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar props={this.props}/>
                 <div className="faq-section">
                     <ListGroup>
                         {this.createList()}

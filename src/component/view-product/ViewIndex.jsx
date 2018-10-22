@@ -162,7 +162,7 @@ class ViewIndex extends Component {
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar props={this.props}/>
                 <div className="view-selected-product">
                     <Row className="view-product-row">
                         {this.selectedImageSection()}

@@ -10,7 +10,7 @@ class HomeIndex extends Component {
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar props={this.props}/>
                 <IndexCorausel/>
                 <CategoriesCard/>
                 <FeaturedProducts/>

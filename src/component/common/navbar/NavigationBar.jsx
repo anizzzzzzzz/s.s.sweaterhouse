@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
 import './NavigationBar.css';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {deleteUserSession} from "../../../action/UserSessionAction";
+import {decoder} from "../../../util/Decoder";
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -10,6 +14,7 @@ class NavigationBar extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
+            roles:[]
         };
     }
 
@@ -19,7 +24,25 @@ class NavigationBar extends Component {
         });
     }
 
+    componentWillMount(){
+        this.setState({
+            roles: decoder(this.props.userSession)
+        });
+    }
+
+    handleClick = (e)=>{
+        e.preventDefault();
+        this.props.deleteUserSession();
+        this.setState({
+            roles:[]
+        });
+        this.props.props.history.push({
+            pathname:"/login"
+        });
+    };
+
     render() {
+        console.log(this.state.roles);
         return (
             <div className="sshouse">
                     <Navbar color="dark" dark expand="md" className="fixed-top">
@@ -89,7 +112,10 @@ class NavigationBar extends Component {
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <NavItem className="nav-text-style">
-                                <NavLink href="/login" >Login</NavLink>
+                                {(this.props.userSession.token === '' && this.props.userSession.username === '')
+                                    ? <NavLink href="/login" >Login</NavLink>
+                                    : <NavLink href="/" onClick={this.handleClick}>Logout</NavLink>
+                                }
                             </NavItem>
                         </Nav>
                     </Collapse>
@@ -110,4 +136,16 @@ Nav.propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
-export default NavigationBar;
+const mapStateToProps = (state)=>{
+    return{
+        userSession:state.getUserSession
+    }
+};
+
+const mapDispatchToProps = (dispatch)=>{
+    return bindActionCreators({
+        deleteUserSession:deleteUserSession
+    },dispatch);
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(NavigationBar);

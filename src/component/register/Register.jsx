@@ -1,21 +1,34 @@
 import React, {Component} from 'react';
 import './Register.css';
-import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row} from "reactstrap";
 import NavigationBar from "../common/navbar/NavigationBar";
+import {validateEmail, validatePassword} from "../../util/Validator";
+import {userRegistration} from "../../api/UserApi";
+import {RegistrationException} from "../../exception/Exceptions";
 
 class Register extends Component {
     constructor(props){
         super(props);
 
         this.state={
-            name:'',
+            firstname:'',
+            middlename:'',
+            lastname:'',
             email:'',
             password:'',
             confirmPassword:'',
             errorMsg:{},
-            errorFlag:{}
+            errorFlag:{},
+            modal:false,
+            message:''
         };
     }
+
+    toggle=()=> {
+        this.setState({
+            modal: !this.state.modal
+        });
+    };
 
     handleChange(event){
         this.setState({
@@ -67,7 +80,48 @@ class Register extends Component {
         );
 
         if(error !== true){
-            alert('Form is ok');
+            let user={
+                firstname:this.state.firstname,
+                middlename:this.state.middlename,
+                lastname:this.state.lastname,
+                username:this.state.email,
+                password:this.state.password
+            };
+            userRegistration(user)
+                .then(response=>{
+                    if(response.status === 200) {
+                        let msg = "Dear "+this.state.firstname+","
+                                    +"\n"+"User has been registered. Activation Email has been sent to your email. Please activate your account.";
+                        this.setState({
+                            message: msg,
+                            firstname:'',
+                            lastname:'',
+                            middlename:'',
+                            email:'',
+                            password:'',
+                            confirmPassword:'',
+                        });
+                        this.toggle();
+                    }
+                    else if(response.status === 400){
+                        let msg= "Dear "+this.state.firstname+","
+                                    +"\n"+this.state.email+" has already been registered. Please try again with different email id";
+                        this.setState({
+                            message:msg
+                        });
+                        this.toggle();
+                    }
+                    else
+                        throw new RegistrationException();
+                })
+                .catch(e=>{
+                    // Need to show error after fetching from server side
+                    if(e instanceof RegistrationException){
+                        Promise.resolve(e).then(p=>{
+                            console.log(p);
+                        });
+                    }
+                })
         }
     }
 
@@ -76,13 +130,22 @@ class Register extends Component {
         let errorMsg={};
         let errorFlag={};
 
-        if(this.state.name === ''){
-            errorMsg={...errorMsg,name:nullMsg};
-            errorFlag={...errorFlag, name:true};
+        if(this.state.firstname === ''){
+            errorMsg={...errorMsg,firstname:nullMsg};
+            errorFlag={...errorFlag, firstname:true};
         }
         else{
-            errorMsg={...errorMsg,name:''};
-            errorFlag={...errorFlag, name:false};
+            errorMsg={...errorMsg,firstname:''};
+            errorFlag={...errorFlag, firstname:false};
+        }
+
+        if(this.state.lastname === ''){
+            errorMsg={...errorMsg,lastname:nullMsg};
+            errorFlag={...errorFlag, lastname:true};
+        }
+        else{
+            errorMsg={...errorMsg,lastname:''};
+            errorFlag={...errorFlag, lastname:false};
         }
 
         if(this.state.email === ''){
@@ -90,7 +153,7 @@ class Register extends Component {
             errorFlag={...errorFlag,email:true};
         }
         else{
-            if(!this.validateEmail(this.state.email)){
+            if(!validateEmail(this.state.email)){
                 errorMsg={...errorMsg,email:'Email not valid'};
                 errorFlag={...errorFlag,email:true};
             }
@@ -105,7 +168,7 @@ class Register extends Component {
             errorFlag={...errorFlag,password:true};
         }
         else{
-            if(!this.validatePassword(this.state.password)){
+            if(!validatePassword(this.state.password)){
                 errorMsg={...errorMsg,password:'Password must contain a capital letter, a number and minimum 8 character'};
                 errorFlag={...errorFlag,password:true};
             }
@@ -133,32 +196,54 @@ class Register extends Component {
         return {errorMsg:errorMsg, errorFlag:errorFlag};
     }
 
-    validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-    validatePassword(password){
-        const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-        return re.test(password);
-    }
-
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar props={this.props}/>
                 <div className="register">
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>User Registration</ModalHeader>
+                        <ModalBody>
+                            {this.state.message}
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>Ok</Button>
+                        </ModalFooter>
+                    </Modal>
                     <Form onSubmit={(e)=>this.handleSubmit(e)}>
-                        <FormGroup>
-                            <Label for="name">Full name</Label>
-                            <Input type="text" name="name" id="name" placeholder="Full name"
-                                   onChange={(e)=>this.handleChange(e)}/>
-                            <span
-                                className="register-error"
-                                hidden={!this.state.errorFlag.name}>
-                                {this.state.errorMsg.name}
+                        <Row>
+                            <Col lg={4} md={4} sm={12} xs={12}>
+                                <FormGroup>
+                                    <Label for="firstname">First name</Label>
+                                    <Input type="text" name="firstname" id="firstname" placeholder="First name"
+                                           onChange={(e)=>this.handleChange(e)}/>
+                                    <span
+                                        className="register-error"
+                                        hidden={!this.state.errorFlag.firstname}>
+                                {this.state.errorMsg.firstname}
                             </span>
-                        </FormGroup>
+                                </FormGroup>
+                            </Col>
+                            <Col lg={4} md={4} sm={12} xs={12}>
+                                <FormGroup>
+                                    <Label for="middlename">Middle name</Label>
+                                    <Input type="text" name="middlename" id="middlename" placeholder="Middle name"
+                                           onChange={(e)=>this.handleChange(e)}/>
+                                </FormGroup>
+                            </Col>
+                            <Col lg={4} md={4} sm={12} xs={12}>
+                                <FormGroup>
+                                    <Label for="lastname">Last name</Label>
+                                    <Input type="text" name="lastname" id="lastname" placeholder="Last name"
+                                           onChange={(e)=>this.handleChange(e)}/>
+                                    <span
+                                        className="register-error"
+                                        hidden={!this.state.errorFlag.lastname}>
+                                {this.state.errorMsg.lastname}
+                            </span>
+                                </FormGroup>
+                            </Col>
+                        </Row>
                         <FormGroup>
                             <Label for="email">Email</Label>
                             <Input type="text" name="email" id="email" placeholder="Email"

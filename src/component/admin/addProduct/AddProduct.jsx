@@ -162,7 +162,7 @@ class AddProduct extends Component {
     render() {
         return (
             <div>
-                <NavigationBar/>
+                <NavigationBar props={this.props}/>
                 <div className="add-product-parent-div">
                     <div className="add-product">
                         {
