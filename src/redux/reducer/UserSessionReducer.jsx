@@ -8,13 +8,15 @@ const getUserSession = (state = initialState, action)=>{
             return {
                 ...state,
                 username:action.payload.username,
-                token:action.payload.token
+                token:action.payload.token,
+                roles:action.payload.roles
             };
         case DELETE_USER_SESSION:
             return {
                 ...state,
                 username:'',
-                token:''
+                token:'',
+                roles:[]
             };
         default:
             return state;

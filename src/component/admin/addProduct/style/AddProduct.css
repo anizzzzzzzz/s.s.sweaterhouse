@@ -6,8 +6,10 @@
 
 .add-product{
     border: 1px solid #cacdd1;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     padding:20px;
+    margin-top: 9%;
     /*min-height: 84vh;*/
 }
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {deleteUserSession} from "../../../redux/action/UserSessionAction";
-import {decoder} from "../../../util/Decoder";
+import {ADMIN, SUPER_ADMIN} from "../../../constant/RoleConstant";
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -14,7 +14,6 @@ class NavigationBar extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            roles:[]
         };
     }
 
@@ -24,25 +23,27 @@ class NavigationBar extends Component {
         });
     }
 
-    componentWillMount(){
-        this.setState({
-            roles: decoder(this.props.userSession)
-        });
-    }
-
     handleClick = (e)=>{
         e.preventDefault();
         this.props.deleteUserSession();
-        this.setState({
-            roles:[]
-        });
         this.props.props.history.push({
             pathname:"/login"
         });
     };
 
+    //checks if ADMIN, SUPER_ADMIN role is present in usersession role.
+    // Then will add this navigation option
+    adminNavigationBar = () => {
+        if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
+            return <div>
+                <NavItem className="nav-item-custom nav-text-style">
+                    <NavLink href="/add-product" >Add Product</NavLink>
+                </NavItem>
+            </div>
+        }
+    };
+
     render() {
-        console.log(this.state.roles);
         return (
             <div className="sshouse">
                     <Navbar color="dark" dark expand="md" className="fixed-top">
@@ -103,6 +104,10 @@ class NavigationBar extends Component {
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="/faq" >FAQ</NavLink>
                             </NavItem>
+
+                            {/*For Admin Navigation*/}
+                            {this.adminNavigationBar()}
+
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="#none" >About us</NavLink>
                             </NavItem>

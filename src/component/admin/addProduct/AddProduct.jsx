@@ -6,52 +6,10 @@ import {uploadProduct} from "../../../api/UploadApi";
 import {ProductUploadFailure} from "../../../exception/Exceptions";
 import NavigationBar from "../../common/navbar/NavigationBar";
 import Footer from "../../common/footer/Footer";
-
-const productType=[
-    {
-        'key':'Handwarmer',
-        'value':'handwarmer'
-    },
-    {
-        'key':'Jacket',
-        'value':'jacket'
-    },
-    {
-        'key':'Shock',
-        'value':'shock'
-    },
-    {
-        'key':'Sweater',
-        'value':'sweater'
-    },
-    {
-        'key':'Trouser',
-        'value':'trouser'
-    },
-];
-
-const productSize=[
-    {
-        'key':'S',
-        'value':'S'
-    },
-    {
-        'key':'L',
-        'value':'L'
-    },
-    {
-        'key':'XL',
-        'value':'XL'
-    },
-    {
-        'key':'XXL',
-        'value':'XXL'
-    },
-    {
-        'key':'XXXL',
-        'value':'XXXL'
-    },
-];
+import {connect} from "react-redux";
+import {ADMIN, SUPER_ADMIN} from "../../../constant/RoleConstant";
+import {productType} from "../../../constant/ProductTypeConstant";
+import {productSize} from "../../../constant/ProductSizeConstant";
 
 class AddProduct extends Component {
     constructor(props){
@@ -72,11 +30,19 @@ class AddProduct extends Component {
         this.handleSelectForHighlight=this.handleSelectForHighlight.bind(this);
     }
 
-    createListForType(){
+    componentWillMount(){
+        if(this.props.userSession.token === '' || !this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
+            this.props.history.push({
+                pathname:"/login"
+            });
+        }
+    }
+
+    createListForType = () =>{
         return productType.map((type)=>
             <option key={type.key} value={type.value}>{type.key}</option>
         );
-    }
+    };
 
     createListForSize(){
         return productSize.map((size)=>
@@ -287,4 +253,10 @@ class AddProduct extends Component {
     }
 }
 
-export default AddProduct;
+const mapStateToProps = (state) => {
+    return{
+        userSession: state.getUserSession
+    }
+};
+
+export default connect(mapStateToProps)(AddProduct);

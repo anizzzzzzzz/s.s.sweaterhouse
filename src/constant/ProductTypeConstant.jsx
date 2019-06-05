@@ -1,0 +1,22 @@
+export const productType=[
+    {
+        'key':'Handwarmer',
+        'value':'handwarmer'
+    },
+    {
+        'key':'Jacket',
+        'value':'jacket'
+    },
+    {
+        'key':'Shock',
+        'value':'shock'
+    },
+    {
+        'key':'Sweater',
+        'value':'sweater'
+    },
+    {
+        'key':'Trouser',
+        'value':'trouser'
+    },
+];
