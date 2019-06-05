@@ -7,11 +7,11 @@ import {Link} from "react-router-dom";
 import NavigationBar from "../common/navbar/NavigationBar";
 import {userLogin} from "../../api/UserApi";
 import {LoginException} from "../../exception/Exceptions";
-import {createUserSession} from "../../action/UserSessionAction";
+import {createUserSession} from "../../redux/action/UserSessionAction";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {validateEmail, validatePassword} from "../../util/Validator";
-import {saveForgotPasswordUsername} from "../../action/ForgotPasswordAction";
+import {saveForgotPasswordUsername} from "../../redux/action/ForgotPasswordAction";
 
 class Login extends Component {
     constructor(props){

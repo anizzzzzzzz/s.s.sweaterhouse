@@ -117,6 +117,7 @@ class Register extends Component {
                 .catch(e=>{
                     // Need to show error after fetching from server side
                     if(e instanceof RegistrationException){
+                        console.error("Registration Exception occured");
                         Promise.resolve(e).then(p=>{
                             console.log(p);
                         });

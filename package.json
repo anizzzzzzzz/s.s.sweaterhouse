@@ -10,7 +10,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-emotion": "latest",
+    "react-emotion": "^9.2.6",
     "react-icons": "^2.2.7",
     "react-image-magnify": "^2.7.0",
     "react-image-picker": "^1.1.1",

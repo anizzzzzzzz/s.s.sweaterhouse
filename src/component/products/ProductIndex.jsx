@@ -6,7 +6,7 @@ import * as FontAwesome from 'react-icons/lib/fa'
 import ProductFilter from "./ProductFilter";
 import Footer from "../common/footer/Footer";
 import {connect} from "react-redux";
-import {isProductCollapseOpen} from "../../action/CollapseAction";
+import {isProductCollapseOpen} from "../../redux/action/CollapseAction";
 import {bindActionCreators} from "redux";
 import ProductMain from "./ProductMain";
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Pagination, PaginationItem, PaginationLink} from 'reactstrap';
 import './style/ProductPagination.css';
 import bindActionCreators from "redux/src/bindActionCreators";
-import {trackingPagination} from "../../action/PaginationAction";
+import {trackingPagination} from "../../redux/action/PaginationAction";
 import {connect} from "react-redux";
 
 

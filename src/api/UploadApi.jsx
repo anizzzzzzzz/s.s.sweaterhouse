@@ -14,7 +14,7 @@ export function uploadProduct(images,name,type,size,price,sale,selectedImage) {
     data.append("size",size);
     data.append("selectedImage",selectedImage);
 
-    return fetch(API_ROOT+"/upload-images",{
+    return fetch(API_ROOT+"/upload-products",{
         method:'POST',
         body:data,
     });

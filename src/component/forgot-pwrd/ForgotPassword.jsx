@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import NavigationBar from "../common/navbar/NavigationBar";
 import {Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {bindActionCreators} from "redux";
-import {clearForgotPasswordUsername, saveForgotPasswordUsername} from "../../action/ForgotPasswordAction";
+import {clearForgotPasswordUsername, saveForgotPasswordUsername} from "../../redux/action/ForgotPasswordAction";
 import {connect} from "react-redux";
 import {validateEmail} from "../../util/Validator";
 import './ForgotPassword.css'
@@ -45,6 +45,7 @@ class ForgotPassword extends Component {
         if(this.state.username !== ''){
 
         }
+        console.log(error);
     };
 
     formValidation(){

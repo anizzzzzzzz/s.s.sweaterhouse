@@ -7,7 +7,7 @@ import SaleFilter from "./SaleFilter";
 import Footer from "../common/footer/Footer";
 import SaleMain from "./SaleMain";
 import {bindActionCreators} from "redux";
-import {isSaleCollapseOpen} from "../../action/CollapseAction";
+import {isSaleCollapseOpen} from "../../redux/action/CollapseAction";
 import {connect} from "react-redux";
 
 class SaleIndex extends Component {

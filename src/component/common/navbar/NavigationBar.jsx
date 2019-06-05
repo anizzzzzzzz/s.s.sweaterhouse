@@ -4,7 +4,7 @@ import './NavigationBar.css';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {deleteUserSession} from "../../../action/UserSessionAction";
+import {deleteUserSession} from "../../../redux/action/UserSessionAction";
 import {decoder} from "../../../util/Decoder";
 
 class NavigationBar extends Component {

@@ -1,6 +1,7 @@
 import API_ROOT from '../config/appConfig';
 
 export function userRegistration(user){
+    console.log(user);
     return fetch(API_ROOT+"/register/user",{
         method:"POST",
         headers:{
