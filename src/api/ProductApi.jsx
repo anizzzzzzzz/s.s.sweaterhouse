@@ -1,7 +1,7 @@
-import API_ROOT from '../config/appConfig';
+import API_DICT from '../config/appConfig';
 
 export function findAllProducts(pageNo, size) {
-    return fetch(API_ROOT+"/find-all?page="+pageNo.toString()+"&size="+size.toString(),{
+    return fetch(API_DICT.ROOT_API+"/find-all?page="+pageNo.toString()+"&size="+size.toString(),{
        method:'GET'
     });
 }
@@ -12,16 +12,17 @@ export function findAllProductsByType(type, pageNo, size){
     data.append("size",size.toString());
     data.append("page",pageNo.toString());
 
-    return fetch(API_ROOT+"/find-all-by-type",{
+    return fetch(API_DICT.ROOT_API+"/find-all-by-type",{
         method:'POST',
         body:data
     });
 }
 
-export function findOneByProductCode(productCode){
+export function findOneByPrductIdAndProductCode(id,productCode){
     let data=new FormData();
+    data.append("id",id);
     data.append("productCode",productCode);
-    return fetch(API_ROOT+"/find-one",{
+    return fetch(API_DICT.ROOT_API+"/find-one",{
         method:'POST',
         body:data
     });

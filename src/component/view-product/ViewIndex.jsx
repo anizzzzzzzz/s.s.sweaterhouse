@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import './style/ViewIndex.css';
-import {findOneByProductCode} from "../../api/ProductApi";
+import {findOneByPrductIdAndProductCode} from "../../api/ProductApi";
 import {ProductNullException} from "../../exception/Exceptions";
 import ReactImageMagnify from "react-image-magnify";
 import NavigationBar from "../common/navbar/NavigationBar";
 import {Col, Row} from "reactstrap";
 import ViewLightBox from "./ViewLightBox";
 import Footer from "../common/footer/Footer";
+import API_DICT from "../../config/appConfig";
 
 class ViewIndex extends Component {
     constructor(props){
@@ -19,6 +20,7 @@ class ViewIndex extends Component {
             images:[],
             price:0.0,
             productCode:queryParams.code,
+            productId:queryParams.id,
             size:[],
             type:'',
             selectedImage:{},
@@ -29,7 +31,7 @@ class ViewIndex extends Component {
     }
 
     componentWillMount(){
-        findOneByProductCode(this.state.productCode)
+        findOneByPrductIdAndProductCode(this.state.productId, this.state.productCode)
             .then(response=>{
                 if(response.status ===200) {
                     return response.json();
@@ -39,13 +41,12 @@ class ViewIndex extends Component {
                 }
             })
             .then(result=>{
-                console.log("sd",result);
                 this.setState({
-                    images : result.productResponse.images,
-                    type : result.productResponse.type,
-                    price : result.productResponse.price,
-                    size : result.productResponse.size,
-                    selectedImage : result.productResponse.images.filter(img=>img.highlighted === true)[0]
+                    images : result.productInfos,
+                    type : result.type,
+                    price : result.price,
+                    size : result.size,
+                    selectedImage : result.productInfos.filter(img=>img.highlight === true)[0]
                 });
             })
             .catch(ex=>{
@@ -71,7 +72,8 @@ class ViewIndex extends Component {
 
     selectedImageSection(){
         let image=this.state.selectedImage;
-        let src = 'data:' + image.type + ';base64,' + image.image;
+        // let src = 'data:' + image.type + ';base64,' + image.image;
+        let src = API_DICT.IMAGE_API + '/' + image.location;
         return (
           <Col sm="7" md="7" xs="12" lg="7" className="view-product-image">
               <Row>
@@ -118,7 +120,8 @@ class ViewIndex extends Component {
                 {
                     this.state.images.filter(img=>img.name!==this.state.selectedImage.name)
                         .map(img=>{
-                            let src = 'data:' + img.type + ';base64,' + img.image;
+                            // let src = 'data:' + img.type + ';base64,' + img.image;
+                            let src = API_DICT.IMAGE_API + '/' + img.location;
                             return (
                                 <div className="view-product-img-lists" key={img.name} onClick={(e)=>{this.handleImageSelect(e,img)}}>
                                     <img src={src} alt={img.name+"."+img.extension}/>

@@ -1,8 +1,8 @@
-import API_ROOT from '../config/appConfig';
+import API_DICT from '../config/appConfig';
 
 export function userRegistration(user){
     console.log(user);
-    return fetch(API_ROOT+"/register/user",{
+    return fetch(API_DICT.ROOT_API+"/register/user",{
         method:"POST",
         headers:{
             'Accept':'application/json',
@@ -13,7 +13,7 @@ export function userRegistration(user){
 }
 
 export function userLogin(user) {
-    return fetch(API_ROOT+"/auth",{
+    return fetch(API_DICT.ROOT_API+"/auth",{
        method:'POST',
        headers:{
            'Accept':'application/json',

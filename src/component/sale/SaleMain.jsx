@@ -8,6 +8,7 @@ import {BounceLoader} from "react-spinners";
 import {css} from "react-emotion";
 import SalePagination from "./SalePagination";
 import {FIND_ALL_BY_SALES_AND_TYPE, FIND_ALL_SALES} from "../../constant/Constants";
+import API_DICT from "../../config/appConfig";
 
 const override = css`
     display: block;
@@ -37,12 +38,12 @@ class SaleMain extends Component {
         this.handlePagination=this.handlePagination.bind(this);
     }
 
-    selectMethod(item){
+    selectMethod = (item) =>{
         if(item!==undefined )
             return FIND_ALL_BY_SALES_AND_TYPE;
         else
             return FIND_ALL_SALES;
-    }
+    };
 
     componentWillMount() {
         this.setState({
@@ -111,24 +112,25 @@ class SaleMain extends Component {
 
     createImagesList(){
         if(this.state.products.length > 0) {
-            return this.state.products.map((image)=>{
-                let src = 'data:' + image.imageType + ';base64,' + image.image;
+            return this.state.products.map((product)=>{
+                let selectedPhoto = product.productInfos.filter(img => img.highlight === true)[0];
+                let src = API_DICT.IMAGE_API + '/' + selectedPhoto.location;
                 return (
-                    <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={image.productCode}>
+                    <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={product.productCode}>
                         <Card className={this.props.isOpen?"sales-lists-card-with-filter":"sales-lists-card"}>
-                            <Link to={"/view?code="+image.productCode}>
+                            <Link to={"/view?code="+product.productCode+"&id="+product.id}>
                                 <CardImg
                                     className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"}
                                     top src={src} alt="prod"
                                 />
                             </Link>
-                            <CardTitle className="sales-item-title">{image.name}</CardTitle>
+                            <CardTitle className="sales-item-title">{product.name}</CardTitle>
                             <CardText className="sales-item-title">
-                                Product Code: {image.productCode}
+                                Product Code: {product.productCode}
                                 <br/>
-                                Product Type: {image.type}
+                                Product Type: {product.type}
                                 <br/>
-                                Price: {image.price}
+                                Price: {product.price}
                             </CardText>
                         </Card>
                     </Col>

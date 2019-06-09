@@ -1,4 +1,4 @@
-import API_ROOT from '../config/appConfig';
+import API_DICT from '../config/appConfig';
 
 
 export function uploadProduct(images,name,type,size,price,sale,selectedImage) {
@@ -14,7 +14,7 @@ export function uploadProduct(images,name,type,size,price,sale,selectedImage) {
     data.append("size",size);
     data.append("selectedImage",selectedImage);
 
-    return fetch(API_ROOT+"/upload-products",{
+    return fetch(API_DICT.ROOT_API+"/upload-products",{
         method:'POST',
         body:data,
     });

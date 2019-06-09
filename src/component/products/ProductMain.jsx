@@ -9,6 +9,7 @@ import ProductPagination from "./ProductPagination";
 import {Link} from "react-router-dom";
 import {FIND_ALL_PRODUCTS, FIND_ALL_PRODUCTS_BY_TYPE} from "../../constant/Constants";
 import sale_icon from '../../images/icon/sale-icon.png';
+import API_DICT from "../../config/appConfig";
 
 const override = css`
     display: block;
@@ -37,12 +38,12 @@ class ProductMain extends Component {
         this.handlePagination=this.handlePagination.bind(this);
     }
 
-    selectMethod(item){
+    selectMethod = (item) =>{
         if(item!==undefined )
             return FIND_ALL_PRODUCTS_BY_TYPE;
         else
             return FIND_ALL_PRODUCTS;
-    }
+    };
 
     componentWillMount() {
         this.setState({
@@ -111,29 +112,30 @@ class ProductMain extends Component {
 
     createImagesList(){
         if(this.state.products.length > 0) {
-            return this.state.products.map((image) => {
-                let src = 'data:' + image.imageType + ';base64,' + image.image;
+            return this.state.products.map((product) => {
+                let selectedPhoto = product.productInfos.filter(img => img.highlight === true)[0];
+                let src = API_DICT.IMAGE_API + '/' + selectedPhoto.location;
                 return (
                     <Col sm="6" md="6" xs="12" lg="4"
                          className="product-lists-col"
-                         key={image.productCode}
+                         key={product.productCode}
                     >
                         <Card className={this.props.isOpen ? "product-lists-card-with-filter" : "product-lists-card"}>
-                            <Link to={"/view?code="+image.productCode}>
+                            <Link to={"/view?code="+product.productCode+"&id="+product.id}>
                                 <CardImg
                                     className={this.props.isOpen ? "product-item-image-with-filter" : "product-item-image"}
                                     top src={src} alt="Card image cap"
                                 />
                             </Link>
-                            <CardTitle className="product-item-text">{image.name}</CardTitle>
+                            <CardTitle className="product-item-text">{product.name}</CardTitle>
                             <CardText className="product-item-text">
-                                Product Code: {image.productCode}
+                                Product Code: {product.productCode}
                                 <br/>
-                                Product Type: {image.type}
+                                Product Type: {product.type}
                                 <br/>
-                                Price: {image.price}
+                                Price: {product.price}
                             </CardText>
-                            {image.sale?<img className="sale-icon-on-product-top" src={sale_icon} alt="Sale Icon"/>:null}
+                            {product.sale?<img className="sale-icon-on-product-top" src={sale_icon} alt="Sale Icon"/>:null}
                         </Card>
                     </Col>
                 )
