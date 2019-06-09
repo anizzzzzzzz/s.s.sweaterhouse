@@ -9,6 +9,8 @@ import SaleMain from "./SaleMain";
 import {bindActionCreators} from "redux";
 import {isSaleCollapseOpen} from "../../redux/action/CollapseAction";
 import {connect} from "react-redux";
+import AddProductModal from "../admin/addProduct/AddProductModal";
+import {ADMIN, SUPER_ADMIN} from "../../constant/RoleConstant";
 
 class SaleIndex extends Component {
     constructor(props){
@@ -20,6 +22,7 @@ class SaleIndex extends Component {
         this.state={
             item:queryParams.item,
             page:('page' in queryParams)?parseInt(queryParams.page,10):1,
+            modalVisible:false,
         };
 
         this.toggle=this.toggle.bind(this);
@@ -28,6 +31,24 @@ class SaleIndex extends Component {
     toggle() {
         this.props.isSaleCollapseOpen(!this.props.isSaleCategoriesCollapseOpen);
     }
+
+    handleModalVisible = (visible) => {
+        this.setState({
+            modalVisible:visible
+        });
+    };
+
+    //checks if ADMIN, SUPER_ADMIN role is present in usersession role.
+    // Then will add this will be displayer
+    addProductButton = () => {
+        if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
+            return (<button type="button"
+                            className="product-index-button product-index-button-add"
+                            onClick={()=>this.handleModalVisible(true)}>
+                <span><FontAwesome.FaPlus/> Add Product</span>
+            </button>)
+        }
+    };
 
     render() {
         return (
@@ -40,6 +61,9 @@ class SaleIndex extends Component {
                                  (<span><FontAwesome.FaPlus/> Show Categories</span>):
                                  (<span><FontAwesome.FaMinus/> Hide Categories</span>)}
                          </button>
+
+                         {/*The add button should be displayed only if the user have admin credential.*/}
+                         {this.addProductButton()}
                          <SaleFilter/>
                      </div>
 
@@ -54,6 +78,9 @@ class SaleIndex extends Component {
                     </div>
                 </div>
                 <Footer/>
+
+                {/*Add Product Modal*/}
+                <AddProductModal modalVisible={this.state.modalVisible} handleModalVisible={this.handleModalVisible}/>
             </div>
         )
     }
@@ -61,7 +88,8 @@ class SaleIndex extends Component {
 
 const mapStateToProps = (state)=>{
     return {
-        isSaleCategoriesCollapseOpen:state.isSaleCategoriesCollapseOpen
+        isSaleCategoriesCollapseOpen:state.isSaleCategoriesCollapseOpen,
+        userSession:state.getUserSession
     }
 };
 

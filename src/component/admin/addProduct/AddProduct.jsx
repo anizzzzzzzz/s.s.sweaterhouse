@@ -4,8 +4,6 @@ import {Button, Col, Form, FormGroup, FormText, Input, InputGroup, InputGroupAdd
 import ShowSelectedImages from "./ShowSelectedImages";
 import {uploadProduct} from "../../../api/UploadApi";
 import {ProductUploadFailure} from "../../../exception/Exceptions";
-import NavigationBar from "../../common/navbar/NavigationBar";
-import Footer from "../../common/footer/Footer";
 import {connect} from "react-redux";
 import {ADMIN, SUPER_ADMIN} from "../../../constant/RoleConstant";
 import {productType} from "../../../constant/ProductTypeConstant";
@@ -128,7 +126,6 @@ class AddProduct extends Component {
     render() {
         return (
             <div>
-                <NavigationBar props={this.props}/>
                 <div className="add-product-parent-div">
                     <div className="add-product">
                         {
@@ -247,7 +244,6 @@ class AddProduct extends Component {
                         </Form>
                     </div>
                 </div>
-                <Footer/>
             </div>
         )
     }

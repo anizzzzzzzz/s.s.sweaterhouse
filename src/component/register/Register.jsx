@@ -90,8 +90,8 @@ class Register extends Component {
             userRegistration(user)
                 .then(response=>{
                     if(response.status === 200) {
-                        let msg = "Dear "+this.state.firstname+","
-                                    +"\n"+"User has been registered. Activation Email has been sent to your email. Please activate your account.";
+                        let msg = "Dear".concat(this.state.firstname, ",\nUser has been registered. " +
+                            "Activation Email has been sent to your email. Please activate your account.");
                         this.setState({
                             message: msg,
                             firstname:'',
@@ -104,8 +104,8 @@ class Register extends Component {
                         this.toggle();
                     }
                     else if(response.status === 400){
-                        let msg= "Dear "+this.state.firstname+","
-                                    +"\n"+this.state.email+" has already been registered. Please try again with different email id";
+                        let msg = "Dear".concat(this.state.firstname,",\n", this.state.email," has already been registered. " +
+                            "Please try again with different email id.");
                         this.setState({
                             message:msg
                         });

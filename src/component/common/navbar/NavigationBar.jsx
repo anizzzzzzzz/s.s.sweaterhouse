@@ -104,10 +104,6 @@ class NavigationBar extends Component {
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="/faq" >FAQ</NavLink>
                             </NavItem>
-
-                            {/*For Admin Navigation*/}
-                            {this.adminNavigationBar()}
-
                             <NavItem className="nav-item-custom nav-text-style">
                                 <NavLink href="#none" >About us</NavLink>
                             </NavItem>

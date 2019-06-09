@@ -21,6 +21,12 @@
     box-shadow: none;
 }
 
+.product-index-button-add{
+    position:relative;
+    float:right;
+    margin:0 5px
+}
+
 .product-index-button:hover{
     cursor: pointer;
 }

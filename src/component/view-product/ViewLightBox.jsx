@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Lightbox from "react-images";
+import './style/ViewLightBox.css';
+import API_DICT from "../../config/appConfig";
 
 class ViewLightBox extends Component {
     constructor(){
@@ -19,7 +21,8 @@ class ViewLightBox extends Component {
     createImageList(){
         let imgs=[];
         this.props.images.forEach(image=>{
-            imgs.push({src:'data:' + image.type + ';base64,' + image.image});
+            // imgs.push({src:'data:' + image.type + ';base64,' + image.image});
+            imgs.push({src:API_DICT.IMAGE_API + '/' + image.location});
         });
         return imgs;
     }

@@ -3,12 +3,13 @@ import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/SaleMain.css';
 import {findAllBySalesAndType, findAllSales} from "../../api/SalesApi";
 import {ProductNullException} from "../../exception/Exceptions";
-import {Link} from "react-router-dom";
 import {BounceLoader} from "react-spinners";
 import {css} from "react-emotion";
 import SalePagination from "./SalePagination";
 import {FIND_ALL_BY_SALES_AND_TYPE, FIND_ALL_SALES} from "../../constant/Constants";
 import API_DICT from "../../config/appConfig";
+import ViewIndex from "../view-product/ViewIndex";
+import {Modal} from "antd";
 
 const override = css`
     display: block;
@@ -32,7 +33,10 @@ class SaleMain extends Component {
             page:this.props.page,
             error:false,
             selectedMethod : this.selectMethod(this.props.item),
-            message:''
+            message:'',
+            modalVisible:false,
+            selectedProductId:'',
+            selectedProductCode:'',
         };
 
         this.handlePagination=this.handlePagination.bind(this);
@@ -110,6 +114,15 @@ class SaleMain extends Component {
             });
     }
 
+
+    handleProductSelectUnselect = (id, productCode, visible) => {
+        this.setState({
+            selectedProductId : id,
+            selectedProductCode : productCode,
+            modalVisible:visible
+        });
+    };
+
     createImagesList(){
         if(this.state.products.length > 0) {
             return this.state.products.map((product)=>{
@@ -118,12 +131,13 @@ class SaleMain extends Component {
                 return (
                     <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={product.productCode}>
                         <Card className={this.props.isOpen?"sales-lists-card-with-filter":"sales-lists-card"}>
-                            <Link to={"/view?code="+product.productCode+"&id="+product.id}>
+                            {/*<Link to={"/view?code="+product.productCode+"&id="+product.id}>*/}
                                 <CardImg
                                     className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"}
                                     top src={src} alt="prod"
+                                    onClick={() => this.handleProductSelectUnselect(product.id, product.productCode, true)}
                                 />
-                            </Link>
+                            {/*</Link>*/}
                             <CardTitle className="sales-item-title">{product.name}</CardTitle>
                             <CardText className="sales-item-title">
                                 Product Code: {product.productCode}
@@ -188,6 +202,21 @@ class SaleMain extends Component {
                     />:
                     null
                 }
+
+                <Modal
+                    width="80%"
+                    style={{top: 20}}
+                    title=""
+                    visible={this.state.modalVisible}
+                    onCancel={()=>this.handleProductSelectUnselect('','',false)}
+                    onOk={()=>this.handleProductSelectUnselect('','',false)}
+                >
+                    {this.state.selectedProductId !== '' && this.state.selectedProductCode !== '' ?
+                        <ViewIndex
+                            productId={this.state.selectedProductId}
+                            productCode={this.state.selectedProductCode}/>
+                        : null}
+                </Modal>
             </div>
         );
     }

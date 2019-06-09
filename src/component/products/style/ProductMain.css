@@ -93,6 +93,10 @@
     margin: 90px auto;
 }
 
+.ant-modal-content{
+    margin-top: 50px;
+}
+
 @media (min-width: 1200px) {
     .product-lists-card{
         height: 510px;

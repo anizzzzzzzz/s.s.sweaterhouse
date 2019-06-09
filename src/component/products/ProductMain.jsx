@@ -6,10 +6,11 @@ import {ProductNullException} from "../../exception/Exceptions";
 import {BounceLoader} from "react-spinners";
 import {css} from 'react-emotion';
 import ProductPagination from "./ProductPagination";
-import {Link} from "react-router-dom";
 import {FIND_ALL_PRODUCTS, FIND_ALL_PRODUCTS_BY_TYPE} from "../../constant/Constants";
 import sale_icon from '../../images/icon/sale-icon.png';
 import API_DICT from "../../config/appConfig";
+import {Modal} from "antd";
+import ViewIndex from "../view-product/ViewIndex";
 
 const override = css`
     display: block;
@@ -33,7 +34,10 @@ class ProductMain extends Component {
             page:this.props.page,
             selectedMethod : this.selectMethod(this.props.item),
             message:'',
-            error:false
+            error:false,
+            modalVisible:false,
+            selectedProductId:'',
+            selectedProductCode:'',
         };
         this.handlePagination=this.handlePagination.bind(this);
     }
@@ -110,6 +114,14 @@ class ProductMain extends Component {
             })
     }
 
+    handleProductSelectUnselect = (id, productCode, visible) => {
+        this.setState({
+            selectedProductId : id,
+            selectedProductCode : productCode,
+            modalVisible:visible
+        });
+    };
+
     createImagesList(){
         if(this.state.products.length > 0) {
             return this.state.products.map((product) => {
@@ -121,12 +133,13 @@ class ProductMain extends Component {
                          key={product.productCode}
                     >
                         <Card className={this.props.isOpen ? "product-lists-card-with-filter" : "product-lists-card"}>
-                            <Link to={"/view?code="+product.productCode+"&id="+product.id}>
+                            {/*<Link to={"/view?code="+product.productCode+"&id="+product.id}>*/}
                                 <CardImg
                                     className={this.props.isOpen ? "product-item-image-with-filter" : "product-item-image"}
                                     top src={src} alt="Card image cap"
+                                    onClick={() => this.handleProductSelectUnselect(product.id, product.productCode, true)}
                                 />
-                            </Link>
+                            {/*</Link>*/}
                             <CardTitle className="product-item-text">{product.name}</CardTitle>
                             <CardText className="product-item-text">
                                 Product Code: {product.productCode}
@@ -192,6 +205,21 @@ class ProductMain extends Component {
                     />:
                     null
                 }
+
+                <Modal
+                    width="80%"
+                    style={{top: 20}}
+                    title=""
+                    visible={this.state.modalVisible}
+                    onCancel={()=>this.handleProductSelectUnselect('','',false)}
+                    onOk={()=>this.handleProductSelectUnselect('','',false)}
+                >
+                    {this.state.selectedProductId !== '' && this.state.selectedProductCode !== '' ?
+                        <ViewIndex
+                            productId={this.state.selectedProductId}
+                            productCode={this.state.selectedProductCode}/>
+                        : null}
+                </Modal>
             </div>
 
         );

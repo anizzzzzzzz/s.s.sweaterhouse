@@ -1,7 +1,6 @@
 .view-selected-product{
     margin: 0 auto;
     width: 95%;
-    min-height: 84vh;
 }
 
 .view-product-row{
@@ -49,8 +48,6 @@
 
 .view-product-info{
     width: 40%;
-    z-index: -1;
-    min-height: 100vh;
 }
 
 .view-product-details{
@@ -58,6 +55,10 @@
 
 .view-product-info p:first-child{
     font-size:25px;
+}
+
+.comments-div{
+    margin-top: 40px;
 }
 
 @media (min-width: 1200px) {
