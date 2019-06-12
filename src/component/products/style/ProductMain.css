@@ -60,12 +60,58 @@
     position: relative;
 }
 
+.product-lists-card-with-filter:hover .admin-edit-delete-div-wrapper, .product-lists-card:hover .admin-edit-delete-div-wrapper{
+    visibility: visible;
+}
+
 .sale-icon-on-product-top{
     position:absolute;
     top: 0;
     left: 0;
     height: 65px;
     width: 65px;
+}
+
+.admin-edit-delete-div-wrapper{
+    visibility: hidden;
+    position:absolute;
+    top: 0;
+    right: 0;
+    height: 64px;
+    width: 100%;
+}
+
+.admin-edit-delete-div-child{
+    height: 100%;
+    width: 100%;
+    background-color: darkgray;
+    filter: alpha(opacity=30);
+    -moz-opacity: 0.3;
+    -khtml-opacity: 0.3;
+    opacity: 0.5;
+}
+
+.admin-edit-delete-div-icon{
+    height: 100%;
+    position: absolute;
+    color:black;
+    top:0;
+    right: 0;
+}
+
+.admin-edit-delete-div-icon i{
+    height: 100%;
+    font-size:30px;
+    padding: 5px 20px;
+    text-align: center;
+    float: right;
+}
+
+.admin-edit-delete-div-icon i:hover{
+    color:black;
+    background-color: #b3b3b3;
+    cursor: pointer;
+    /*opacity: 0.8;*/
 }
 
 .product-item-image{

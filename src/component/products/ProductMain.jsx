@@ -9,8 +9,9 @@ import ProductPagination from "./ProductPagination";
 import {FIND_ALL_PRODUCTS, FIND_ALL_PRODUCTS_BY_TYPE} from "../../constant/Constants";
 import sale_icon from '../../images/icon/sale-icon.png';
 import API_DICT from "../../config/appConfig";
-import {Modal} from "antd";
+import {Icon, Modal} from "antd";
 import ViewIndex from "../view-product/ViewIndex";
+import {ADMIN, SUPER_ADMIN} from "../../constant/RoleConstant";
 
 const override = css`
     display: block;
@@ -122,6 +123,21 @@ class ProductMain extends Component {
         });
     };
 
+    showEditDeleteButtonAdmin = () => {
+        if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
+            return (
+                <div className="admin-edit-delete-div-wrapper">
+                    <div className="admin-edit-delete-div-child">
+                    </div>
+                    <div className="admin-edit-delete-div-icon">
+                        <Icon type="delete" />
+                        <Icon type="edit" />
+                    </div>
+                </div>
+            )
+        }
+    };
+
     createImagesList(){
         if(this.state.products.length > 0) {
             return this.state.products.map((product) => {
@@ -133,13 +149,11 @@ class ProductMain extends Component {
                          key={product.productCode}
                     >
                         <Card className={this.props.isOpen ? "product-lists-card-with-filter" : "product-lists-card"}>
-                            {/*<Link to={"/view?code="+product.productCode+"&id="+product.id}>*/}
                                 <CardImg
                                     className={this.props.isOpen ? "product-item-image-with-filter" : "product-item-image"}
                                     top src={src} alt="Card image cap"
                                     onClick={() => this.handleProductSelectUnselect(product.id, product.productCode, true)}
                                 />
-                            {/*</Link>*/}
                             <CardTitle className="product-item-text">{product.name}</CardTitle>
                             <CardText className="product-item-text">
                                 Product Code: {product.productCode}
@@ -149,6 +163,7 @@ class ProductMain extends Component {
                                 Price: {product.price}
                             </CardText>
                             {product.sale?<img className="sale-icon-on-product-top" src={sale_icon} alt="Sale Icon"/>:null}
+                            {this.showEditDeleteButtonAdmin()}
                         </Card>
                     </Col>
                 )

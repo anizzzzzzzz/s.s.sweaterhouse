@@ -9,7 +9,8 @@ import SalePagination from "./SalePagination";
 import {FIND_ALL_BY_SALES_AND_TYPE, FIND_ALL_SALES} from "../../constant/Constants";
 import API_DICT from "../../config/appConfig";
 import ViewIndex from "../view-product/ViewIndex";
-import {Modal} from "antd";
+import {Icon, Modal} from "antd";
+import {ADMIN, SUPER_ADMIN} from "../../constant/RoleConstant";
 
 const override = css`
     display: block;
@@ -123,6 +124,21 @@ class SaleMain extends Component {
         });
     };
 
+    showEditDeleteButtonAdmin = () => {
+        if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
+            return (
+                <div className="admin-edit-delete-div-wrapper">
+                    <div className="admin-edit-delete-div-child">
+                    </div>
+                    <div className="admin-edit-delete-div-icon">
+                        <Icon type="delete" />
+                        <Icon type="edit" />
+                    </div>
+                </div>
+            )
+        }
+    };
+
     createImagesList(){
         if(this.state.products.length > 0) {
             return this.state.products.map((product)=>{
@@ -131,13 +147,11 @@ class SaleMain extends Component {
                 return (
                     <Col sm="6" md="6" xs="12" lg="4" className="sales-lists-col" key={product.productCode}>
                         <Card className={this.props.isOpen?"sales-lists-card-with-filter":"sales-lists-card"}>
-                            {/*<Link to={"/view?code="+product.productCode+"&id="+product.id}>*/}
-                                <CardImg
-                                    className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"}
-                                    top src={src} alt="prod"
-                                    onClick={() => this.handleProductSelectUnselect(product.id, product.productCode, true)}
-                                />
-                            {/*</Link>*/}
+                            <CardImg
+                                className={this.props.isOpen?"sales-item-image-with-filter":"sales-item-image"}
+                                top src={src} alt="prod"
+                                onClick={() => this.handleProductSelectUnselect(product.id, product.productCode, true)}
+                            />
                             <CardTitle className="sales-item-title">{product.name}</CardTitle>
                             <CardText className="sales-item-title">
                                 Product Code: {product.productCode}
@@ -146,6 +160,7 @@ class SaleMain extends Component {
                                 <br/>
                                 Price: {product.price}
                             </CardText>
+                            {this.showEditDeleteButtonAdmin()}
                         </Card>
                     </Col>
                 )

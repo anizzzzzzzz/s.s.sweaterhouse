@@ -76,7 +76,8 @@ class ProductIndex extends Component {
 
                         <ProductMain isOpen={this.props.isProdCategoriesCollapseOpen}
                                      item={this.state.item}
-                                     page={this.state.page}/>
+                                     page={this.state.page}
+                                     userSession={this.props.userSession}/>
                     </div>
                 </div>
                 <Footer/>
