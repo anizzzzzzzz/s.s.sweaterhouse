@@ -25,6 +25,9 @@ class SaleCategories extends Component {
                 <NavItem>
                     <NavLink href="/sale?item=trouser&page=1" className="sales-categories-list">Trouser</NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink href="/sale" className="sales-categories-list">Clear all</NavLink>
+                </NavItem>
             </Nav>
         )
     }

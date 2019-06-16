@@ -50,6 +50,15 @@ class ProductCategories extends Component {
                         Trouser
                     </NavLink>
                 </NavItem>
+                <hr className="products-categories-list-hr-line"/>
+                <NavItem>
+                    <NavLink href="/products"
+                             className="products-categories-list"
+                             name="trouser"
+                    >
+                        Clear all
+                    </NavLink>
+                </NavItem>
             </Nav>
         )
     }

@@ -20,3 +20,7 @@ export const productSize=[
         'value':'XXXL'
     },
 ];
+
+export const productSizeArr = [
+    'S', 'L', 'XL', 'XXL', 'XXXL'
+];

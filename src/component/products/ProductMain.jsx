@@ -3,21 +3,14 @@ import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/ProductMain.css';
 import {findAllProducts, findAllProductsByType} from "../../api/ProductApi";
 import {ProductNullException} from "../../exception/Exceptions";
-import {BounceLoader} from "react-spinners";
-import {css} from 'react-emotion';
 import ProductPagination from "./ProductPagination";
 import {FIND_ALL_PRODUCTS, FIND_ALL_PRODUCTS_BY_TYPE} from "../../constant/Constants";
 import sale_icon from '../../images/icon/sale-icon.png';
 import API_DICT from "../../config/appConfig";
-import {Icon, Modal} from "antd";
+import {Empty, Icon, message, Modal, Spin} from "antd";
 import ViewIndex from "../view-product/ViewIndex";
 import {ADMIN, SUPER_ADMIN} from "../../constant/RoleConstant";
-
-const override = css`
-    display: block;
-    margin: 90px auto;
-    border-color: red;
-`;
+import AddProductModal from "../admin/addProduct/AddProductModal";
 
 class ProductMain extends Component {
     constructor(props){
@@ -37,11 +30,16 @@ class ProductMain extends Component {
             message:'',
             error:false,
             modalVisible:false,
+            editModalVisible:false,
             selectedProductId:'',
             selectedProductCode:'',
         };
         this.handlePagination=this.handlePagination.bind(this);
     }
+
+    error = (msg) => {
+        message.error(msg);
+    };
 
     selectMethod = (item) =>{
         if(item!==undefined )
@@ -108,9 +106,9 @@ class ProductMain extends Component {
             .catch((ex)=>{
                 if(ex instanceof ProductNullException){
                     this.setState({
-                        error:true,
-                        message:'Error Occured while loading.'
+                        loading:false
                     });
+                    this.error('Error Occured while loading.');
                 }
             })
     }
@@ -123,7 +121,16 @@ class ProductMain extends Component {
         });
     };
 
-    showEditDeleteButtonAdmin = () => {
+    // For Edit Model
+    handleEditModalVisible = (id, productCode, visible) => {
+        this.setState({
+            editModalVisible:visible,
+            selectedProductId : id,
+            selectedProductCode : productCode,
+        });
+    };
+
+    showEditDeleteButtonAdmin = (id, productCode) => {
         if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
             return (
                 <div className="admin-edit-delete-div-wrapper">
@@ -131,7 +138,7 @@ class ProductMain extends Component {
                     </div>
                     <div className="admin-edit-delete-div-icon">
                         <Icon type="delete" />
-                        <Icon type="edit" />
+                        <Icon type="edit" onClick={() => this.handleEditModalVisible(id, productCode, true)}/>
                     </div>
                 </div>
             )
@@ -163,7 +170,7 @@ class ProductMain extends Component {
                                 Price: {product.price}
                             </CardText>
                             {product.sale?<img className="sale-icon-on-product-top" src={sale_icon} alt="Sale Icon"/>:null}
-                            {this.showEditDeleteButtonAdmin()}
+                            {this.showEditDeleteButtonAdmin(product.id, product.productCode)}
                         </Card>
                     </Col>
                 )
@@ -173,7 +180,7 @@ class ProductMain extends Component {
             if (this.state.loading === false) {
                 return (
                     <div className="product-no-product-text">
-                        <p>No products Found.</p>
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                     </div>
                 );
             }
@@ -189,54 +196,46 @@ class ProductMain extends Component {
     render() {
         return (
             <div className={this.props.isOpen?"products-main-with-filter":"products-main"}>
-                <div className="product-lists">
-                    {
-                        this.state.error === true ?
-                            (
-                                <div style={{minHeight:'100%',textAlign:'center'}}>
-                                    <p style={{color:'red'}}>{this.state.message}</p>
-                                </div>
-                            ):null
+                <Spin size="large" spinning={this.state.loading}>
+                    <div className="product-lists">
+                        {/*<Row className={this.props.isOpen?"products-lists-row-with-filter":"products-lists-row"}>*/}
+                        <Row className="products-lists-row">
+                            {this.createImagesList()}
+                        </Row>
+                    </div>
+                    {(!this.state.loading && this.state.totalElements !== 0 && this.state.totalPages > 1)?
+                        <ProductPagination totalPages={this.state.totalPages}
+                                           currentPage={this.state.currentPage}
+                                           isFirst={this.state.isFirst}
+                                           isLast={this.state.isLast}
+                                           handlePagination={this.handlePagination}
+                                           page={this.state.page}
+                        />:
+                        null
                     }
-                    {/*<Row className={this.props.isOpen?"products-lists-row-with-filter":"products-lists-row"}>*/}
-                    <Row className="products-lists-row">
-                        {this.createImagesList()}
-                    </Row>
-                </div>
-                <BounceLoader
-                    className={override}
-                    sizeUnit={"px"}
-                    size={100}
-                    color={'#01A390'}
-                    loading={this.state.loading}
-                />
-                {(!this.state.loading && this.state.totalElements !== 0 && this.state.totalPages > 1)?
-                    <ProductPagination totalPages={this.state.totalPages}
-                                       currentPage={this.state.currentPage}
-                                       isFirst={this.state.isFirst}
-                                       isLast={this.state.isLast}
-                                       handlePagination={this.handlePagination}
-                                       page={this.state.page}
-                    />:
-                    null
-                }
 
-                <Modal
-                    width="80%"
-                    style={{top: 20}}
-                    title=""
-                    visible={this.state.modalVisible}
-                    onCancel={()=>this.handleProductSelectUnselect('','',false)}
-                    onOk={()=>this.handleProductSelectUnselect('','',false)}
-                >
-                    {this.state.selectedProductId !== '' && this.state.selectedProductCode !== '' ?
-                        <ViewIndex
-                            productId={this.state.selectedProductId}
-                            productCode={this.state.selectedProductCode}/>
-                        : null}
-                </Modal>
+                    <Modal
+                        width="80%"
+                        style={{top: 20}}
+                        title=""
+                        visible={this.state.modalVisible}
+                        onCancel={()=>this.handleProductSelectUnselect('','',false)}
+                        onOk={()=>this.handleProductSelectUnselect('','',false)}
+                    >
+                        {this.state.selectedProductId !== '' && this.state.selectedProductCode !== '' ?
+                            <ViewIndex
+                                productId={this.state.selectedProductId}
+                                productCode={this.state.selectedProductCode}/>
+                            : null}
+                    </Modal>
+
+                    {/*Editing Product*/}
+                    <AddProductModal modalVisible={this.state.editModalVisible}
+                                     handleModalVisible={this.handleEditModalVisible}
+                                     productId={this.state.selectedProductId}
+                                     productCode={this.state.selectedProductCode}/>
+                </Spin>
             </div>
-
         );
     }
 }

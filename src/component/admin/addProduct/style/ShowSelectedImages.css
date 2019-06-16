@@ -66,3 +66,35 @@
 .hide-icon{
     display: none;
 }
+
+.delete-icon{
+    position:absolute;
+    top:0;
+    left:78%;
+    font-size: 20px;
+    color: red;
+    padding:5px;
+    background-color: darkgray;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.delete-icon:hover{
+    -webkit-transform: scale(2.06);
+    transform: scale(2.06);
+    background-color: inherit;
+    left:77%;
+    /*cursor: ;*/
+}
+
+@media (max-width: 419px) {
+    .selected-images-candid{
+        height: 100px;
+        width: 100px;
+    }
+
+    .delete-icon{
+        padding-top: 2px;
+        left: 70%;
+    }
+}

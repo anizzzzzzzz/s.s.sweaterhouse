@@ -9,12 +9,18 @@ class AddProductModal extends Component {
             <Modal
                 width="80%"
                 style={{top: 40}}
-                title="Add Product"
+                title={this.props.productId === undefined ? "Add Product" : "Edit Product"}
                 visible={this.props.modalVisible}
-                onCancel={()=>this.props.handleModalVisible(false)}
-                onOk={()=>this.props.handleModalVisible(false)}
+                onCancel={()=>
+                    this.props.productId === undefined? this.props.handleModalVisible(false) :
+                        this.props.handleModalVisible('','',false)}
+                onOk={()=>
+                    this.props.productId === undefined ? this.props.handleModalVisible(false) :
+                        this.props.handleModalVisible('','',false)}
             >
-                <AddProduct/>
+                <AddProduct
+                    productId = {this.props.productId !== undefined ? this.props.productId : undefined}
+                    productCode = {this.props.productCode !== undefined ? this.props.productCode : undefined}/>
             </Modal>
         );
     }
