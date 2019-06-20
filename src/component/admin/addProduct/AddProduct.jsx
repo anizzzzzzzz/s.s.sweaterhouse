@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {ADMIN, SUPER_ADMIN} from "../../../constant/RoleConstant";
 import {productType} from "../../../constant/ProductTypeConstant";
 import {productSizeArr} from "../../../constant/ProductSizeConstant";
-import {findOneByPrductIdAndProductCode} from "../../../api/ProductApi";
+import {findOneByPrductIdAndProductCode, updateProduct} from "../../../api/ProductApi";
 import {Checkbox, Spin, message} from "antd";
 
 const CheckboxGroup = Checkbox.Group;
@@ -19,6 +19,7 @@ class AddProduct extends Component {
 
         this.state={
             id:'',
+            productCode:'',
             images:[],
             name:'',
             type:'',
@@ -74,7 +75,7 @@ class AddProduct extends Component {
 
     loadExistingProductForEdit = (productId, productCode) => {
         if(productId !== "" && productCode !== "") {
-            findOneByPrductIdAndProductCode(productId, productCode)
+            findOneByPrductIdAndProductCode(productId, productCode, this.props.userSession.token)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json();
@@ -95,6 +96,10 @@ class AddProduct extends Component {
                         sale: result.sale,
                         selectedImage: result.productInfos.filter(img => img.highlight === true)[0].name,
                         comments: result.comments,
+                        deletedImagesId : [],
+                        id : result.id,
+                        productCode : result.productCode,
+
                     });
                 })
                 .catch(ex => {
@@ -149,51 +154,138 @@ class AddProduct extends Component {
         }));
     };
 
-    handleSubmit(e){
+    handleSubmitTest(e){
         e.preventDefault();
-        let state=this.state;
+        if(this.state.id.trim().length === 0 && this.state.productCode.trim().length === 0)
+            console.log("save");
+        else
+            console.log("update");
+    }
 
-        if(state.images.length > 0 && state.name.trim().length > 0 && state.price.trim().length > 0) {
-            this.setState({loading:true});
-            uploadProduct(state.images, state.name, state.type, state.size, state.price, state.sale, state.selectedImage)
-                .then(response => {
-                    if (response.status === 200) {
-                        return response.json();
-                    }
-                    else {
-                        throw new ProductUploadFailure();
-                    }
-                })
-                .then(result => {
+    resetState = () => {
+        this.setState({
+            serverResponse:{},
+            name: '',
+            images: [],
+            type: '',
+            size: [],
+            price: '',
+            sale: false,
+            productInfos : [],
+            selectedImage: '',
+            loading: false,
+            id : '',
+            productCode : '',
+        });
+    };
+
+    saveProduct = () => {
+        let state=this.state;
+        uploadProduct(state.images, state.name, state.type, state.size, state.price,
+            state.sale, state.selectedImage, this.props.userSession.token)
+            .then(response => {
+                if (response.status === 200) {
+                    this.resetState();
+                    this.success('Saved product successfully.');
+                }
+                else {
+                    throw new ProductUploadFailure();
+                }
+            })
+            .catch((ex) => {
+                if (ex instanceof ProductUploadFailure) {
                     this.setState({
-                        serverResponse:{},
-                        name: '',
-                        images: [],
-                        type: '',
-                        size: [],
-                        price: '',
-                        sale: '',
-                        productInfos : [],
-                        selectedImage: '',
                         loading: false
                     });
-                    this.success('Saved product successfully.');
-                })
-                .catch((ex) => {
-                    if (ex instanceof ProductUploadFailure) {
-                        this.setState({
-                            loading: false
-                        });
-                        this.error('Error while saving product.');
-                    }
-                });
+                    this.error('Error while saving product.');
+                }
+            });
+    };
+
+    updateProduct = () => {
+        console.log('update');
+        const state = this.state;
+        let data = {};
+        data['id'] = state.id;
+        data['productCode'] = state.productCode;
+        data['name'] = state.name;
+        data['price'] = state.price;
+        data['sale'] = state.sale;
+        data['size'] = state.size;
+        data['selectedImage'] = state.selectedImage;
+        data['deletedImagesId'] = state.deletedImagesId;
+
+        let newImages = state.images.filter(img => img instanceof File);
+
+        updateProduct(newImages, data, this.props.userSession.token)
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    this.resetState();
+                    this.success('Updated product successfully.');
+                }
+                else {
+                    throw new ProductUploadFailure();
+                }
+            })
+            .catch((ex) => {
+                if (ex instanceof ProductUploadFailure) {
+                    this.resetState();
+                    this.setState({
+                        loading: false
+                    });
+                    this.error('Error while updating product.');
+                }
+            });
+    };
+
+
+    handleSubmit(e){
+        e.preventDefault();
+        if(!this.checkError()) {
+            this.setState({loading:true});
+            // Applying condition for saving/updating the product.
+            // While saving new product, the id and productCode will be originally empty because it is to bre created in backend.
+            // While updating the product, the id and productCode will not be empty. So applying this condition
+            // to save/update the product.
+            if(this.state.id.trim().length === 0 && this.state.productCode.trim().length === 0)
+                this.saveProduct();
+            else
+                this.updateProduct();
+
+            // Resetting all the input form
             e.target.reset();
         }
         else{
             this.setState({loading:false});
-            this.error('Name, Images and Price cannot be null.');
         }
     }
+
+    checkError = () =>{
+        let state=this.state;
+        let error = false;
+        if(state.images.length === 0){
+            error = true;
+            this.error('Must upload atleast one image.');
+        }
+        if(state.name.trim().length === 0){
+            error = true;
+            this.error('Name must be specified.');
+        }
+        if(state.type.trim().length === 0){
+            error = true;
+            this.error('Type must not be None. Must choose type.');
+        }
+        if(state.price === 0){
+            error = true;
+            this.error('Price must be specified.');
+        }
+        if(state.size.length === 0){
+            error = true;
+            this.error('Available size must be specified.');
+        }
+        return error
+    };
 
     render() {
         return (

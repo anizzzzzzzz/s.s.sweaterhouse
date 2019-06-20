@@ -13,10 +13,10 @@ class AddProductModal extends Component {
                 visible={this.props.modalVisible}
                 onCancel={()=>
                     this.props.productId === undefined? this.props.handleModalVisible(false) :
-                        this.props.handleModalVisible('','',false)}
+                        this.props.handleModalVisible('', '', false)}
                 onOk={()=>
                     this.props.productId === undefined ? this.props.handleModalVisible(false) :
-                        this.props.handleModalVisible('','',false)}
+                        this.props.handleModalVisible('' , '', false)}
             >
                 <AddProduct
                     productId = {this.props.productId !== undefined ? this.props.productId : undefined}

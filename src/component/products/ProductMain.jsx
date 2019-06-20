@@ -70,10 +70,10 @@ class ProductMain extends Component {
         const size = 18;
         switch (this.state.selectedMethod){
             case FIND_ALL_PRODUCTS_BY_TYPE:
-                select = findAllProductsByType(this.props.item,this.state.page-1,size);
+                select = findAllProductsByType(this.props.item, this.state.page-1, size, this.props.userSession.token);
                 break;
             case FIND_ALL_PRODUCTS:
-                select = findAllProducts(this.state.page-1,size);
+                select = findAllProducts(this.state.page-1, size, this.props.userSession.token);
                 break;
             default:
                 this.setState({
@@ -224,6 +224,7 @@ class ProductMain extends Component {
                     >
                         {this.state.selectedProductId !== '' && this.state.selectedProductCode !== '' ?
                             <ViewIndex
+                                userToken={this.props.userSession.token}
                                 productId={this.state.selectedProductId}
                                 productCode={this.state.selectedProductCode}/>
                             : null}

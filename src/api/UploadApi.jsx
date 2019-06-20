@@ -1,7 +1,7 @@
 import API_DICT from '../config/appConfig';
 
 
-export function uploadProduct(images,name,type,size,price,sale,selectedImage) {
+export function uploadProduct(images, name, type, size, price, sale, selectedImage, token) {
     console.log(selectedImage);
     let data=new FormData();
     for(let i=0; i<images.length; i++) {
@@ -17,5 +17,8 @@ export function uploadProduct(images,name,type,size,price,sale,selectedImage) {
     return fetch(API_DICT.ROOT_API+"/upload-products",{
         method:'POST',
         body:data,
+        headers : {
+            'Authorization' : 'Bearer ' + token
+        },
     });
 }

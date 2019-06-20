@@ -29,7 +29,7 @@ class ViewIndex extends Component {
     }
 
     componentWillMount(){
-        findOneByPrductIdAndProductCode(this.state.productId, this.state.productCode)
+        findOneByPrductIdAndProductCode(this.state.productId, this.state.productCode, this.props.userToken)
             .then(response=>{
                 if(response.status ===200) {
                     return response.json();
@@ -39,7 +39,6 @@ class ViewIndex extends Component {
                 }
             })
             .then(result=>{
-                console.log(result);
                 this.setState({
                     name : result.name,
                     images : result.productInfos,
@@ -142,9 +141,10 @@ class ViewIndex extends Component {
     sizeLists(){
         let size=this.state.size;
         if(size.length >0){
-            return size.map((s)=>{
+            /*return size.map((s)=>{
                 return (s.id === size[size.length-1].id)?(<b key={s.id}>{s.size}</b>):(<b key={s.id}>{s.size+", "}</b>)
-            })
+            })*/
+            return size.map((s)=><b key={s.id}>{s.size} </b>)
         }
         else{
             return null;
