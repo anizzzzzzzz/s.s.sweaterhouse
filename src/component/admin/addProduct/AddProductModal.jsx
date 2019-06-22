@@ -20,7 +20,8 @@ class AddProductModal extends Component {
             >
                 <AddProduct
                     productId = {this.props.productId !== undefined ? this.props.productId : undefined}
-                    productCode = {this.props.productCode !== undefined ? this.props.productCode : undefined}/>
+                    productCode = {this.props.productCode !== undefined ? this.props.productCode : undefined}
+                    handleRefreshPage = {this.props.handleRefreshPage}/>
             </Modal>
         );
     }

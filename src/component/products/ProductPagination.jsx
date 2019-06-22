@@ -19,7 +19,7 @@ class ProductPagination extends Component {
     handlePrevious(event,i){
         event.preventDefault();
         if((i)>0){
-            this.props.handlePagination(i);
+            this.props.handlePagination(i-1);
         }
     }
 
@@ -27,14 +27,14 @@ class ProductPagination extends Component {
         return (
             <div className="products-main-pagination">
                 <div className="pagination">
-                    <PaginationItem disabled={this.props.isFirst} onClick={(e)=>this.handlePrevious(e,this.props.currentPage)}>
+                    <PaginationItem disabled={this.props.isFirst} onClick={(e)=>this.handlePrevious(e,this.props.page)}>
                         <PaginationLink previous />
                     </PaginationItem>
                 </div>
                 <MuiThemeProvider>
                     <Pagination
                         total = { this.props.totalPages }
-                        current = { this.props.currentPage+1 }
+                        current = { this.props.currentPage}
                         display = {5}
                         onChange={(number)=>this.handleClick(number)}
                         styleFirstPageLink={{display:'none'}}

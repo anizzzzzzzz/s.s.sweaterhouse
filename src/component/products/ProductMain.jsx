@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardText, CardTitle, Col, Row} from "reactstrap";
 import './style/ProductMain.css';
-import {findAllProducts, findAllProductsByType} from "../../api/ProductApi";
+import {deleteProduct, findAllProducts, findAllProductsByType} from "../../api/ProductApi";
 import {ProductNullException} from "../../exception/Exceptions";
 import ProductPagination from "./ProductPagination";
 import {FIND_ALL_PRODUCTS, FIND_ALL_PRODUCTS_BY_TYPE} from "../../constant/Constants";
 import sale_icon from '../../images/icon/sale-icon.png';
 import API_DICT from "../../config/appConfig";
-import {Empty, Icon, message, Modal, Spin} from "antd";
+import {Empty, Icon, message, Modal, Popconfirm, Spin} from "antd";
 import ViewIndex from "../view-product/ViewIndex";
 import {ADMIN, SUPER_ADMIN} from "../../constant/RoleConstant";
 import AddProductModal from "../admin/addProduct/AddProductModal";
@@ -37,6 +37,10 @@ class ProductMain extends Component {
         this.handlePagination=this.handlePagination.bind(this);
     }
 
+    success = (msg) => {
+        message.success(msg);
+    };
+
     error = (msg) => {
         message.error(msg);
     };
@@ -63,17 +67,21 @@ class ProductMain extends Component {
             else
                 window.location='/products?page='+(this.state.page);
         }
+
+        if(this.props.refreshpage !== nextProps.refreshpage){
+            this.findAllByType();
+        }
     }
 
     findAllByType(){
         let select = null;
-        const size = 18;
+        const size = 12;
         switch (this.state.selectedMethod){
             case FIND_ALL_PRODUCTS_BY_TYPE:
-                select = findAllProductsByType(this.props.item, this.state.page-1, size, this.props.userSession.token);
+                select = findAllProductsByType(this.props.item, this.state.page, size, this.props.userSession.token);
                 break;
             case FIND_ALL_PRODUCTS:
-                select = findAllProducts(this.state.page-1, size, this.props.userSession.token);
+                select = findAllProducts(this.state.page, size, this.props.userSession.token);
                 break;
             default:
                 this.setState({
@@ -98,8 +106,8 @@ class ProductMain extends Component {
                     totalPages:result.totalPages,
                     totalElements:result.totalElements,
                     currentPage:result.number,
-                    isFirst:result.first,
-                    isLast:result.last,
+                    isFirst:result.number === 1,
+                    isLast:result.number === result.totalPages,
                     page: (result.totalElements > 0)? page : page+1
                 });
             })
@@ -130,6 +138,20 @@ class ProductMain extends Component {
         });
     };
 
+    deleteProduct = (id) => {
+        this.setState({loading:true});
+        deleteProduct(id, this.props.userSession.token)
+            .then(response => {
+                if(response.status === 200){
+                    this.success("Deleted image.");
+                    this.findAllByType();
+                }
+                else
+                    this.error("Cannot delete image.");
+            });
+        this.setState({loading:false});
+    };
+
     showEditDeleteButtonAdmin = (id, productCode) => {
         if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
             return (
@@ -137,7 +159,14 @@ class ProductMain extends Component {
                     <div className="admin-edit-delete-div-child">
                     </div>
                     <div className="admin-edit-delete-div-icon">
-                        <Icon type="delete" />
+                        <Popconfirm
+                            title="Are you sure delete this product?"
+                            onConfirm={() => this.deleteProduct(id)}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <Icon type="delete"/>
+                        </Popconfirm>
                         <Icon type="edit" onClick={() => this.handleEditModalVisible(id, productCode, true)}/>
                     </div>
                 </div>
@@ -149,6 +178,8 @@ class ProductMain extends Component {
         if(this.state.products.length > 0) {
             return this.state.products.map((product) => {
                 let selectedPhoto = product.productInfos.filter(img => img.highlight === true)[0];
+                if(selectedPhoto === undefined)
+                    selectedPhoto = product.productInfos[0];
                 let src = API_DICT.IMAGE_API + '/' + selectedPhoto.location;
                 return (
                     <Col sm="6" md="6" xs="12" lg="4"
@@ -234,7 +265,8 @@ class ProductMain extends Component {
                     <AddProductModal modalVisible={this.state.editModalVisible}
                                      handleModalVisible={this.handleEditModalVisible}
                                      productId={this.state.selectedProductId}
-                                     productCode={this.state.selectedProductCode}/>
+                                     productCode={this.state.selectedProductCode}
+                                     handleRefreshPage = {this.props.handleRefreshPage}/>
                 </Spin>
             </div>
         );

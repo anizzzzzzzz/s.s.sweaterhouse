@@ -1,6 +1,9 @@
 import React from "react";
 import {Avatar, Button, Comment, Form, Icon, Input, List} from 'antd';
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {saveComment} from "../../api/CommentApi";
+import moment from "moment";
 
 const TextArea = Input.TextArea;
 
@@ -37,7 +40,9 @@ class CommentBox extends React.Component {
     }
 
     componentWillMount(){
+        console.log(this.props.productId);
         const { comments }= this.props;
+        console.log(comments);
         let commentsArr=[];
         comments.forEach((item,index)=>{
             commentsArr.push({
@@ -55,12 +60,12 @@ class CommentBox extends React.Component {
 
 
 
-    /*handleSubmit = (value) => {
+    handleSubmit = (value) => {
 
         let data={};
         data.comment=this.state.value;
-        data.commenterUsername=this.props.adminAuth.username;
-        data.resumeId=this.props.id;
+        data.commenterUsername=this.props.userSession.username;
+        data.productId=this.props.productId;
 
         if (!this.state.value) {
             return;
@@ -70,7 +75,7 @@ class CommentBox extends React.Component {
             submitting: true,
         });
 
-        api.postComment(this.props.adminAuth.token,data)
+        saveComment(data, this.props.userSession.token)
             .then((response)=>{
                 if(response.status === 200){
                     this.setState({
@@ -78,7 +83,7 @@ class CommentBox extends React.Component {
                         value: '',
                         comments: [
                             {
-                                author: <p>{this.props.adminAuth.firstName+" "+this.props.adminAuth.middleName+" "+this.props.adminAuth.lastName}</p>,
+                                author: <p>{this.props.userSession.firstName+" "+this.props.userSession.middleName+" "+this.props.userSession.lastName}</p>,
                                 avatar: (<Avatar >U</Avatar>),
                                 content: <p>{this.state.value}</p>,
                                 datetime: moment().fromNow(),
@@ -90,7 +95,7 @@ class CommentBox extends React.Component {
                 return response.json();
             });
 
-    };*/
+    };
 
     handleChange = e => {
         this.setState({
@@ -103,6 +108,11 @@ class CommentBox extends React.Component {
 
         return (
             <div>
+                <h4>Comments</h4>
+                {
+                    this.props.userSession.username !== "" && this.props.userSession.token !==""?
+                        <Link to="/login">login to make comment.</Link>:null
+                }
                 <Comment
                     avatar={
                         <Avatar  size="large">

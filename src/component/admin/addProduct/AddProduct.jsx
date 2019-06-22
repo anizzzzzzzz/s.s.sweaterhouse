@@ -85,6 +85,9 @@ class AddProduct extends Component {
                     }
                 })
                 .then(result => {
+                    let selectedPhoto = result.productInfos.filter(img=>img.highlight === true)[0];
+                    if(selectedPhoto === undefined)
+                        selectedPhoto = result.productInfos[0];
                     this.setState({
                         serverResponse:result,
                         name: result.name,
@@ -94,7 +97,7 @@ class AddProduct extends Component {
                         price: result.price,
                         size: result.size.map(si => si.size),
                         sale: result.sale,
-                        selectedImage: result.productInfos.filter(img => img.highlight === true)[0].name,
+                        selectedImage: selectedPhoto.name,
                         comments: result.comments,
                         deletedImagesId : [],
                         id : result.id,
@@ -154,14 +157,6 @@ class AddProduct extends Component {
         }));
     };
 
-    handleSubmitTest(e){
-        e.preventDefault();
-        if(this.state.id.trim().length === 0 && this.state.productCode.trim().length === 0)
-            console.log("save");
-        else
-            console.log("update");
-    }
-
     resetState = () => {
         this.setState({
             serverResponse:{},
@@ -186,6 +181,7 @@ class AddProduct extends Component {
             .then(response => {
                 if (response.status === 200) {
                     this.resetState();
+                    this.props.handleRefreshPage();
                     this.success('Saved product successfully.');
                 }
                 else {
@@ -203,7 +199,6 @@ class AddProduct extends Component {
     };
 
     updateProduct = () => {
-        console.log('update');
         const state = this.state;
         let data = {};
         data['id'] = state.id;
@@ -219,9 +214,9 @@ class AddProduct extends Component {
 
         updateProduct(newImages, data, this.props.userSession.token)
             .then(response => {
-                console.log(response);
                 if (response.status === 200) {
                     this.resetState();
+                    this.props.handleRefreshPage();
                     this.success('Updated product successfully.');
                 }
                 else {

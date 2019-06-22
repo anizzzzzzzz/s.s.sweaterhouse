@@ -19,7 +19,7 @@ class SalePagination extends Component {
     handlePrevious(event,i){
         event.preventDefault();
         if((i)>0){
-            this.props.handlePagination(i);
+            this.props.handlePagination(i-1);
         }
     }
     render() {
@@ -34,7 +34,7 @@ class SalePagination extends Component {
                 <MuiThemeProvider>
                     <Pagination
                         total = { this.props.totalPages }
-                        current = { this.props.currentPage+1 }
+                        current = { this.props.currentPage}
                         display = {5}
                         onChange={(number)=>this.handleClick(number)}
                         styleFirstPageLink={{display:'none'}}

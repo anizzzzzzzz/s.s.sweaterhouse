@@ -47,15 +47,6 @@ export function updateProduct(images, product, token) {
         data.append("images", images[i]);
     }
     data.append("product", productBlob);
-    /*return fetch(API_DICT.ROOT_API + "/update-product",{
-        method : 'POST',
-        headers: {
-            // 'Content-Type': 'application/json',
-            'Content-Type': 'multipart/form-data',
-            "Authorization" : "Bearer "+token
-        },
-        body : data
-    })*/
     return axios({
         method: "post",
         url: API_DICT.ROOT_API + "/update-product",
@@ -67,4 +58,13 @@ export function updateProduct(images, product, token) {
         },
         headers : {"Authorization" : "Bearer "+token}
     })
+}
+
+export function deleteProduct(productId, token) {
+    return fetch(API_DICT.ROOT_API+"/product/" + productId,{
+        method:'DELETE',
+        headers : {
+            'Authorization' : 'Bearer ' + token
+        }
+    });
 }

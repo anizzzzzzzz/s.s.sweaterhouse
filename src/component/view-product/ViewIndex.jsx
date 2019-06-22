@@ -22,7 +22,7 @@ class ViewIndex extends Component {
             type:'',
             comments:[],
             selectedImage:{},
-            openLightbox:false
+            openLightbox:false,
         };
 
         this.closeImageLightbox = this.closeImageLightbox.bind(this);
@@ -39,13 +39,17 @@ class ViewIndex extends Component {
                 }
             })
             .then(result=>{
+                console.log("co", result.comments);
+                let selectedPhoto = result.productInfos.filter(img=>img.highlight === true)[0];
+                if(selectedPhoto === undefined)
+                    selectedPhoto = result.productInfos[0];
                 this.setState({
                     name : result.name,
                     images : result.productInfos,
                     type : result.type,
                     price : result.price,
                     size : result.size,
-                    selectedImage : result.productInfos.filter(img=>img.highlight === true)[0],
+                    selectedImage : selectedPhoto,
                     comments : result.comments,
                 });
             })
@@ -144,7 +148,7 @@ class ViewIndex extends Component {
             /*return size.map((s)=>{
                 return (s.id === size[size.length-1].id)?(<b key={s.id}>{s.size}</b>):(<b key={s.id}>{s.size+", "}</b>)
             })*/
-            return size.map((s)=><b key={s.id}>{s.size} </b>)
+            return size.map((s)=><b key={s.size}>{s.size} </b>)
         }
         else{
             return null;
@@ -181,7 +185,6 @@ class ViewIndex extends Component {
                         ):null}
 
                     <div className="comments-div">
-                        <h4>Comments</h4>
                         <CommentBox comments={this.state.comments}
                                     productId={this.state.productId}
                                     productCode={this.state.productCode}/>

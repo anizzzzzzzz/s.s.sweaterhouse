@@ -23,6 +23,7 @@ class SaleIndex extends Component {
             item:queryParams.item,
             page:('page' in queryParams)?parseInt(queryParams.page,10):1,
             modalVisible:false,
+            refreshpage:false,
         };
 
         this.toggle=this.toggle.bind(this);
@@ -50,6 +51,10 @@ class SaleIndex extends Component {
         }
     };
 
+    handleRefreshPage = () => {
+        this.setState({refreshpage: !this.state.refreshpage})
+    };
+
     render() {
         return (
             <div>
@@ -75,13 +80,17 @@ class SaleIndex extends Component {
                         <SaleMain isOpen={this.props.isSaleCategoriesCollapseOpen}
                                   item={this.state.item}
                                   page={this.state.page}
-                                  userSession={this.props.userSession}/>
+                                  userSession={this.props.userSession}
+                                  refreshpage={this.state.refreshpage}
+                                  handleRefreshPage={this.handleRefreshPage}/>
                     </div>
                 </div>
                 <Footer/>
 
                 {/*Add Product Modal*/}
-                <AddProductModal modalVisible={this.state.modalVisible} handleModalVisible={this.handleModalVisible}/>
+                <AddProductModal modalVisible={this.state.modalVisible}
+                                 handleModalVisible={this.handleModalVisible}
+                                 handleRefreshPage={this.handleRefreshPage}/>
             </div>
         )
     }
