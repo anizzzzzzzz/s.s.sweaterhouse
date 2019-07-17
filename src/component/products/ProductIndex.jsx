@@ -44,7 +44,7 @@ class ProductIndex extends Component {
     //checks if ADMIN, SUPER_ADMIN role is present in usersession role.
     // Then will add this will be displayer
     addProductButton = () => {
-        if(this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
+        if(this.props.userSession.roles !== undefined && this.props.userSession.roles.includes(ADMIN, SUPER_ADMIN)){
             return (<button type="button"
                             className="product-index-button product-index-button-add"
                             onClick={()=>this.handleModalVisible(true)}>
